@@ -4,6 +4,7 @@
 *.map
 # intermediate files
 *.o
+*.s
 # executables
 *.prg
 *.xex

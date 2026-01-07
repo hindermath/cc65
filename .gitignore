@@ -1,3 +1,19 @@
+# general extra output
+*.lst
+*.lbl
+*.map
+# intermediate files
+*.o
+*.s
+# executables
+*.prg
+*.xex
+*.bin
+*.com
+*.cvt
+*.lnx
+
+# directories
 /bin/
 /html/
 /info/
@@ -9,6 +25,8 @@
 /cc65.zip
 /util/atari/*.exe
 /util/gamate/*.exe
+
+# 
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,jetbrains,jetbrains+all,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,jetbrains,jetbrains+all,c++

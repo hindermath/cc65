@@ -4,6 +4,7 @@
 *.map
 # intermediate files
 *.o
+*.s
 # executables
 *.prg
 *.xex
@@ -11,6 +12,53 @@
 *.com
 *.cvt
 *.lnx
+
+# disk images
+*.d64
+*.d81
+*.d71
+*.g64
+
+# tape images
+*.tap
+*.cas
+
+# applications
+ascii
+checkversion
+debug
+enumdevdir
+gunzip65
+hello
+joydemo
+mandelbrot
+mousedemo
+multdemo
+multdemo.1
+multdemo.2
+multdemo.3
+multdemo.4
+multdemo.5
+multdemo.6
+multdemo.7
+multdemo.8
+multdemo.9
+ovrldemo
+ovrldemo.1
+ovrldemo.2
+ovrldemo.3
+ovrldemo.4
+ovrldemo.5
+ovrldemo.6
+ovrldemo.7
+ovrldemo.8
+ovrldemo.9
+sieve
+terminal
+tgidemo
+tinyshell
+
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,jetbrains,jetbrains+all,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,jetbrains,jetbrains+all,c++
