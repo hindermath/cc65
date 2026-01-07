@@ -14,8 +14,8 @@
 *.lnx
 
 # demo files
-#bitmap.c
-#overlay-demores.h
+bitmap.c
+overlay-demores.h
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,jetbrains,jetbrains+all,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,jetbrains,jetbrains+all,c++
