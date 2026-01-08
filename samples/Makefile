@@ -259,6 +259,7 @@ EXELIST_c64 =      \
         enumdevdir \
         gunzip65   \
         hello      \
+        hello2      \
         joydemo    \
         mandelbrot \
         mousedemo  \
