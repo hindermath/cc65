@@ -24,12 +24,12 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
     - subdirs color are green
 - command:
   - copy -> short CP associated to F1
-  - rename -> short REN associated to F2
-  - chdir -> short CD associated to F3
-  - delete -> short DEL associated to F4
+  - delete -> short DL associated to F2
+  - rename -> short RN associated to F3
+  - chdir -> short CD associated to F4
   - makedir -> short MD associated to F5
   - removedir -> short RD associated to F6
-  - execute -> short EXE associated to F7
+  - execute -> short EX associated to F7
   - quit -> short Q associated to F8
 # Functions
 - for the commands describes above the tinyshell is the sample program to learn how to use the the command and is a good source as an example how to code this functions
@@ -49,6 +49,9 @@ Um Kompilierungsfehler und Warnungen in der cc65-Umgebung (insbesondere für den
 - **Plattformkompatibilität**: Funktionen wie `chdir`, `rmdir` und `getcwd` sind nicht auf allen cc65-Targets (z. B. C64) in der Standardbibliothek verfügbar. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
 - **Vermeidung unerreichbaren Codes**: Da `main` oft eine Endlosschleife (`while(1)`) enthält, sollte danach kein `return`-Statement stehen, da dies eine Warnung über unerreichbaren Code ("Unreachable code") auslöst.
 - **Verwendung von `static` für Puffer**: Größere Puffer innerhalb von Funktionen sollten ebenfalls `static` sein, um den Stack zu entlasten.
+
+- **Kompilierung**: Um das Programm für den C64 zu kompilieren, wird im Verzeichnis `samples` der Befehl `make tinycmdr` (oder `make SYS=c64 tinycmdr`) verwendet.
+- **Erstellung des Disk-Images**: Ein .d64-Disk-Image (z. B. für Emulatoren) kann mit dem Befehl `make disk SYS=c64` im `samples`-Verzeichnis erstellt werden. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
 
 
 
