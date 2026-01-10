@@ -38,6 +38,7 @@
 typedef struct {
     char name[FILENAME_MAX];
     unsigned char is_dir;
+    unsigned char type;
 } file_entry;
 
 /* Global state */
@@ -98,7 +99,9 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
 void read_directory(const char* path, file_entry* files, int* count) {
     static DIR* dir;
     static struct dirent* ent;
+#ifdef HAVE_SUBDIRS
     static DIR* subdir;
+#endif
     *count = 0;
 
     dir = opendir(path);
@@ -108,12 +111,22 @@ void read_directory(const char* path, file_entry* files, int* count) {
         strncpy(files[*count].name, ent->d_name, FILENAME_MAX - 1);
         files[*count].name[FILENAME_MAX - 1] = '\0';
 
+#ifdef __CBM__
+        files[*count].type = ent->d_type;
+        if (ent->d_type == _CBM_T_DIR) {
+            files[*count].is_dir = 1;
+        } else {
+            files[*count].is_dir = 0;
+        }
+#else
         /* Simple check for directory */
         /* In many cc65 targets, we can't easily check d_type. */
         /* For this 'tiny' app, we'll mark '.' and '..' as dirs. */
+        files[*count].type = 0;
         if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0) {
             files[*count].is_dir = 1;
         } else {
+#ifdef HAVE_SUBDIRS
             /* Try to opendir it to see if it's a directory */
             subdir = opendir(ent->d_name);
             if (subdir) {
@@ -122,7 +135,11 @@ void read_directory(const char* path, file_entry* files, int* count) {
             } else {
                 files[*count].is_dir = 0;
             }
+#else
+            files[*count].is_dir = 0;
+#endif
         }
+#endif
         (*count)++;
     }
     closedir(dir);
@@ -154,6 +171,7 @@ void update_list(int col) {
     int count = (col == 0) ? left_count : right_count;
     int sel = (col == 0) ? left_sel : right_sel;
     file_entry* files = (col == 0) ? left_files : right_files;
+    static char type_str[4];
 
     for (i = 0; i < COL_HEIGHT - 2; ++i) {
         gotoxy(x, TOP_Y + 1 + i);
@@ -166,7 +184,23 @@ void update_list(int col) {
                 if (files[i].is_dir) textcolor(DIR_COLOR);
                 else textcolor(TEXT_COLOR);
             }
+
+            /* Display type on CBM targets */
+#ifdef __CBM__
+            switch (files[i].type & 0x0F) {
+                case 0: strcpy(type_str, "DEL"); break;
+                case 1: strcpy(type_str, "SEQ"); break;
+                case 2: strcpy(type_str, "PRG"); break;
+                case 3: strcpy(type_str, "USR"); break;
+                case 4: strcpy(type_str, "REL"); break;
+                case 5: strcpy(type_str, "CBM"); break;
+                case 6: strcpy(type_str, "DIR"); break;
+                default: strcpy(type_str, "???"); break;
+            }
+            cprintf("%-13.13s %s", files[i].name, type_str);
+#else
             cprintf("%-17.17s", files[i].name);
+#endif
         } else {
             revers(0);
             textcolor(TEXT_COLOR);
