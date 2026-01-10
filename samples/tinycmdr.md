@@ -10,14 +10,13 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
   - each column have a border around them
 - 2 rows the bottom have a special meaning:
   - the bottom row have the short cut informations for the F1-F8 functions keys
-  - the row above the buttom row is a commandline prompt to enter commands like in the sample program tinyshell.c
+  - the row above the bottom row is used for prompts (like for F1 and F3) and can also be used for messages.
 - Changing from the left to the right column and vice versa is done by pressing the left and right cursor keys
 - Navigating in each column up und down of the listed files are with the up and down cursor keys
 - a selected file is highlighted with a different color
 - actions to a selected file are made by using/pressing the functions keys. The commands they do are described above
 - colors:
   - the selected file is highlighted with a different color
-  - the commandline prompt is highlighted with a different color
   - subdirectory names are highlighted with a different color
   - the short cut informations are highlighted with a different color
     - background color are blue
@@ -36,9 +35,9 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 # Functions
 - if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY
 - if the selected file ist not an executable file then the command F7 must be disabled and the color should be COLOR_GREY
-- if F1 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be copied to the new file with the new name. After that the commandline prompt should be visible again.
+- if F1 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be copied to the new file with the new name.
 - if F2 is pressed the selected file must be deleted
-- if F3 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be renamed to the new name. After that the commandline prompt should be visible again.
+- if F3 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be renamed to the new name.
 - if F7 is pressed the selected file must be executed
 - if F8 is pressed the application must be quit
 # Dev Environment
