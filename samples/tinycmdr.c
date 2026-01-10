@@ -55,7 +55,6 @@ static int right_top = 0;
 static char right_path[256];
 
 static int active_col = 0; /* 0 for left, 1 for right */
-static char cmd_buf[128];
 
 /* Prototypes */
 void read_directory(const char* path, file_entry* files, int* count);
@@ -227,12 +226,6 @@ void draw_ui(void) {
     update_list(0);
     update_list(1);
 
-    /* Command prompt row above shortcut row */
-    gotoxy(0, PROMPT_Y);
-    cclear(40);
-    textcolor(COLOR_RED);
-    cprintf("CMD> %s", cmd_buf);
-
     /* Shortcut row (bottom row) */
     gotoxy(0, SHORTCUT_Y);
     cclear(40);
@@ -324,7 +317,6 @@ void execute_command(int key) {
                     if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
                     if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
                 }
-                cmd_buf[0] = '\0';
             }
             break;
         case CH_F2: /* DL */
@@ -344,7 +336,6 @@ void execute_command(int key) {
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
                 }
-                cmd_buf[0] = '\0';
             }
             break;
         case CH_F4: /* CD */
@@ -368,7 +359,6 @@ void execute_command(int key) {
                 read_directory(left_path, left_files, &left_count);
                 read_directory(right_path, right_files, &right_count);
             }
-            cmd_buf[0] = '\0';
 #endif
             break;
         case CH_F6: /* RD */
@@ -464,8 +454,6 @@ int main(void) {
 
     read_directory(left_path, left_files, &left_count);
     read_directory(right_path, right_files, &right_count);
-
-    cmd_buf[0] = '\0';
 
     while (1) {
         draw_ui();
