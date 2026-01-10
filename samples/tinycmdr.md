@@ -42,16 +42,16 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 
 # Development Tips and Error Prevention
 
-Um Kompilierungsfehler und Warnungen in der cc65-Umgebung (insbesondere für den C64) zu vermeiden, wurden folgende Maßnahmen ergriffen:
+To avoid compilation errors and warnings in the cc65 environment (especially for the C64), the following measures were taken:
 
-- **Begrenzung lokaler Variablen**: Der cc65-Compiler hat ein striktes Limit für die Anzahl lokaler Variablen pro Funktion. Bei komplexen Funktionen sollten lokale Variablen als `static` deklariert werden, um den "Too many local variables"-Fehler zu vermeiden.
-- **Speicheroptimierung (BSS-Segment)**: Da der Speicher auf 8-Bit-Systemen wie dem C64 begrenzt ist, müssen große Arrays (z. B. für Dateilisten) in ihrer Größe beschränkt werden. `MAX_FILES` wurde von 100 auf 50 reduziert, um einen Überlauf des BSS-Segments zu verhindern.
-- **Plattformkompatibilität**: Funktionen wie `chdir`, `rmdir` und `getcwd` sind nicht auf allen cc65-Targets (z. B. C64) in der Standardbibliothek verfügbar. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
-- **Vermeidung unerreichbaren Codes**: Da `main` oft eine Endlosschleife (`while(1)`) enthält, sollte danach kein `return`-Statement stehen, da dies eine Warnung über unerreichbaren Code ("Unreachable code") auslöst.
-- **Verwendung von `static` für Puffer**: Größere Puffer innerhalb von Funktionen sollten ebenfalls `static` sein, um den Stack zu entlasten.
+- **Limiting Local Variables**: The cc65 compiler has a strict limit on the number of local variables per function. Bei komplexen Funktionen sollten lokale Variablen als `static` deklariert werden, um den "Too many local variables"-Fehler zu vermeiden.
+- **Memory Optimization (BSS Segment)**: Since memory is limited on 8-bit systems like the C64, large arrays (e.g., for file lists) must be restricted in size. `MAX_FILES` wurde von 100 auf 50 reduziert, um einen Überlauf des BSS-Segments zu verhindern.
+- **Platform compatibility**: Functions such as `chdir`, `rmdir`, and `getcwd` are not available on all cc65 targets (e.g., C64) in the standard library. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
+- **Avoid unreachable code**: Since `main` often contains an infinite loop (`while(1)`), there should be no `return` statement afterward, as this triggers a warning about unreachable code.
+- **Using `static` for Buffers**: Larger buffers within functions should also be `static` to relieve the stack.
 
-- **Kompilierung**: Um das Programm für den C64 zu kompilieren, wird im Verzeichnis `samples` der Befehl `make tinycmdr` (oder `make SYS=c64 tinycmdr`) verwendet.
-- **Erstellung des Disk-Images**: Ein .d64-Disk-Image (z. B. für Emulatoren) kann mit dem Befehl `make disk SYS=c64` im `samples`-Verzeichnis erstellt werden. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
+- **Compilation**: To compile the program for the C64, use the command `make tinycmdr` (or `make SYS=c64 tinycmdr`) in the `samples` directory.
+- **Creation of the disk image: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
 
 
 
