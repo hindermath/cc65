@@ -20,7 +20,7 @@
 /* Defines */
 #define MAX_FILES 50
 #define COL_WIDTH 19
-#define COL_HEIGHT 18
+#define COL_HEIGHT 21
 #define LEFT_COL_X 0
 #define RIGHT_COL_X 20
 #define TOP_Y 1
@@ -158,14 +158,14 @@ void draw_ui(void) {
     /* Command prompt row above shortcut row */
     gotoxy(0, PROMPT_Y);
     cclear(40);
-    textcolor(COLOR_LIGHTRED);
+    textcolor(COLOR_RED);
     cprintf("CMD> %s", cmd_buf);
 
     /* Shortcut row (bottom row) */
     gotoxy(0, SHORTCUT_Y);
     cclear(40);
     textcolor(COLOR_CYAN);
-    cprintf("F1:CP F2:DL F3:RN F4:CD F5:MD F6:RD F7:EX F8:Q");
+    cprintf("1:CP 2:DL 3:RN 4:CD 5:MD 6:RD 7:EX 8:Q");
 }
 
 void copy_file(const char* src, const char* dst) {
