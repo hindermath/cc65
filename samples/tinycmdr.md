@@ -37,7 +37,18 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 # Dev Environment
 - that is the cc65 environment
 - the sample file directory are a good source to learn how to use the tinycmdr applications is to create
-  - mousedemo is a good example for the column layout and the border and how to show content inside a column
-  - tinyshell is the sample program to learn how to use the tinycmdr application with command describes above
+    - mousedemo is a good example for the column layout and the border and how to show content inside a column
+    - tinyshell is the sample program to learn how to use the tinycmdr application with command describes above
+
+# Entwicklungshinweise und Fehlervermeidung
+
+Um Kompilierungsfehler und Warnungen in der cc65-Umgebung (insbesondere für den C64) zu vermeiden, wurden folgende Maßnahmen ergriffen:
+
+- **Begrenzung lokaler Variablen**: Der cc65-Compiler hat ein striktes Limit für die Anzahl lokaler Variablen pro Funktion. Bei komplexen Funktionen sollten lokale Variablen als `static` deklariert werden, um den "Too many local variables"-Fehler zu vermeiden.
+- **Speicheroptimierung (BSS-Segment)**: Da der Speicher auf 8-Bit-Systemen wie dem C64 begrenzt ist, müssen große Arrays (z. B. für Dateilisten) in ihrer Größe beschränkt werden. `MAX_FILES` wurde von 100 auf 50 reduziert, um einen Überlauf des BSS-Segments zu verhindern.
+- **Plattformkompatibilität**: Funktionen wie `chdir`, `rmdir` und `getcwd` sind nicht auf allen cc65-Targets (z. B. C64) in der Standardbibliothek verfügbar. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
+- **Vermeidung unerreichbaren Codes**: Da `main` oft eine Endlosschleife (`while(1)`) enthält, sollte danach kein `return`-Statement stehen, da dies eine Warnung über unerreichbaren Code ("Unreachable code") auslöst.
+- **Verwendung von `static` für Puffer**: Größere Puffer innerhalb von Funktionen sollten ebenfalls `static` sein, um den Stack zu entlasten.
+
 
 
