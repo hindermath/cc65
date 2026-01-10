@@ -260,7 +260,7 @@ void draw_ui(void) {
     cprintf("7:EX ");
 
     textcolor(COLOR_CYAN);
-    cprintf("8:Q");
+    cprintf("8:QT");
 }
 
 void copy_file(const char* src, const char* dst) {
