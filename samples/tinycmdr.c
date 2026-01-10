@@ -246,8 +246,28 @@ void draw_ui(void) {
 #endif
     cprintf("4:CD 5:MD 6:RD ");
 
+    {
+        /* Check if selected file is executable (PRG on CBM) */
+        int sel = (active_col == 0) ? left_sel : right_sel;
+        int count = (active_col == 0) ? left_count : right_count;
+        file_entry* files = (active_col == 0) ? left_files : right_files;
+        int is_exe = 0;
+        if (sel < count) {
+#ifdef __CBM__
+            if (files[sel].type == _CBM_T_PRG) is_exe = 1;
+#else
+            /* On other platforms, we might need a different check,
+               but for now we follow the .md which implies 'executable' */
+            is_exe = 1;
+#endif
+        }
+        if (is_exe) textcolor(COLOR_CYAN);
+        else textcolor(COLOR_GRAY1);
+    }
+    cprintf("7:EX ");
+
     textcolor(COLOR_CYAN);
-    cprintf("7:EX 8:Q");
+    cprintf("8:Q");
 }
 
 void copy_file(const char* src, const char* dst) {
@@ -362,12 +382,20 @@ void execute_command(int key) {
             break;
         case CH_F7: /* EX */
             if (filename[0]) {
-                clrscr();
-                exec(filename, "");
-                /* If exec returns, it failed */
-                cprintf("Exec failed: %s\n", strerror(errno));
-                cgetc();
-                clrscr();
+                int is_exe = 0;
+#ifdef __CBM__
+                if (files[*sel].type == _CBM_T_PRG) is_exe = 1;
+#else
+                is_exe = 1;
+#endif
+                if (is_exe) {
+                    clrscr();
+                    exec(filename, "");
+                    /* If exec returns, it failed */
+                    cprintf("Exec failed: %s\n", strerror(errno));
+                    cgetc();
+                    clrscr();
+                }
             }
             break;
         case CH_F8: /* Q */
