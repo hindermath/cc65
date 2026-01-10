@@ -62,8 +62,38 @@ void update_list(int col);
 void handle_input(void);
 void execute_command(int key);
 void copy_file(const char* src, const char* dst);
+void get_input(const char* prompt, char* buffer, unsigned char maxlen);
 
 /* Implementation */
+
+void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
+    unsigned char pos = 0;
+    int key;
+
+    buffer[0] = '\0';
+    cursor(1);
+
+    while (1) {
+        gotoxy(0, PROMPT_Y);
+        cclear(40);
+        textcolor(COLOR_RED);
+        cprintf("%s%s", prompt, buffer);
+
+        key = cgetc();
+        if (key == 13) { /* ENTER */
+            break;
+        } else if (key == CH_DEL || key == CH_CURS_LEFT) {
+            if (pos > 0) {
+                pos--;
+                buffer[pos] = '\0';
+            }
+        } else if (key >= 32 && key < 127 && pos < maxlen - 1) {
+            buffer[pos++] = (char)key;
+            buffer[pos] = '\0';
+        }
+    }
+    cursor(0);
+}
 
 void read_directory(const char* path, file_entry* files, int* count) {
     static DIR* dir;
@@ -202,7 +232,7 @@ void execute_command(int key) {
     static int* sel;
     static char* path;
     static char filename[FILENAME_MAX];
-    static char dst[256];
+    static char newname[FILENAME_MAX];
 
     files = (active_col == 0) ? left_files : right_files;
     count = (active_col == 0) ? &left_count : &right_count;
@@ -218,23 +248,31 @@ void execute_command(int key) {
     switch (key) {
         case CH_F1: /* CP */
             if (filename[0]) {
-                strcpy(dst, (active_col == 0) ? right_path : left_path);
-                strcat(dst, "/");
-                strcat(dst, filename);
-                copy_file(filename, dst);
-                read_directory(left_path, left_files, &left_count);
-                read_directory(right_path, right_files, &right_count);
+                get_input("COPY TO: ", newname, FILENAME_MAX);
+                if (newname[0]) {
+                    copy_file(filename, newname);
+                    read_directory(left_path, left_files, &left_count);
+                    read_directory(right_path, right_files, &right_count);
+                }
             }
             break;
         case CH_F2: /* DL */
             if (filename[0]) {
                 unlink(filename);
-                read_directory(".", files, count);
+                read_directory(left_path, left_files, &left_count);
+                read_directory(right_path, right_files, &right_count);
                 if (*sel >= *count && *count > 0) *sel = *count - 1;
             }
             break;
         case CH_F3: /* RN */
-            /* Placeholder for rename */
+            if (filename[0]) {
+                get_input("RENAME TO: ", newname, FILENAME_MAX);
+                if (newname[0]) {
+                    rename(filename, newname);
+                    read_directory(left_path, left_files, &left_count);
+                    read_directory(right_path, right_files, &right_count);
+                }
+            }
             break;
         case CH_F4: /* CD */
         case 13:    /* Enter */
@@ -249,18 +287,33 @@ void execute_command(int key) {
 #endif
             break;
         case CH_F5: /* MD */
-            /* Placeholder for makedir */
+#ifdef HAVE_SUBDIRS
+            get_input("MKDIR: ", newname, FILENAME_MAX);
+            if (newname[0]) {
+                mkdir(newname, 0777);
+                read_directory(left_path, left_files, &left_count);
+                read_directory(right_path, right_files, &right_count);
+            }
+#endif
             break;
         case CH_F6: /* RD */
 #ifdef HAVE_SUBDIRS
             if (filename[0]) {
                 rmdir(filename);
-                read_directory(".", files, count);
+                read_directory(left_path, left_files, &left_count);
+                read_directory(right_path, right_files, &right_count);
             }
 #endif
             break;
         case CH_F7: /* EX */
-            /* Placeholder for execute */
+            if (filename[0]) {
+                clrscr();
+                exec(filename, "");
+                /* If exec returns, it failed */
+                cprintf("Exec failed: %s\n", strerror(errno));
+                cgetc();
+                clrscr();
+            }
             break;
         case CH_F8: /* Q */
             clrscr();
