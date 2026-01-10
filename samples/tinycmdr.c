@@ -165,7 +165,7 @@ void draw_ui(void) {
     gotoxy(0, SHORTCUT_Y);
     cclear(40);
     textcolor(COLOR_CYAN);
-    cprintf("F1:CP F2:REN F3:CD F4:DEL F5:MD F6:RD F7:EXE F8:Q");
+    cprintf("F1:CP F2:DL F3:RN F4:CD F5:MD F6:RD F7:EX F8:Q");
 }
 
 void copy_file(const char* src, const char* dst) {
@@ -216,10 +216,17 @@ void execute_command(int key) {
                 read_directory(right_path, right_files, &right_count);
             }
             break;
-        case CH_F2: /* REN */
+        case CH_F2: /* DL */
+            if (filename[0]) {
+                unlink(filename);
+                read_directory(".", files, count);
+                if (*sel >= *count && *count > 0) *sel = *count - 1;
+            }
+            break;
+        case CH_F3: /* RN */
             /* Placeholder for rename */
             break;
-        case CH_F3: /* CD */
+        case CH_F4: /* CD */
         case 13:    /* Enter */
             if (filename[0]) {
 #ifdef HAVE_SUBDIRS
@@ -229,13 +236,6 @@ void execute_command(int key) {
                     *sel = 0;
                 }
 #endif
-            }
-            break;
-        case CH_F4: /* DEL */
-            if (filename[0]) {
-                unlink(filename);
-                read_directory(".", files, count);
-                if (*sel >= *count && *count > 0) *sel = *count - 1;
             }
             break;
         case CH_F5: /* MD */
@@ -249,7 +249,7 @@ void execute_command(int key) {
 #endif
             }
             break;
-        case CH_F7: /* EXE */
+        case CH_F7: /* EX */
             /* Placeholder for execute */
             break;
         case CH_F8: /* Q */
