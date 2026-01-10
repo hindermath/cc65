@@ -187,14 +187,18 @@ void update_list(int col) {
 
             /* Display type on CBM targets */
 #ifdef __CBM__
-            switch (files[i].type & 0x0F) {
-                case 0: strcpy(type_str, "DEL"); break;
-                case 1: strcpy(type_str, "SEQ"); break;
-                case 2: strcpy(type_str, "PRG"); break;
-                case 3: strcpy(type_str, "USR"); break;
-                case 4: strcpy(type_str, "REL"); break;
-                case 5: strcpy(type_str, "CBM"); break;
-                case 6: strcpy(type_str, "DIR"); break;
+            switch (files[i].type) {
+                case _CBM_T_DEL: strcpy(type_str, "DEL"); break;
+                case _CBM_T_SEQ: strcpy(type_str, "SEQ"); break;
+                case _CBM_T_PRG: strcpy(type_str, "PRG"); break;
+                case _CBM_T_USR: strcpy(type_str, "USR"); break;
+                case _CBM_T_REL: strcpy(type_str, "REL"); break;
+                case _CBM_T_VRP: strcpy(type_str, "VRP"); break;
+                case _CBM_T_CBM: strcpy(type_str, "CBM"); break;
+                case _CBM_T_DIR: strcpy(type_str, "DIR"); break;
+                case _CBM_T_LNK: strcpy(type_str, "LNK"); break;
+                case _CBM_T_OTHER: strcpy(type_str, "OTH"); break;
+                case _CBM_T_HEADER: strcpy(type_str, "HDR"); break;
                 default: strcpy(type_str, "???"); break;
             }
             cprintf("%-13.13s %s", files[i].name, type_str);
