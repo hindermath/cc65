@@ -45,11 +45,13 @@ typedef struct {
 static file_entry left_files[MAX_FILES];
 static int left_count = 0;
 static int left_sel = 0;
+static int left_top = 0;
 static char left_path[256];
 
 static file_entry right_files[MAX_FILES];
 static int right_count = 0;
 static int right_sel = 0;
+static int right_top = 0;
 static char right_path[256];
 
 static int active_col = 0; /* 0 for left, 1 for right */
@@ -170,24 +172,26 @@ void update_list(int col) {
     int x = (col == 0) ? LEFT_COL_X + 1 : RIGHT_COL_X + 1;
     int count = (col == 0) ? left_count : right_count;
     int sel = (col == 0) ? left_sel : right_sel;
+    int top = (col == 0) ? left_top : right_top;
     file_entry* files = (col == 0) ? left_files : right_files;
     static char type_str[4];
 
     for (i = 0; i < COL_HEIGHT - 2; ++i) {
+        int idx = top + i;
         gotoxy(x, TOP_Y + 1 + i);
-        if (i < count) {
-            if (i == sel && col == active_col) {
+        if (idx < count) {
+            if (idx == sel && col == active_col) {
                 revers(1);
                 textcolor(SEL_COLOR);
             } else {
                 revers(0);
-                if (files[i].is_dir) textcolor(DIR_COLOR);
+                if (files[idx].is_dir) textcolor(DIR_COLOR);
                 else textcolor(TEXT_COLOR);
             }
 
             /* Display type on CBM targets */
 #ifdef __CBM__
-            switch (files[i].type) {
+            switch (files[idx].type) {
                 case _CBM_T_DEL: strcpy(type_str, "DEL"); break;
                 case _CBM_T_SEQ: strcpy(type_str, "SEQ"); break;
                 case _CBM_T_PRG: strcpy(type_str, "PRG"); break;
@@ -201,9 +205,9 @@ void update_list(int col) {
                 case _CBM_T_HEADER: strcpy(type_str, "HDR"); break;
                 default: strcpy(type_str, "???"); break;
             }
-            cprintf("%-13.13s %s", files[i].name, type_str);
+            cprintf("%-13.13s %s", files[idx].name, type_str);
 #else
-            cprintf("%-17.17s", files[i].name);
+            cprintf("%-17.17s", files[idx].name);
 #endif
         } else {
             revers(0);
@@ -268,13 +272,16 @@ void execute_command(int key) {
     static file_entry* files;
     static int* count;
     static int* sel;
+    static int* top;
     static char* path;
     static char filename[FILENAME_MAX];
     static char newname[FILENAME_MAX];
+    static int visible_height = COL_HEIGHT - 2;
 
     files = (active_col == 0) ? left_files : right_files;
     count = (active_col == 0) ? &left_count : &right_count;
     sel = (active_col == 0) ? &left_sel : &right_sel;
+    top = (active_col == 0) ? &left_top : &right_top;
     path = (active_col == 0) ? left_path : right_path;
 
     if (*sel < *count) {
@@ -291,6 +298,11 @@ void execute_command(int key) {
                     copy_file(filename, newname);
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
+                    /* Reset scroll position if count changed significantly */
+                    if (left_sel >= left_count) { left_sel = left_count > 0 ? left_count - 1 : 0; }
+                    if (left_top + visible_height > left_count) { left_top = left_count > visible_height ? left_count - visible_height : 0; }
+                    if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
+                    if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
                 }
             }
             break;
@@ -300,6 +312,7 @@ void execute_command(int key) {
                 read_directory(left_path, left_files, &left_count);
                 read_directory(right_path, right_files, &right_count);
                 if (*sel >= *count && *count > 0) *sel = *count - 1;
+                if (*top + visible_height > *count) { *top = *count > visible_height ? *count - visible_height : 0; }
             }
             break;
         case CH_F3: /* RN */
@@ -320,6 +333,7 @@ void execute_command(int key) {
                     getcwd(path, 255);
                     read_directory(".", files, count);
                     *sel = 0;
+                    if (active_col == 0) left_top = 0; else right_top = 0;
                 }
             }
 #endif
@@ -362,20 +376,27 @@ void execute_command(int key) {
 
 void handle_input(void) {
     static int key;
+    int* sel = (active_col == 0) ? &left_sel : &right_sel;
+    int* top = (active_col == 0) ? &left_top : &right_top;
+    int count = (active_col == 0) ? left_count : right_count;
+    int visible_height = COL_HEIGHT - 2;
+
     key = cgetc();
     switch (key) {
         case CH_CURS_UP:
-            if (active_col == 0) {
-                if (left_sel > 0) left_sel--;
-            } else {
-                if (right_sel > 0) right_sel--;
+            if (*sel > 0) {
+                (*sel)--;
+                if (*sel < *top) {
+                    *top = *sel;
+                }
             }
             break;
         case CH_CURS_DOWN:
-            if (active_col == 0) {
-                if (left_sel < left_count - 1) left_sel++;
-            } else {
-                if (right_sel < right_count - 1) right_sel++;
+            if (*sel < count - 1) {
+                (*sel)++;
+                if (*sel >= *top + visible_height) {
+                    *top = *sel - visible_height + 1;
+                }
             }
             break;
         case CH_CURS_LEFT:
