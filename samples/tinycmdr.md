@@ -34,6 +34,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 # Functions
 - if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY
 
+
 # Dev Environment
 - that is the cc65 environment
 - the sample file directory are a good source to learn how to use the tinycmdr applications is to create
