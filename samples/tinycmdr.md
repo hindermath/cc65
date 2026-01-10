@@ -35,6 +35,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
   - quit -> short Q associated to F8
 # Functions
 - if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY
+- if the selected file ist not an executable file then the command F7 must be disabled and the color should be COLOR_GREY
 - if F1 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be copied to the new file with the new name. After that the commandline prompt should be visible again.
 - if F2 is pressed the selected file must be deleted
 - if F3 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be renamed to the new name. After that the commandline prompt should be visible again.
