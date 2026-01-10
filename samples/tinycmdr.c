@@ -304,6 +304,7 @@ void execute_command(int key) {
                     if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
                     if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
                 }
+                cmd_buf[0] = '\0';
             }
             break;
         case CH_F2: /* DL */
@@ -323,6 +324,7 @@ void execute_command(int key) {
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
                 }
+                cmd_buf[0] = '\0';
             }
             break;
         case CH_F4: /* CD */
@@ -346,6 +348,7 @@ void execute_command(int key) {
                 read_directory(left_path, left_files, &left_count);
                 read_directory(right_path, right_files, &right_count);
             }
+            cmd_buf[0] = '\0';
 #endif
             break;
         case CH_F6: /* RD */
