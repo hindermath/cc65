@@ -32,7 +32,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
   - execute -> short EX associated to F7
   - quit -> short Q associated to F8
 # Functions
-- for the commands describes above the tinyshell is the sample program to learn how to use the the command and is a good source as an example how to code this functions
+- if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY
 
 # Dev Environment
 - that is the cc65 environment
@@ -40,7 +40,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
     - mousedemo is a good example for the column layout and the border and how to show content inside a column
     - tinyshell is the sample program to learn how to use the tinycmdr application with command describes above
 
-# Entwicklungshinweise und Fehlervermeidung
+# Development Tips and Error Prevention
 
 Um Kompilierungsfehler und Warnungen in der cc65-Umgebung (insbesondere für den C64) zu vermeiden, wurden folgende Maßnahmen ergriffen:
 
