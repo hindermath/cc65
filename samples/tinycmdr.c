@@ -165,7 +165,17 @@ void draw_ui(void) {
     gotoxy(0, SHORTCUT_Y);
     cclear(40);
     textcolor(COLOR_CYAN);
-    cprintf("1:CP 2:DL 3:RN 4:CD 5:MD 6:RD 7:EX 8:Q");
+    cprintf("1:CP 2:DL 3:RN ");
+
+#ifdef HAVE_SUBDIRS
+    textcolor(COLOR_CYAN);
+#else
+    textcolor(COLOR_GRAY1);
+#endif
+    cprintf("4:CD 5:MD 6:RD ");
+
+    textcolor(COLOR_CYAN);
+    cprintf("7:EX 8:Q");
 }
 
 void copy_file(const char* src, const char* dst) {
@@ -228,26 +238,26 @@ void execute_command(int key) {
             break;
         case CH_F4: /* CD */
         case 13:    /* Enter */
-            if (filename[0]) {
 #ifdef HAVE_SUBDIRS
+            if (filename[0]) {
                 if (chdir(filename) == 0) {
                     getcwd(path, 255);
                     read_directory(".", files, count);
                     *sel = 0;
                 }
-#endif
             }
+#endif
             break;
         case CH_F5: /* MD */
             /* Placeholder for makedir */
             break;
         case CH_F6: /* RD */
-            if (filename[0]) {
 #ifdef HAVE_SUBDIRS
+            if (filename[0]) {
                 rmdir(filename);
                 read_directory(".", files, count);
-#endif
             }
+#endif
             break;
         case CH_F7: /* EX */
             /* Placeholder for execute */
