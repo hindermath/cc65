@@ -5,7 +5,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 
 # Text User Interface
 - 2 columns layout that contains only the filenames and subdirectory names.
-  - the types of the files should also displayed
+  - the types of the files should also displayed correct, wether they are executable, archive, or other
   - each column have a border arouns them
 - 2 rows the bottom have a special meaning:
   - the bottom row have the short cut informations for the F1-F8 functions keys
