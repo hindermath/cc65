@@ -52,7 +52,7 @@ To avoid compilation errors and warnings in the cc65 environment (especially for
 - **Using `static` for Buffers**: Larger buffers within functions should also be `static` to relieve the stack.
 
 - **Compilation**: To compile the program for the C64, use the command `make tinycmdr` (or `make SYS=c64 tinycmdr`) in the `samples` directory.
-- **Creation of the disk image: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
+- **Creation of the disk image**: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
 
 
 
