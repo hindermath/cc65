@@ -10,7 +10,7 @@ Diese Datei dient als Langzeitgedächtnis für die Zusammenarbeit an diesem Proj
 ## Technische Standards & Optimierungen
 - **Speichermanagement:** Auf 8-Bit-Systemen (C64) ist der Speicher begrenzt.
     - Lokale Variablen in komplexen Funktionen sollten als `static` deklariert werden, um den cc65-Fehler "Too many local variables" zu vermeiden und den Stack zu schonen.
-    - Große Arrays (z.B. Dateilisten) müssen in ihrer Größe beschränkt werden (derzeit `MAX_FILES = 50`), um BSS-Segment-Überläufe zu verhindern.
+    - Große Arrays (z.B. Dateilisten) müssen in ihrer Größe beschränkt werden (derzeit `MAX_FILES = 144`), um alle Dateien eines D64-Images verwalten zu können, ohne das BSS-Segment zu sprengen.
 - **Plattformkompatibilität:** Funktionen wie `chdir`, `rmdir`, `getcwd` sind auf dem C64 nicht standardmäßig verfügbar und müssen über `#ifdef HAVE_SUBDIRS` abgesichert werden.
 - **UI-Design:**
     - Hintergrundfarbe: Blau (`COLOR_BLUE`)
