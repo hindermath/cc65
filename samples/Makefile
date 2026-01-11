@@ -209,6 +209,7 @@ EXELIST_apple2 =   \
         sieve      \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         tgidemo
 
 EXELIST_apple2enh = $(EXELIST_apple2)
@@ -226,6 +227,7 @@ EXELIST_atari =    \
         sieve      \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         tgidemo
 
 EXELIST_atarixl = $(EXELIST_atari)
@@ -278,7 +280,8 @@ EXELIST_c65 = \
         hello \
         joydemo    \
         sieve \
-        tinyshell
+        tinyshell  \
+        tinycmdr
 
 EXELIST_c128 =     \
         ascii      \
@@ -293,6 +296,7 @@ EXELIST_c128 =     \
         sieve      \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         tgidemo
 
 EXELIST_c16 =      \
@@ -301,6 +305,7 @@ EXELIST_c16 =      \
         debug      \
         enumdevdir \
         tinyshell  \
+        tinycmdr  \
         hello      \
         joydemo
 
@@ -315,6 +320,7 @@ EXELIST_cbm510 =   \
         mousedemo  \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         sieve
 
 EXELIST_cbm610 =   \
@@ -326,6 +332,7 @@ EXELIST_cbm610 =   \
         hello      \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         sieve
 
 EXELIST_creativision = \
@@ -344,6 +351,7 @@ EXELIST_cx16 =     \
         mousedemo  \
         sieve      \
         tinyshell  \
+        tinycmdr  \
         tgidemo
 
 EXELIST_gamate =   \
@@ -368,7 +376,8 @@ EXELIST_mega65 = \
         hello \
         joydemo    \
         sieve \
-        tinyshell
+        tinyshell  \
+        tinycmdr
 
 EXELIST_nes = \
         hello      \
@@ -389,6 +398,7 @@ EXELIST_pet =      \
         hello      \
         joydemo    \
         tinyshell  \
+        tinycmdr  \
         sieve
 
 EXELIST_plus4 =    \
@@ -402,6 +412,7 @@ EXELIST_plus4 =    \
         mandelbrot \
         terminal   \
         tinyshell  \
+        tinycmdr  \
         sieve      \
         tgidemo
 
