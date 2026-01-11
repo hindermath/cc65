@@ -36,7 +36,7 @@
 
 /* File entry structure */
 typedef struct {
-    char name[FILENAME_MAX];
+    char name[32];
     unsigned char is_dir;
     unsigned char type;
 } file_entry;
@@ -63,7 +63,7 @@ void draw_ui(void);
 void update_list(int col);
 void handle_input(void);
 void execute_command(int key);
-void copy_file(const char* src, const char* dst);
+void copy_file(const char* src, const char* dst, unsigned char type);
 void get_input(const char* prompt, char* buffer, unsigned char maxlen);
 
 /* Implementation */
@@ -263,20 +263,77 @@ void draw_ui(void) {
     cprintf("8:QT");
 }
 
-void copy_file(const char* src, const char* dst) {
+void copy_file(const char* src, const char* dst, unsigned char type) {
     static int sfd, dfd;
     static int n;
-    static char buf[128];
+    static char buf[512];
+    static size_t buf_sz = sizeof(buf);
+    static char cbm_src[FILENAME_MAX + 10];
+    static char cbm_dst[FILENAME_MAX + 10];
+    static unsigned char base_type;
+
+#ifdef __CBM__
+    /* Use original name for reading */
+    strncpy(cbm_src, src, FILENAME_MAX);
+    cbm_src[FILENAME_MAX] = '\0';
+
+    /* For writing, first try to delete existing file to avoid "File exists" error */
+    /* We build the name with suffix for unlinking too */
+    strncpy(cbm_dst, dst, FILENAME_MAX);
+    cbm_dst[FILENAME_MAX] = '\0';
+
+    base_type = type & 0x0F;
+    if (base_type == (_CBM_T_PRG & 0x0F)) {
+        strcat(cbm_dst, ",p");
+    } else if (base_type == (_CBM_T_SEQ & 0x0F)) {
+        strcat(cbm_dst, ",s");
+    } else if (base_type == (_CBM_T_USR & 0x0F)) {
+        strcat(cbm_dst, ",u");
+    }
+
+    unlink(cbm_dst);
+    strcat(cbm_dst, ",w");
+
+    sfd = open(cbm_src, O_RDONLY);
+#else
+    (void)type;
     sfd = open(src, O_RDONLY);
-    if (sfd < 0) return;
-    dfd = open(dst, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-    if (dfd < 0) {
-        close(sfd);
+    strncpy(cbm_dst, dst, FILENAME_MAX);
+    cbm_dst[FILENAME_MAX] = '\0';
+#endif
+
+    if (sfd < 0) {
+        gotoxy(0, PROMPT_Y);
+        cclear(40);
+        textcolor(COLOR_RED);
+        cprintf("SRC ERR %d: %s", errno, cbm_src);
+        cgetc();
         return;
     }
-    while ((n = read(sfd, buf, sizeof(buf))) > 0) {
-        write(dfd, buf, n);
+
+    dfd = open(cbm_dst, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+
+    if (dfd < 0) {
+        gotoxy(0, PROMPT_Y);
+        cclear(40);
+        textcolor(COLOR_RED);
+        cprintf("DST ERR %d: %s", errno, cbm_dst);
+        close(sfd);
+        cgetc();
+        return;
     }
+
+    while ((n = read(sfd, buf, buf_sz)) > 0) {
+        if (write(dfd, buf, n) != n) {
+            gotoxy(0, PROMPT_Y);
+            cclear(40);
+            textcolor(COLOR_RED);
+            cprintf("WRITE ERR %d", errno);
+            cgetc();
+            break;
+        }
+    }
+
     close(sfd);
     close(dfd);
 }
@@ -308,7 +365,10 @@ void execute_command(int key) {
             if (filename[0]) {
                 get_input("COPY TO: ", newname, FILENAME_MAX);
                 if (newname[0]) {
-                    copy_file(filename, newname);
+#ifdef __CBM__
+                    strupr(newname);
+#endif
+                    copy_file(filename, newname, files[*sel].type);
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
                     /* Reset scroll position if count changed significantly */
@@ -332,6 +392,9 @@ void execute_command(int key) {
             if (filename[0]) {
                 get_input("RENAME TO: ", newname, FILENAME_MAX);
                 if (newname[0]) {
+#ifdef __CBM__
+                    strupr(newname);
+#endif
                     rename(filename, newname);
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
