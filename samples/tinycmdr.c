@@ -381,11 +381,21 @@ void execute_command(int key) {
             break;
         case CH_F2: /* DL */
             if (filename[0]) {
-                unlink(filename);
-                read_directory(left_path, left_files, &left_count);
-                read_directory(right_path, right_files, &right_count);
-                if (*sel >= *count && *count > 0) *sel = *count - 1;
-                if (*top + visible_height > *count) { *top = *count > visible_height ? *count - visible_height : 0; }
+                int confirm_key;
+                gotoxy(0, PROMPT_Y);
+                cclear(40);
+                textcolor(COLOR_RED);
+                cprintf("DELETE %s? (F2 TO CONFIRM)", filename);
+                confirm_key = cgetc();
+                if (confirm_key == CH_F2) {
+                    unlink(filename);
+                    read_directory(left_path, left_files, &left_count);
+                    read_directory(right_path, right_files, &right_count);
+                    if (*sel >= *count && *count > 0) *sel = *count - 1;
+                    if (*top + visible_height > *count) { *top = *count > visible_height ? *count - visible_height : 0; }
+                }
+                gotoxy(0, PROMPT_Y);
+                cclear(40);
             }
             break;
         case CH_F3: /* RN */
