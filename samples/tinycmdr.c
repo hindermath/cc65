@@ -18,7 +18,7 @@
 #endif
 
 /* Defines */
-#define MAX_FILES 50
+#define MAX_FILES 144
 #define COL_WIDTH 19
 #define COL_HEIGHT 21
 #define LEFT_COL_X 0
@@ -63,6 +63,7 @@ void draw_ui(void);
 void update_list(int col);
 void handle_input(void);
 void execute_command(int key);
+void display_attributes(void);
 void copy_file(const char* src, const char* dst, unsigned char type);
 void get_input(const char* prompt, char* buffer, unsigned char maxlen);
 
@@ -95,6 +96,7 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
         }
     }
     cursor(0);
+    display_attributes();
 }
 
 void read_directory(const char* path, file_entry* files, int* count) {
@@ -225,6 +227,7 @@ void draw_ui(void) {
 
     update_list(0);
     update_list(1);
+    display_attributes();
 
     /* Shortcut row (bottom row) */
     gotoxy(0, SHORTCUT_Y);
@@ -261,6 +264,41 @@ void draw_ui(void) {
 
     textcolor(COLOR_CYAN);
     cprintf("8:QT");
+}
+
+void display_attributes(void) {
+    static file_entry* files;
+    static int sel, count;
+    static char type_str[4];
+
+    files = (active_col == 0) ? left_files : right_files;
+    sel = (active_col == 0) ? left_sel : right_sel;
+    count = (active_col == 0) ? left_count : right_count;
+
+    gotoxy(0, PROMPT_Y);
+    cclear(40);
+    if (sel < count) {
+        textcolor(TEXT_COLOR);
+#ifdef __CBM__
+        switch (files[sel].type) {
+            case _CBM_T_DEL: strcpy(type_str, "DEL"); break;
+            case _CBM_T_SEQ: strcpy(type_str, "SEQ"); break;
+            case _CBM_T_PRG: strcpy(type_str, "PRG"); break;
+            case _CBM_T_USR: strcpy(type_str, "USR"); break;
+            case _CBM_T_REL: strcpy(type_str, "REL"); break;
+            case _CBM_T_VRP: strcpy(type_str, "VRP"); break;
+            case _CBM_T_CBM: strcpy(type_str, "CBM"); break;
+            case _CBM_T_DIR: strcpy(type_str, "DIR"); break;
+            case _CBM_T_LNK: strcpy(type_str, "LNK"); break;
+            case _CBM_T_OTHER: strcpy(type_str, "OTH"); break;
+            case _CBM_T_HEADER: strcpy(type_str, "HDR"); break;
+            default: strcpy(type_str, "???"); break;
+        }
+        cprintf("ATTR: %s  TYPE: %s  %s", files[sel].name, type_str, files[sel].is_dir ? "DIR" : "FILE");
+#else
+        cprintf("ATTR: %s  %s", files[sel].name, files[sel].is_dir ? "DIR" : "FILE");
+#endif
+    }
 }
 
 void copy_file(const char* src, const char* dst, unsigned char type) {
@@ -308,6 +346,7 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
         textcolor(COLOR_RED);
         cprintf("SRC ERR %d: %s", errno, cbm_src);
         cgetc();
+        display_attributes();
         return;
     }
 
@@ -320,6 +359,7 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
         cprintf("DST ERR %d: %s", errno, cbm_dst);
         close(sfd);
         cgetc();
+        display_attributes();
         return;
     }
 
@@ -330,6 +370,7 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
             textcolor(COLOR_RED);
             cprintf("WRITE ERR %d", errno);
             cgetc();
+            display_attributes();
             break;
         }
     }
@@ -377,6 +418,7 @@ void execute_command(int key) {
                     if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
                     if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
                 }
+                display_attributes();
             }
             break;
         case CH_F2: /* DL */
@@ -396,6 +438,7 @@ void execute_command(int key) {
                 }
                 gotoxy(0, PROMPT_Y);
                 cclear(40);
+                display_attributes();
             }
             break;
         case CH_F3: /* RN */
@@ -409,6 +452,7 @@ void execute_command(int key) {
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
                 }
+                display_attributes();
             }
             break;
         case CH_F4: /* CD */
@@ -432,6 +476,7 @@ void execute_command(int key) {
                 read_directory(left_path, left_files, &left_count);
                 read_directory(right_path, right_files, &right_count);
             }
+            display_attributes();
 #endif
             break;
         case CH_F6: /* RD */
@@ -441,6 +486,7 @@ void execute_command(int key) {
                 read_directory(left_path, left_files, &left_count);
                 read_directory(right_path, right_files, &right_count);
             }
+            display_attributes();
 #endif
             break;
         case CH_F7: /* EX */
@@ -458,6 +504,7 @@ void execute_command(int key) {
                     cprintf("Exec failed: %s\n", strerror(errno));
                     cgetc();
                     clrscr();
+                    display_attributes();
                 }
             }
             break;
@@ -531,5 +578,6 @@ int main(void) {
     while (1) {
         draw_ui();
         handle_input();
+        display_attributes();
     }
 }
