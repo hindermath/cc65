@@ -36,7 +36,6 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 # Functions
 - if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY.
 - if the selected file is not an executable file then the command F7 must be disabled and the color should be COLOR_GREY.
-- if a file is selected the attributes of the file must displayed in the messae prompt area.
 - if F1 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be copied to the new file with the new name.  *Important* If the file is in copied the type of the destination file must be the same as the source file. After the copy the content must be refreshed.
 - if F2 is pressed the selected file must be deleted. Ask the user wit a prompt with an appropriated message. Press F2 again to delete the selected file absolutely.
 - if F3 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be renamed to the new name.
@@ -58,7 +57,4 @@ To avoid compilation errors and warnings in the cc65 environment (especially for
 - **Using `static` for Buffers**: Larger buffers within functions should also be `static` to relieve the stack.
 
 - **Compilation**: To compile the program for the C64, use the command `make tinycmdr` (or `make SYS=c64 tinycmdr`) in the `samples` directory.
-- **Creation of the disk image**: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`.
-
-
-
+- **Creation of the disk image**: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycmdr`. Dieser Schritt sollte nach jeder erfolgreichen Übersetzung durchgeführt werden. After successful creation, the emulator VICE can be started with the command `/opt/homebrew/bin/x64sc -8 samples.d64`.
