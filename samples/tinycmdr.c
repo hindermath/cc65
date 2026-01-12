@@ -12,6 +12,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <dbg.h>
+#include <cc65.h>
 
 #if defined(__APPLE2__) || defined(__ATARI__)
 #define HAVE_SUBDIRS 1
@@ -496,6 +498,17 @@ void handle_input(void) {
         case 13: /* ENTER */
             execute_command(13);
             break;
+        case 'd':
+        case 'D':
+            BREAK();
+            /* The debugger might have changed the colors. Restore them. */
+            (void)bordercolor(COLOR_BLUE);
+            (void)bgcolor(BGC);
+            (void)textcolor(TEXT_COLOR);
+            /* The debugger changed the screen; restore it. */
+            clrscr();
+            draw_ui();
+            break;
         default:
             if (key >= CH_F1 && key <= CH_F8) {
                 execute_command(key);
@@ -505,6 +518,9 @@ void handle_input(void) {
 }
 
 int main(void) {
+    /* Initialize the debugger */
+    DbgInit(0);
+
     /* Initialize colors and screen */
     (void)bordercolor(COLOR_BLUE);
     (void)bgcolor(BGC);
