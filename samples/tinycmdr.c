@@ -365,9 +365,6 @@ void execute_command(int key) {
             if (filename[0]) {
                 get_input("COPY TO: ", newname, FILENAME_MAX);
                 if (newname[0]) {
-#ifdef __CBM__
-                    strupr(newname);
-#endif
                     copy_file(filename, newname, files[*sel].type);
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
@@ -402,9 +399,6 @@ void execute_command(int key) {
             if (filename[0]) {
                 get_input("RENAME TO: ", newname, FILENAME_MAX);
                 if (newname[0]) {
-#ifdef __CBM__
-                    strupr(newname);
-#endif
                     rename(filename, newname);
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
