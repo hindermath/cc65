@@ -269,6 +269,7 @@ EXELIST_c64 =      \
         ovrldemo   \
         sieve      \
         terminal   \
+        tinycalc   \
         tinycmdr   \
         tinyshell  \
         tgidemo
