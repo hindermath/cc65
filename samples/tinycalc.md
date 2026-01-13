@@ -71,3 +71,6 @@ To avoid compilation errors and warnings in the cc65 environment (especially for
 - **Using `const` Correctly**: Use `const` for variables that should not be modified to avoid accidental modifications and potential bugs.
 - **Memory Management**: Be mindful of memory usage, especially on systems with limited resources like the C64, to avoid "out of memory" errors.
 - **Error Handling**: Implement proper error handling to gracefully manage unexpected situations and prevent crashes.
+
+- **Compilation**: To compile the program for the C64, use the command `make tinycalc` (or `make SYS=c64 tinycalc`) in the `samples` directory.
+- **Creation of the disk image**: A .d64 disk image (e.g. for emulators) can be created with the command `make disk SYS=c64` in the `samples` directory. Dies setzt voraus, dass das Tool `c1541` (Teil von VICE) installiert ist. Das resultierende Image `samples.d64` enthält dann alle für den C64 kompilierten Beispiele, einschließlich `tinycalc`. Dieser Schritt sollte nach jeder erfolgreichen Übersetzung durchgeführt werden. After successful creation, the emulator VICE can be started with the command `/opt/homebrew/bin/x64sc -8 samples.d64`.
