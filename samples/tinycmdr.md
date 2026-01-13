@@ -1,9 +1,9 @@
 # TinyCmdr
 
-# Purpose
+## Purpose
 TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS Norton Commander oder Linux Midnight Commander.
 
-# Text User Interface
+## Text User Interface
 - 2 columns layout that contains only the filenames and subdirectory names.
   - the types of the files should also displayed correct, whether they are executable, archive, or other
   - if the file selection goes beyond the bottom of the column, the content should scroll up and vice versa.
@@ -34,7 +34,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
   - execute -> short EX associated to F7
   - quit -> short Q associated to F8
 
-# Functions
+## Functions
 - if the system/operatingsystem does not support directories on disk the the commands F4-F6 must be disables and the color should be COLOR_GREY.
 - if the selected file is not an executable file then the command F7 must be disabled and the color should be COLOR_GREY.
 - if the key 'd' was pressed then go into the debugger. For an example see the sample program mousedemo.c.
@@ -44,13 +44,13 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 - if F7 is pressed the selected file must be executed.
 - if F8 is pressed the application must be quit.
 
-# Dev Environment
+## Dev Environment
 - that is the cc65 environment
 - the sample file directory are a good source to learn how to use the tinycmdr applications is to create
     - mousedemo is a good example for the column layout and the border and how to show content inside a column
     - tinyshell is the sample program to learn how to use the tinycmdr application with command describes above
 
-# Development Tips and Error Prevention
+## Development Tips and Error Prevention
 To avoid compilation errors and warnings in the cc65 environment (especially for the C64), the following measures were taken:
 - **Limiting Local Variables**: The cc65 compiler has a strict limit on the number of local variables per function. Bei komplexen Funktionen sollten lokale Variablen als `static` deklariert werden, um den "Too many local variables"-Fehler zu vermeiden.
 - **Memory Optimization (BSS Segment)**: Since memory is limited on 8-bit systems like the C64, large arrays (e.g., for file lists) must be restricted in size. `MAX_FILES` wurde auf 144 erhöht, um alle möglichen Dateien eines .d64 Disk-Images (max. 144) anzeigen zu können. Dies belegt ca. 10 KB im BSS-Segment, was für den C64 tragbar ist.
