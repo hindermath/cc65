@@ -17,7 +17,7 @@ TinyCalc is a simple (Tiny) spreadsheet calculation application designed to perf
 - **MC-MOD00 (Utilities)**: Helper functions for messages (`Msg`), blink effects (`Flash`), keyboard adjustment (`IBMCh`), and auto-calculation switching.
 - **MC-MOD01 (Initialization/Grid)**: Drawing the grid (`Grid`), initializing memory (`Init`), and clearing the worksheet (`Clear`).
 - **MC-MOD02 (Navigation/Display)**: Cell navigation (`MoveUp`, `MoveDown`, etc.) and display update (`Update`, `GotoCell`, `LeaveCell`).
-- **MC-MOD03 (I/O & Help)**: File access (`Load`, `Save`), printing (`Print`), and display of the help file `CALC.HLP`.
+- **MC-MOD03 (I/O & Help)**: File access (`Load`, `Save`), printing (`Print`), and display of the help file `tinycalc.hlp`.
 - **MC-MOD04 (Formula Evaluation)**: A recursive parser for mathematical expressions (`Evaluate`). Supports basic arithmetic, powers (`^`), and standard functions (`ABS`, `SQRT`, `SIN`, `COS`, etc.) as well as cell references (e.g., `A1`).
 - **MC-MOD05 (Cell Editing)**: Input of data into cells (`GetCell`), text editing (`GetLine`), and formatting settings (`Format`).
 
