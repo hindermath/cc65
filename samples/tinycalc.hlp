@@ -1,0 +1,138 @@
+                INTRODUCTION
+
+TinyCalc is a tiny spread sheet program
+inspired by VisiCalc. It is provided
+with the cc65 system as an example.
+
+Since TinyCalc is only a demonstration
+program it has its limitations:
+
+  * You can not copy formulas.
+  * You can not insert/delete lines.
+
+In spite of its limitations TinyCalc
+does provide some interesting features:
+
+  *  Floating point reals (cc65)
+  *  Mathematical functions (SIN, COS,
+     LN, EXP etc.)
+  *  Built in line editor for text
+     and formula editing.
+  *  Text can be entered across cells.
+  *  Formula protection.
+.PA
+In addition to this TinyCalc offers
+the usual features of a spread sheet:
+
+  *  Load a spread sheet from disk.
+  *  Save a spread sheet to disk.
+  *  Automatic recalculation.
+  *  Print the spread sheet.
+  *  Clear the current spread sheet.
+
+The spread sheet is an electronic
+piece of paper for text, numbers
+and formulas.
+
+The next page shows the grid.
+.PA
+--------------------------------------
+       A          B         C
+ 1   22.00
+ 2    1.00
+ 3    2.00
+ 4    3.00
+ 5   28.00
+ .
+ .
+A 5  Formula: (A1+A2+A3+A4)
+--------------------------------------
+
+In the example cell A5 contains a
+formula: (A1+A2+A3+A4) which means
+the numbers in A1-A4 are added.
+
+The formula can be abbreviated to:
+(A1>A4) meaning: add all cells
+from A1 to A4.
+.PA
+You move the cursor using the
+CRSR keys:
+
+           [CRSR UP]
+    [CRSR LEFT]  [CRSR RIGHT]
+          [CRSR DOWN]
+
+A cell may contain a number,
+a formula or some text. The type
+and coordinates are shown in the
+bottom corner:
+
+A 5   Formula: (Cell A5 has formula)
+
+A 1   Text    (Cell A1 has text)
+
+A 2   Numeric (Cell A2 has a number)
+
+.PA
+               Summary
+     Cells are denoted A1 through
+     G21 (total 147 cells).
+
+Functions and operators:
+ABS, SQRT, SQR, SIN, COS, ARCTAN,
+LN, LOG, EXP, FACT
++,-,*,/, ^ (power)
+> denotes a range of cells.
+
+Entering data
+Move to cell and enter data.
+TinyCalc determines if it is
+numeric or text.
+
+Navigation:
+Use CRSR keys to move.
+
+Field editing:
+CRSR Left/Right moves in line.
+INST/DEL deletes characters.
+CLR/HOME moves to start/end.
+RETURN finishes entry.
+ESC (or <-) cancels changes.
+.PA
+              Commands
+
+    /   restore screen
+    Q   Quit TinyCalc
+    L   Load from disk
+    S   Save to disk
+    R   Recalculate
+    P   Print
+    F   Change format
+    A   AutoCalc ON/OFF
+
+Note: use F command and enter -1
+      for scientific notation.
+
+.PA
+              EXAMPLES
+
+Valid cell formulas:
+
+(A1+(B2-C7))  subtract C7 from B2,
+              and add result to A1
+(A1>A23)      sum of A1..A23
+(A1>B5)       sum of A1..A5 and B1..B5
+
+Complex formulas:
+
+(SIN(A1)*COS(A2)/((1.2*A8)+
+LN(FACT(A8)+8.9E-3))+(C1>C5))
+
+To edit a cell, move to it and
+press ESC (or <-), change and
+press RETURN. Press ESC again
+to restore old value.
+
+   --> Use /L to load <--
+   --> file: CALCDEMO    <--
