@@ -8,7 +8,7 @@ TinyCalc is a simple (Tiny) spreadsheet calculation application designed to perf
 ### Data Structures and Types
 - `CellRec`: Record structure for a cell.
   - `CellStatus`: Set of attributes (`Constant`, `Formula`, `Txt`, `OverWritten`, `Locked`, `Calculated`).
-  - `Contents`: String[70] for formulas or text.
+  - `Contents`: String[64] for formulas or text.
   - `Value`: Real (floating-point number) for the result.
   - `DEC`, `FW`: Formatting (decimal places and column width).
 - `Sheet`: 2D-Array (`array['A'..'G', 1..21]`) of `CellRec`.
@@ -23,7 +23,7 @@ TinyCalc is a simple (Tiny) spreadsheet calculation application designed to perf
 
 ### Critical Aspects for Porting to C (cc65)
 - **Floating-point numbers**: Pascal uses `Real`. In cc65, the performance of `float` or `double` on the 6502 must be considered.
-- **Memory Management**: An array of 147 `CellRec` (7 columns * 21 rows) with ~80 bytes each occupies approx. 11.7 KB RAM. This is unproblematic on the C64, but the organization in memory (structs instead of Pascal records) is important.
+- **Memory Management**: An array of 147 `CellRec` (7 columns * 21 rows) with ~74 bytes each occupies approx. 10.6 KB RAM. This is unproblematic on the C64, but the organization in memory (structs instead of Pascal records) is important.
 - **Recursion**: The formula parser is highly recursive (`Expression` -> `SimpleExpression` -> `Term` -> `Factor` -> `Expression`). On the C64, the stack is limited; caution is required here, or an iterative solution is preferable.
 - **UI/Terminal**: Pascal commands like `GotoXY`, `ClrEol`, and `HighVideo/LowVideo` must be mapped to the `conio.h` functions of cc65.
 - **Sets**: The Pascal `set of Attributes` must be mapped in C via bitmasks (`#define` or `enum`).
