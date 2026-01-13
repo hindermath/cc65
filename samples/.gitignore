@@ -58,8 +58,8 @@ sieve
 terminal
 tgidemo
 tinyshell
-
-
+tinycmdr
+tinycalc
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,jetbrains,jetbrains+all,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,jetbrains,jetbrains+all,c++
