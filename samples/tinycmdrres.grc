@@ -1,0 +1,7 @@
+; this is the resource file for tinycmdr.c, a GEOS application example
+
+HEADER APPLICATION "tinycmdr" "TinyCmdr" "V1.0" {
+    dostype USR
+    author "Thorsten Hindermann"
+    info "TinyCmdr - A simple TUI file commander for C64."
+}
