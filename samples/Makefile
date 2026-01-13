@@ -274,6 +274,8 @@ EXELIST_c64 =      \
         tinyshell  \
         tgidemo
 
+DATALIST_c64 = tinycalc.hlp
+
 EXELIST_c65 = \
         ascii \
         checkversion \
@@ -639,12 +641,14 @@ samples.d64: samples
 	$(foreach file,$(EXELIST_$(SYS)),$(D64_WRITE_PRG_recipe))
 	$(foreach file,$(OVERLAYLIST),$(D64_WRITE_PRG_recipe))
 	$(foreach file,$(EMD) $(MOU) $(JOY) $(TGI),$(D64_WRITE_SEQ_recipe))
+	$(foreach file,$(DATALIST_$(SYS)),$(D64_WRITE_SEQ_recipe))
 
 samples.d81: samples
 	@$(C1541) -format "samples,00" d81 $@ >$(NULLDEV)
 	$(foreach file,$(EXELIST_$(SYS)),$(D64_WRITE_PRG_recipe))
 	$(foreach file,$(OVERLAYLIST),$(D64_WRITE_PRG_recipe))
 	$(foreach file,$(EMD) $(MOU) $(JOY) $(TGI),$(D64_WRITE_SEQ_recipe))
+	$(foreach file,$(DATALIST_$(SYS)),$(D64_WRITE_SEQ_recipe))
 
 # --------------------------------------------------------------------------
 # Rule to make an Apple II disk with all samples. Needs the AppleCommander
