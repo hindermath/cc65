@@ -1,6 +1,8 @@
 /*
 ** TinyCmdr - A simple TUI file commander for cc65.
 ** Inspired by Norton Commander and Midnight Commander.
+**
+** (C) Thorsten Hindermann, 2026
 */
 
 #include <stdio.h>
