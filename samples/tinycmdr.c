@@ -18,47 +18,52 @@
 #include <cc65.h>
 
 #if defined(__APPLE2__) || defined(__ATARI__)
-#define HAVE_SUBDIRS 1
+#define HAVE_SUBDIRS 1       /* Enable subdirectory support for specific platforms */
 #endif
 
 /* Defines */
-#define MAX_FILES 144
-#define COL_WIDTH 19
-#define COL_HEIGHT 21
-#define LEFT_COL_X 0
-#define RIGHT_COL_X 20
-#define TOP_Y 1
-#define PROMPT_Y 22
-#define SHORTCUT_Y 23
+#define MAX_FILES 144        /* Maximum number of files to display in a list */
+#define COL_WIDTH 19         /* Width of each directory column */
+#define COL_HEIGHT 21        /* Height of each directory column */
+#define LEFT_COL_X 0         /* X-coordinate of the left panel */
+#define RIGHT_COL_X 20       /* X-coordinate of the right panel */
+#define TOP_Y 1              /* Y-coordinate of the top of the panels */
+#define PROMPT_Y 22          /* Y-coordinate for the input prompt */
+#define SHORTCUT_Y 23        /* Y-coordinate for the shortcut keys bar */
 
 /* Colors - based on tinycmdr.md */
 /* background blue, unselected white, selected yellow, subdirs green */
-#define BGC COLOR_BLUE
-#define TEXT_COLOR COLOR_WHITE
-#define SEL_COLOR COLOR_YELLOW
-#define DIR_COLOR COLOR_GREEN
+#define BGC COLOR_BLUE       /* Background color */
+#define TEXT_COLOR COLOR_WHITE /* Default text color */
+#define SEL_COLOR COLOR_YELLOW /* Color for the selected item */
+#define DIR_COLOR COLOR_GREEN /* Color for directory entries */
 
-/* File entry structure */
+/*****************************************************************************
+ * Structure:   file_entry                                                   *
+ *                                                                           *
+ * Description: Represents a single file or directory entry in the file      *
+ *              list, including its name, type, and directory status.        *
+ *****************************************************************************/
 typedef struct {
-    char name[32];
-    unsigned char is_dir;
-    unsigned char type;
+    char name[32];          /* Filename (null-terminated) */
+    unsigned char is_dir;   /* Flag: 1 if entry is a directory, 0 otherwise */
+    unsigned char type;     /* CBM file type (e.g., SEQ, PRG, DIR) */
 } file_entry;
 
 /* Global state */
-static file_entry left_files[MAX_FILES];
-static int left_count = 0;
-static int left_sel = 0;
-static int left_top = 0;
-static char left_path[256];
+static file_entry left_files[MAX_FILES]; /* Array of file entries for the left panel */
+static int left_count = 0;              /* Number of files in the left panel */
+static int left_sel = 0;                /* Index of the currently selected file in the left panel */
+static int left_top = 0;                /* Index of the top-most visible file in the left panel */
+static char left_path[256];             /* Current directory path of the left panel */
 
-static file_entry right_files[MAX_FILES];
-static int right_count = 0;
-static int right_sel = 0;
-static int right_top = 0;
-static char right_path[256];
+static file_entry right_files[MAX_FILES]; /* Array of file entries for the right panel */
+static int right_count = 0;               /* Number of files in the right panel */
+static int right_sel = 0;                 /* Index of the currently selected file in the right panel */
+static int right_top = 0;                 /* Index of the top-most visible file in the right panel */
+static char right_path[256];              /* Current directory path of the right panel */
 
-static int active_col = 0; /* 0 for left, 1 for right */
+static int active_col = 0; /* Index of the currently active column (0: left, 1: right) */
 
 /* Prototypes */
 void read_directory(const char* path, file_entry* files, int* count);
