@@ -459,7 +459,7 @@ void execute_command(int key) {
                 }
             }
             break;
-        case CH_F8: /* Q */
+        case CH_F8: /* QT */
             clrscr();
             exit(0);
             break;
