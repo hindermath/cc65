@@ -72,6 +72,19 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen);
 
 /* Implementation */
 
+/*****************************************************************************
+ * Function:    get_input                                                    *
+ *                                                                           *
+ * Description: Displays a prompt and reads a string of characters from the  *
+ *              user. Handles backspace/delete for editing and Enter to      *
+ *              finish. The cursor is shown during input.                    *
+ *                                                                           *
+ * Parameters:  prompt - String to display before the input field.           *
+ *              buffer - Character buffer where the input will be stored.    *
+ *              maxlen - Maximum length of the input string.                 *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
     unsigned char pos = 0;
     int key;
@@ -101,6 +114,19 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
     cursor(0);
 }
 
+/*****************************************************************************
+ * Function:    read_directory                                               *
+ *                                                                           *
+ * Description: Reads the contents of a directory and populates an array of  *
+ *              file entries. It detects whether an entry is a directory and *
+ *              identifies the file type on CBM platforms.                   *
+ *                                                                           *
+ * Parameters:  path  - The directory path to read.                          *
+ *              files - Pointer to the array of file_entry structures.       *
+ *              count - Pointer to an integer to store the number of files.  *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void read_directory(const char* path, file_entry* files, int* count) {
     static DIR* dir;
     static struct dirent* ent;
@@ -150,6 +176,19 @@ void read_directory(const char* path, file_entry* files, int* count) {
     closedir(dir);
 }
 
+/*****************************************************************************
+ * Function:    draw_frame                                                   *
+ *                                                                           *
+ * Description: Draws a rectangular frame on the screen using standard       *
+ *              character-based line drawing symbols.                        *
+ *                                                                           *
+ * Parameters:  x - Horizontal starting position (left).                     *
+ *              y - Vertical starting position (top).                        *
+ *              w - Width of the frame.                                      *
+ *              h - Height of the frame.                                     *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void draw_frame(int x, int y, int w, int h) {
     int i;
     gotoxy(x, y);
@@ -170,6 +209,17 @@ void draw_frame(int x, int y, int w, int h) {
     cputc(CH_LRCORNER);
 }
 
+/*****************************************************************************
+ * Function:    update_list                                                  *
+ *                                                                           *
+ * Description: Renders the list of files for a specific column (left or     *
+ *              right). It handles scrolling, selection highlighting, and    *
+ *              color coding for directories vs. files.                      *
+ *                                                                           *
+ * Parameters:  col - The column index (0 for left, 1 for right).            *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void update_list(int col) {
     int i;
     int x = (col == 0) ? LEFT_COL_X + 1 : RIGHT_COL_X + 1;
@@ -222,6 +272,17 @@ void update_list(int col) {
     textcolor(TEXT_COLOR);
 }
 
+/*****************************************************************************
+ * Function:    draw_ui                                                      *
+ *                                                                           *
+ * Description: Redraws the entire user interface, including the two panels,  *
+ *              the file lists, and the function key shortcuts at the bottom *
+ *              of the screen.                                               *
+ *                                                                           *
+ * Parameters:  None.                                                        *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void draw_ui(void) {
     textcolor(TEXT_COLOR);
     draw_frame(LEFT_COL_X, TOP_Y, COL_WIDTH + 1, COL_HEIGHT);
@@ -267,6 +328,19 @@ void draw_ui(void) {
     cprintf("8:QT");
 }
 
+/*****************************************************************************
+ * Function:    copy_file                                                    *
+ *                                                                           *
+ * Description: Copies a file from the source path to the destination path.  *
+ *              On CBM targets, it handles file types (PRG, SEQ, etc.) and   *
+ *              replaces existing destination files.                         *
+ *                                                                           *
+ * Parameters:  src  - Path of the source file.                              *
+ *              dst  - Path of the destination file.                         *
+ *              type - CBM file type attribute.                              *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void copy_file(const char* src, const char* dst, unsigned char type) {
     static int sfd, dfd;
     static int n;
@@ -342,6 +416,16 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
     close(dfd);
 }
 
+/*****************************************************************************
+ * Function:    execute_command                                              *
+ *                                                                           *
+ * Description: Processes high-level file operations such as copy, delete,    *
+ *              rename, and directory navigation based on the provided key.  *
+ *                                                                           *
+ * Parameters:  key - The key code representing the command (e.g., F-keys).  *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void execute_command(int key) {
     static file_entry* files;
     static int* count;
@@ -466,6 +550,17 @@ void execute_command(int key) {
     }
 }
 
+/*****************************************************************************
+ * Function:    handle_input                                                 *
+ *                                                                           *
+ * Description: Waits for user input and handles navigation (cursor keys)    *
+ *              between columns and files, or dispatches function keys to    *
+ *              the command execution logic.                                 *
+ *                                                                           *
+ * Parameters:  None.                                                        *
+ *                                                                           *
+ * Returns:     None.                                                        *
+ *****************************************************************************/
 void handle_input(void) {
     static int key;
     int* sel = (active_col == 0) ? &left_sel : &right_sel;
@@ -519,6 +614,17 @@ void handle_input(void) {
     }
 }
 
+/*****************************************************************************
+ * Function:    main                                                         *
+ *                                                                           *
+ * Description: Main program entry point. Initializes the screen environment, *
+ *              reads the current directory, and enters the main application *
+ *              loop for UI updates and input handling.                      *
+ *                                                                           *
+ * Parameters:  None.                                                        *
+ *                                                                           *
+ * Returns:     The program exit code (standard 0 for success).              *
+ *****************************************************************************/
 int main(void) {
     /* Initialize the debugger */
     DbgInit(0);
