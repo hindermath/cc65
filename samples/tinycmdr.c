@@ -66,13 +66,53 @@ static char right_path[256];              /* Current directory path of the right
 static int active_col = 0; /* Index of the currently active column (0: left, 1: right) */
 
 /* Prototypes */
+
+/*****************************************************************************
+ * Function:    read_directory                                               *
+ * Description: Reads directory contents and populates file entry arrays.    *
+ *****************************************************************************/
 void read_directory(const char* path, file_entry* files, int* count);
+
+/*****************************************************************************
+ * Function:    draw_frame                                                   *
+ * Description: Draws a rectangular frame using character-based symbols.     *
+ *****************************************************************************/
 void draw_frame(int x, int y, int w, int h);
+
+/*****************************************************************************
+ * Function:    draw_ui                                                      *
+ * Description: Redraws the complete UI including panels and shortcuts.      *
+ *****************************************************************************/
 void draw_ui(void);
+
+/*****************************************************************************
+ * Function:    update_list                                                  *
+ * Description: Renders the file list for a specific panel.                  *
+ *****************************************************************************/
 void update_list(int col);
+
+/*****************************************************************************
+ * Function:    handle_input                                                 *
+ * Description: Handles keyboard navigation and command dispatching.         *
+ *****************************************************************************/
 void handle_input(void);
+
+/*****************************************************************************
+ * Function:    execute_command                                              *
+ * Description: Executes file operations (copy, delete, rename, etc.).       *
+ *****************************************************************************/
 void execute_command(int key);
+
+/*****************************************************************************
+ * Function:    copy_file                                                    *
+ * Description: Copies a file from source to destination.                    *
+ *****************************************************************************/
 void copy_file(const char* src, const char* dst, unsigned char type);
+
+/*****************************************************************************
+ * Function:    get_input                                                    *
+ * Description: Reads a string of characters from the user with a prompt.    *
+ *****************************************************************************/
 void get_input(const char* prompt, char* buffer, unsigned char maxlen);
 
 /* Implementation */
