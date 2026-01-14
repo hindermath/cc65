@@ -604,7 +604,11 @@ ascii.cvt: ascii.o asciires.o
 endif
 
 # --------------------------------------------------------------------------
-# some programs link against getsp.o
+# some programs link against multiple objects
+
+tinycmdr: tinycmdr.o tcmdrlib.o
+	$(if $(QUIET),echo $(SYS):$@)
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -t $(SYS) -m $@.map $^ $(SYS).lib
 
 getsp.o: getsp.s
 	$(AS) $(ASFLAGS) -t $(SYS) $<
@@ -745,6 +749,7 @@ zip:
 
 mostlyclean:
 	@$(DEL) *.lbl *.map *.o 2>$(NULLDEV)
+	@$(DEL) tcmdrlib.s 2>$(NULLDEV)
 # we cant use .s since we have asm files in the directory that we want to keep
 	@$(DEL) ${patsubst %.c,%.s,$(wildcard *.c)} 2>$(NULLDEV)
 
