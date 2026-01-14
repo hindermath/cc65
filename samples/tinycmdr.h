@@ -42,19 +42,19 @@ typedef struct {
 } file_entry;
 
 /* Global state */
-static file_entry left_files[MAX_FILES]; /* Array of file entries for the left panel */
-static int left_count = 0;              /* Number of files in the left panel */
-static int left_sel = 0;                /* Index of the currently selected file in the left panel */
-static int left_top = 0;                /* Index of the top-most visible file in the left panel */
-static char left_path[256];             /* Current directory path of the left panel */
+extern file_entry left_files[MAX_FILES]; /* Array of file entries for the left panel */
+extern int left_count;              /* Number of files in the left panel */
+extern int left_sel;                /* Index of the currently selected file in the left panel */
+extern int left_top;                /* Index of the top-most visible file in the left panel */
+extern char left_path[256];             /* Current directory path of the left panel */
 
-static file_entry right_files[MAX_FILES]; /* Array of file entries for the right panel */
-static int right_count = 0;               /* Number of files in the right panel */
-static int right_sel = 0;                 /* Index of the currently selected file in the right panel */
-static int right_top = 0;                 /* Index of the top-most visible file in the right panel */
-static char right_path[256];              /* Current directory path of the right panel */
+extern file_entry right_files[MAX_FILES]; /* Array of file entries for the right panel */
+extern int right_count;               /* Number of files in the right panel */
+extern int right_sel;                 /* Index of the currently selected file in the right panel */
+extern int right_top;                 /* Index of the top-most visible file in the right panel */
+extern char right_path[256];              /* Current directory path of the right panel */
 
-static int active_col = 0; /* Index of the currently active column (0: left, 1: right) */
+extern int active_col; /* Index of the currently active column (0: left, 1: right) */
 
 /* Prototypes */
 
