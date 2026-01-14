@@ -5,17 +5,17 @@
 ** (C) Thorsten Hindermann, 2026
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <dirent.h>
-#include <conio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <dbg.h>
-#include <cc65.h>
+#include <stdio.h>    /* Standard I/O functions */
+#include <stdlib.h>   /* Standard library functions */
+#include <string.h>   /* String manipulation functions */
+#include <dirent.h>   /* Directory entry operations */
+#include <conio.h>    /* Console I/O functions */
+#include <unistd.h>   /* POSIX operating system API */
+#include <errno.h>    /* Error number definitions */
+#include <fcntl.h>    /* File control options */
+#include <ctype.h>    /* Character type functions */
+#include <dbg.h>      /* Debugging support */
+#include <cc65.h>     /* cc65 specific library functions */
 
 #if defined(__APPLE2__) || defined(__ATARI__)
 #define HAVE_SUBDIRS 1       /* Enable subdirectory support for specific platforms */
