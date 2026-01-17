@@ -55,18 +55,23 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
     while (1) {
         gotoxy(0, PROMPT_Y);
         cclear(40);
-        textcolor(COLOR_RED);
-        cprintf("%s%s", prompt, buffer);
+        textcolor(COLOR_WHITE);
+        cprintf("%s", prompt);
+        textcolor(COLOR_YELLOW);
+        cprintf("%s", buffer);
 
         key = cgetc();
         if (key == 13) { /* ENTER */
             break;
-        } else if (key == CH_DEL || key == CH_CURS_LEFT) {
+        } else if (key == CH_DEL || key == CH_CURS_LEFT || key == 20) { /* 20 is Backspace on C64 */
             if (pos > 0) {
                 pos--;
                 buffer[pos] = '\0';
             }
         } else if (key >= 32 && key < 127 && pos < maxlen - 1) {
+            /* Map uppercase to lowercase if needed, but for drive numbers it doesn't matter.
+               However, cc65's cgetc() on C64 might return PETSCII.
+               In PETSCII, numbers are the same as ASCII. */
             buffer[pos++] = (char)key;
             buffer[pos] = '\0';
         }
@@ -95,8 +100,31 @@ void read_directory(const char* path, file_entry* files, int* count) {
 #endif
     *count = 0;
 
+#ifdef __CBM__
+    /* Check if the path is a drive specification like "8:" */
+    if (path[0] >= '8' && path[0] <= '9' && path[1] == ':' && path[2] == '\0') {
+        dir = opendir(".");
+        if (!dir) {
+            /* Try opendir with the path as a fallback, although opendir in cc65-cbm
+               usually only supports "0:", "1:", or "." */
+            dir = opendir(path);
+        }
+    } else if (path[0] == '1' && (path[1] == '0' || path[1] == '1') && path[2] == ':' && path[3] == '\0') {
+        dir = opendir(".");
+        if (!dir) {
+            dir = opendir(path);
+        }
+    } else {
+        /* Default to path if not a clear drive spec */
+        dir = opendir(path);
+    }
+#else
     dir = opendir(path);
+#endif
     if (!dir) return;
+
+    /* Clear existing file list to avoid confusion */
+    memset(files, 0, MAX_FILES * sizeof(file_entry));
 
     while ((*count < MAX_FILES) && (ent = readdir(dir))) {
         strncpy(files[*count].name, ent->d_name, FILENAME_MAX - 1);
@@ -565,6 +593,74 @@ void handle_input(void) {
             /* The debugger changed the screen; restore it. */
             clrscr();
             draw_ui();
+            break;
+        case 'r':
+        case 'R':
+            {
+                char drive_buf[4];
+                char* colon;
+                get_input("RIGHT DRIVE (8-11): ", drive_buf, 3);
+                /* Remove trailing colon if present */
+                colon = strchr(drive_buf, ':');
+                if (colon) *colon = '\0';
+
+                if (strcmp(drive_buf, "8") == 0 || strcmp(drive_buf, "9") == 0 ||
+                    strcmp(drive_buf, "10") == 0 || strcmp(drive_buf, "11") == 0) {
+#ifdef __CBM__
+                    /* On CBM, chdir("8") sets the current device to 8. */
+                    if (chdir(drive_buf) == 0) {
+                         sprintf(right_path, "%s:", drive_buf);
+                         read_directory(right_path, right_files, &right_count);
+                    }
+#else
+                    sprintf(right_path, "%s:", drive_buf);
+                    read_directory(right_path, right_files, &right_count);
+#endif
+                    right_sel = 0;
+                    right_top = 0;
+                    if (right_count == 0) {
+                        gotoxy(0, PROMPT_Y);
+                        cclear(40);
+                        textcolor(COLOR_RED);
+                        cprintf("NO FILES ON DRIVE %s", drive_buf);
+                        cgetc();
+                    }
+                }
+            }
+            break;
+        case 'l':
+        case 'L':
+            {
+                char drive_buf[4];
+                char* colon;
+                get_input("LEFT DRIVE (8-11): ", drive_buf, 3);
+                /* Remove trailing colon if present */
+                colon = strchr(drive_buf, ':');
+                if (colon) *colon = '\0';
+
+                if (strcmp(drive_buf, "8") == 0 || strcmp(drive_buf, "9") == 0 ||
+                    strcmp(drive_buf, "10") == 0 || strcmp(drive_buf, "11") == 0) {
+#ifdef __CBM__
+                    /* On CBM, chdir("8") sets the current device to 8. */
+                    if (chdir(drive_buf) == 0) {
+                        sprintf(left_path, "%s:", drive_buf);
+                        read_directory(left_path, left_files, &left_count);
+                    }
+#else
+                    sprintf(left_path, "%s:", drive_buf);
+                    read_directory(left_path, left_files, &left_count);
+#endif
+                    left_sel = 0;
+                    left_top = 0;
+                    if (left_count == 0) {
+                        gotoxy(0, PROMPT_Y);
+                        cclear(40);
+                        textcolor(COLOR_RED);
+                        cprintf("NO FILES ON DRIVE %s", drive_buf);
+                        cgetc();
+                    }
+                }
+            }
             break;
         default:
             if (key >= CH_F1 && key <= CH_F8) {
