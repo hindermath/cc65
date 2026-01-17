@@ -16,6 +16,8 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 - a selected file is highlighted with a different color
 - actions to a selected file are made by using/pressing the functions keys. The commands they do are described above
 - pressing the key 'l' (left) or 'r' (right) allows changing the drive for the respective column.
+  - The application asks for the drive number (8, 9, 10, or 11).
+  - Both plain numbers (e.g., `8`) and numbers with a colon (e.g., `8:`) are accepted.
 - pressing the key 'd' starts the built-in debugger.
 - colors:
   - the selected file is highlighted with a different color
@@ -58,6 +60,7 @@ To avoid compilation errors and warnings in the cc65 environment (especially for
 - **Limiting Local Variables**: The cc65 compiler has a strict limit on the number of local variables per function. Bei komplexen Funktionen sollten lokale Variablen als `static` deklariert werden, um den "Too many local variables"-Fehler zu vermeiden.
 - **Memory Optimization (BSS Segment)**: Since memory is limited on 8-bit systems like the C64, large arrays (e.g., for file lists) must be restricted in size. `MAX_FILES` wurde auf 144 erhöht, um alle möglichen Dateien eines .d64 Disk-Images (max. 144) anzeigen zu können. Dies belegt ca. 10 KB im BSS-Segment, was für den C64 tragbar ist.
 - **Platform compatibility**: Functions such as `chdir`, `rmdir`, and `getcwd` are not available on all cc65 targets (e.g., C64) in the standard library. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
+- **CBM Drive Access**: On CBM systems, `opendir()` only supports ".", "0:", or "1:". To change the active device, `chdir()` must be called with the device number (e.g., `chdir("8")`). TinyCmdr handles this by first switching the device and then using `opendir(".")` to read the directory.
 - **Avoid unreachable code**: Since `main` often contains an infinite loop (`while(1)`), there should be no `return` statement afterward, as this triggers a warning about unreachable code.
 - **Using `static` for Buffers**: Larger buffers within functions should also be `static` to relieve the stack.
 
