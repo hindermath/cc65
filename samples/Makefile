@@ -159,23 +159,23 @@ LDFLAGS_tgidemo_atarixl    = --start-addr 0x4000
 
 .c.o:
 	$(CC) $(CFLAGS) -Ors --codesize 500 -T -g -t $(SYS) $<
-	$(AS) $(<:.c=.s)
+	$(AS) -g $(<:.c=.s)
 
 .s.o:
-	$(AS) $(ASFLAGS) -t $(SYS) $<
+	$(AS) $(ASFLAGS) -g -t $(SYS) $<
 
 .PRECIOUS: %.o
 
 .o:
 ifeq ($(SYS),vic20)
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -C vic20-32k.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 else ifeq ($(SYS),plus4)
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -C plus4-hires.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C plus4-hires.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 else
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -t $(SYS) -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 
@@ -555,10 +555,10 @@ platforms:
 # overlay file-names are shortenned to fit the Atari's 8.3-character limit.
 
 multdemo: multidemo.o
-	$(LD) $(LDFLAGS) -o $@ -C $(SYS)-overlay.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C $(SYS)-overlay.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 
 ovrldemo: overlaydemo.o
-	$(LD) $(LDFLAGS) -o $@ -C $(SYS)-overlay.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C $(SYS)-overlay.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 
 OVERLAYLIST :=
 
@@ -576,31 +576,31 @@ endif
 ifeq ($(SYS),vic20)
 mandelbrot.o: override CFLAGS += -D DYN_DRV=0
 mandelbrot: mandelbrot.o
-	$(LD) $(LDFLAGS) -o $@ -C vic20-tgi.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-tgi.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 
 # tgidemo needs at least 16K of RAM expansion.
 tgidemo.o: override CFLAGS += -D DYN_DRV=0
 tgidemo: tgidemo.o
-	$(LD) -D __HIMEM__=0x6000 $(LDFLAGS) -o $@ -C vic20-tgi.cfg -m $@.map $^ $(SYS).lib
+	$(LD) -D __HIMEM__=0x6000 $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-tgi.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # --------------------------------------------------------------------------
 # GEOS programs need a resource file linked to them
 ifeq ($(SYS),geos-cbm)
 asciires.o: asciires.grc
-	$(CL) -c -t $(SYS) $<
+	$(CL) -c -g -t $(SYS) $<
 ascii.cvt: ascii.o asciires.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -t $(SYS) -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 ifeq ($(SYS),geos-apple)
 asciires.o: asciires.grc
 	$(GRC) -t $(SYS) $<
-	$(AS) $(<:.grc=.s)
+	$(AS) -g $(<:.grc=.s)
 ascii.cvt: ascii.o asciires.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -t $(SYS) -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # --------------------------------------------------------------------------
@@ -608,20 +608,20 @@ endif
 
 tinycmdr: tinycmdr.o tcmdrlib.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) -o $@ -t $(SYS) -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 
 getsp.o: getsp.s
-	$(AS) $(ASFLAGS) -t $(SYS) $<
+	$(AS) $(ASFLAGS) -g -t $(SYS) $<
 
 ifneq ($(SYS),vic20)
 tinyshell: tinyshell.o getsp.o
-	$(LD) $(LDFLAGS) -t $(SYS) -o $@ $^ $(SYS).lib
+	$(LD) $(LDFLAGS) --dbgfile $@.dbg -t $(SYS) -o $@ -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # some programs need more memory on the vic20
 ifeq ($(SYS),vic20)
 tinyshell:  tinyshell.o getsp.o
-	$(LD) $(LDFLAGS) -o $@ -C vic20-32k.cfg -m $@.map $^ $(SYS).lib
+	$(LD) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # --------------------------------------------------------------------------
