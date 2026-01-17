@@ -2,6 +2,7 @@
 *.lst
 *.lbl
 *.map
+*.dbg
 # intermediate files
 *.o
 *.s
