@@ -15,6 +15,9 @@
 #include <ctype.h>    /* Character type functions */
 #include <dbg.h>      /* Debugging support */
 #include <cc65.h>     /* cc65 specific library functions */
+#ifdef __CBM__
+#include <device.h>
+#endif
 #include "tinycmdr.h" /* Global declarations and state */
 
 /* Global state definitions */
@@ -330,64 +333,160 @@ void draw_ui(void) {
  * Returns:     None.                                                        *
  *****************************************************************************/
 void copy_file(const char* src, const char* dst, unsigned char type) {
+    static char src_drive[4];
+    static char src_name[FILENAME_MAX];
+    static char dst_drive[4];
+    static char dst_name[FILENAME_MAX];
+    static char src_full_cbm[FILENAME_MAX + 10];
+    static char dst_full_cbm[FILENAME_MAX + 10];
     static int sfd, dfd;
     static int n;
     static char buf[512];
     static size_t buf_sz = sizeof(buf);
-    static char cbm_src[FILENAME_MAX + 10];
-    static char cbm_dst[FILENAME_MAX + 10];
     static unsigned char base_type;
+    static char old_drive[4];
 
 #ifdef __CBM__
-    /* Use original name for reading */
-    strncpy(cbm_src, src, FILENAME_MAX);
-    cbm_src[FILENAME_MAX] = '\0';
-
-    /* For writing, first try to delete existing file to avoid "File exists" error */
-    /* We build the name with suffix for unlinking too */
-    strncpy(cbm_dst, dst, FILENAME_MAX);
-    cbm_dst[FILENAME_MAX] = '\0';
-
-    base_type = type & 0x0F;
-    if (base_type == (_CBM_T_PRG & 0x0F)) {
-        strcat(cbm_dst, ",p");
-    } else if (base_type == (_CBM_T_SEQ & 0x0F)) {
-        strcat(cbm_dst, ",s");
-    } else if (base_type == (_CBM_T_USR & 0x0F)) {
-        strcat(cbm_dst, ",u");
+    /* Parse source drive and name */
+    if (src[1] == ':' && src[0] >= '8' && src[0] <= '9') {
+        src_drive[0] = src[0];
+        src_drive[1] = '\0';
+        strcpy(src_name, src + 2);
+    } else if (src[2] == ':' && src[0] == '1' && (src[1] == '0' || src[1] == '1')) {
+        src_drive[0] = src[0];
+        src_drive[1] = src[1];
+        src_drive[2] = '\0';
+        strcpy(src_name, src + 3);
+    } else if (src[0] == '.' && src[1] == '/') {
+        src_drive[0] = '\0';
+        strcpy(src_name, src + 2);
+    } else {
+        src_drive[0] = '\0';
+        strcpy(src_name, src);
     }
 
-    unlink(cbm_dst);
-    strcat(cbm_dst, ",w");
+    /* Double check if name still contains drive prefix after parsing */
+    if (src_name[1] == ':' && src_name[0] >= '8' && src_name[0] <= '9') {
+        if (!src_drive[0]) {
+            src_drive[0] = src_name[0];
+            src_drive[1] = '\0';
+        }
+        memmove(src_name, src_name + 2, strlen(src_name + 2) + 1);
+    } else if (src_name[2] == ':' && src_name[0] == '1' && (src_name[1] == '0' || src_name[1] == '1')) {
+        if (!src_drive[0]) {
+            src_drive[0] = src_name[0];
+            src_drive[1] = src_name[1];
+            src_drive[2] = '\0';
+        }
+        memmove(src_name, src_name + 3, strlen(src_name + 3) + 1);
+    }
 
-    sfd = open(cbm_src, O_RDONLY);
-#else
-    (void)type;
-    sfd = open(src, O_RDONLY);
-    strncpy(cbm_dst, dst, FILENAME_MAX);
-    cbm_dst[FILENAME_MAX] = '\0';
-#endif
+    /* Parse destination drive and name */
+    if (dst[1] == ':' && dst[0] >= '8' && dst[0] <= '9') {
+        dst_drive[0] = dst[0];
+        dst_drive[1] = '\0';
+        strcpy(dst_name, dst + 2);
+    } else if (dst[2] == ':' && dst[0] == '1' && (dst[1] == '0' || dst[1] == '1')) {
+        dst_drive[0] = dst[0];
+        dst_drive[1] = dst[1];
+        dst_drive[2] = '\0';
+        strcpy(dst_name, dst + 3);
+    } else if (dst[0] == '.' && dst[1] == '/') {
+        dst_drive[0] = '\0';
+        strcpy(dst_name, dst + 2);
+    } else {
+        dst_drive[0] = '\0';
+        strcpy(dst_name, dst);
+    }
 
+    /* Double check if name still contains drive prefix after parsing */
+    if (dst_name[1] == ':' && dst_name[0] >= '8' && dst_name[0] <= '9') {
+        if (!dst_drive[0]) {
+            dst_drive[0] = dst_name[0];
+            dst_drive[1] = '\0';
+        }
+        memmove(dst_name, dst_name + 2, strlen(dst_name + 2) + 1);
+    } else if (dst_name[2] == ':' && dst_name[0] == '1' && (dst_name[1] == '0' || dst_name[1] == '1')) {
+        if (!dst_drive[0]) {
+            dst_drive[0] = dst_name[0];
+            dst_drive[1] = dst_name[1];
+            dst_drive[2] = '\0';
+        }
+        memmove(dst_name, dst_name + 3, strlen(dst_name + 3) + 1);
+    }
+
+    /* Prepare names (without manual suffixes, cc65 open() handles them) */
+    strcpy(src_full_cbm, src_name);
+    strcpy(dst_full_cbm, dst_name);
+
+    /* Set the file type for creation */
+    base_type = type & 0x0F;
+    if (base_type == (_CBM_T_PRG & 0x0F)) {
+        _filetype = 'p';
+        strcat(src_full_cbm, ",p"); /* Force type for reading */
+    } else if (base_type == (_CBM_T_SEQ & 0x0F)) {
+        _filetype = 's';
+        strcat(src_full_cbm, ",s");
+    } else if (base_type == (_CBM_T_USR & 0x0F)) {
+        _filetype = 'u';
+        strcat(src_full_cbm, ",u");
+    } else {
+        _filetype = 's'; /* Default */
+    }
+
+    /* Save current device to restore later */
+    sprintf(old_drive, "%d", getcurrentdevice());
+
+    /* Switch to source drive and open */
+    if (src_drive[0]) chdir(src_drive);
+    sfd = open(src_full_cbm, O_RDONLY);
     if (sfd < 0) {
         gotoxy(0, PROMPT_Y);
         cclear(40);
         textcolor(COLOR_RED);
-        cprintf("SRC ERR %d: %s", errno, cbm_src);
+        cprintf("SRC ERR %d: %s", errno, src_full_cbm);
+        chdir(old_drive);
         cgetc();
         return;
     }
 
-    dfd = open(cbm_dst, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-
+    /* Switch to destination drive and open */
+    if (dst_drive[0]) chdir(dst_drive);
+    /* Delete existing if needed */
+    unlink(dst_full_cbm);
+    dfd = open(dst_full_cbm, O_WRONLY | O_CREAT | O_TRUNC, 0666);
     if (dfd < 0) {
         gotoxy(0, PROMPT_Y);
         cclear(40);
         textcolor(COLOR_RED);
-        cprintf("DST ERR %d: %s", errno, cbm_dst);
+        cprintf("DST ERR %d: %s", errno, dst_full_cbm);
+        close(sfd);
+        chdir(old_drive);
+        cgetc();
+        return;
+    }
+#else
+    (void)type;
+    sfd = open(src, O_RDONLY);
+    if (sfd < 0) {
+        gotoxy(0, PROMPT_Y);
+        cclear(40);
+        textcolor(COLOR_RED);
+        cprintf("SRC ERR %d: %s", errno, src);
+        cgetc();
+        return;
+    }
+    dfd = open(dst, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    if (dfd < 0) {
+        gotoxy(0, PROMPT_Y);
+        cclear(40);
+        textcolor(COLOR_RED);
+        cprintf("DST ERR %d: %s", errno, dst);
         close(sfd);
         cgetc();
         return;
     }
+#endif
 
     while ((n = read(sfd, buf, buf_sz)) > 0) {
         if (write(dfd, buf, n) != n) {
@@ -402,6 +501,11 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
 
     close(sfd);
     close(dfd);
+
+#ifdef __CBM__
+    /* Restore original drive */
+    chdir(old_drive);
+#endif
 }
 
 /*****************************************************************************
@@ -423,6 +527,9 @@ void execute_command(int key) {
     static char filename[FILENAME_MAX];
     static char newname[FILENAME_MAX];
     static int visible_height = COL_HEIGHT - 2;
+    static char drive_buf[4];
+    static char src_full_name[FILENAME_MAX + 8];
+    static char dest_full_name[FILENAME_MAX + 8];
 
     files = (active_col == 0) ? left_files : right_files;
     count = (active_col == 0) ? &left_count : &right_count;
@@ -432,23 +539,80 @@ void execute_command(int key) {
 
     if (*sel < *count) {
         strcpy(filename, files[*sel].name);
+        /* If path is like "8:", we ensure there is no extra slash if it was added elsewhere.
+           TinyCmdr usually stores "8:" or a real path.
+        */
+#ifdef __CBM__
+        /* CBM uses ':' for drive, and usually no subdirectories.
+           If path is ".", we just use the filename.
+        */
+        if (strcmp(path, ".") == 0) {
+            strcpy(src_full_name, filename);
+        } else if (path[0] != '\0' && path[strlen(path)-1] != ':' && path[strlen(path)-1] != '/') {
+            sprintf(src_full_name, "%s/%s", path, filename);
+        } else {
+            sprintf(src_full_name, "%s%s", path, filename);
+        }
+#else
+        if (path[0] != '\0' && path[strlen(path)-1] != ':' && path[strlen(path)-1] != '/') {
+            sprintf(src_full_name, "%s/%s", path, filename);
+        } else {
+            sprintf(src_full_name, "%s%s", path, filename);
+        }
+#endif
     } else {
         filename[0] = '\0';
+        src_full_name[0] = '\0';
     }
 
     switch (key) {
         case CH_F1: /* CP */
             if (filename[0]) {
-                get_input("COPY TO: ", newname, FILENAME_MAX);
-                if (newname[0]) {
-                    copy_file(filename, newname, files[*sel].type);
-                    read_directory(left_path, left_files, &left_count);
-                    read_directory(right_path, right_files, &right_count);
-                    /* Reset scroll position if count changed significantly */
-                    if (left_sel >= left_count) { left_sel = left_count > 0 ? left_count - 1 : 0; }
-                    if (left_top + visible_height > left_count) { left_top = left_count > visible_height ? left_count - visible_height : 0; }
-                    if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
-                    if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
+                get_input("DEST DRIVE (8-11): ", drive_buf, 3);
+                /* Validating input */
+                if (strcmp(drive_buf, "8") == 0 || strcmp(drive_buf, "9") == 0 ||
+                    strcmp(drive_buf, "10") == 0 || strcmp(drive_buf, "11") == 0) {
+
+                    get_input("COPY TO NAME: ", newname, FILENAME_MAX);
+                    if (newname[0]) {
+                        int exists = 0;
+                        int fd;
+                        sprintf(dest_full_name, "%s:%s", drive_buf, newname);
+
+                        /* Check if file exists */
+                        fd = open(dest_full_name, O_RDONLY);
+                        if (fd >= 0) {
+                            exists = 1;
+                            close(fd);
+                        }
+
+                        if (exists) {
+                            int confirm_key;
+                            gotoxy(0, PROMPT_Y);
+                            cclear(40);
+                            textcolor(COLOR_RED);
+                            cprintf("OVERWRITE %s? (F1 TO CONFIRM)", newname);
+                            confirm_key = cgetc();
+                            if (confirm_key != CH_F1) {
+                                break;
+                            }
+                        }
+
+                        copy_file(src_full_name, dest_full_name, files[*sel].type);
+                        read_directory(left_path, left_files, &left_count);
+                        read_directory(right_path, right_files, &right_count);
+                        /* Reset scroll position if count changed significantly */
+                        if (left_sel >= left_count) { left_sel = left_count > 0 ? left_count - 1 : 0; }
+                        if (left_top + visible_height > left_count) { left_top = left_count > visible_height ? left_count - visible_height : 0; }
+                        if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
+                        if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
+                    }
+                } else {
+                    gotoxy(0, PROMPT_Y);
+                    cclear(40);
+                    textcolor(COLOR_RED);
+                    cprintf("INVALID DRIVE %s", drive_buf);
+                    cgetc();
                 }
             }
             break;
