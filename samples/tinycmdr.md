@@ -15,6 +15,7 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 - Navigating in each column up und down of the listed files are with the up and down cursor keys
 - a selected file is highlighted with a different color
 - actions to a selected file are made by using/pressing the functions keys. The commands they do are described above
+- pressing the key 'l' (left) or 'r' (right) allows changing the drive for the respective column.
 - pressing the key 'd' starts the built-in debugger.
 - colors:
   - the selected file is highlighted with a different color
@@ -43,6 +44,8 @@ TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS No
 - if F3 is pressed a prompt in PROMPT_Y should appera and ask for a new name. After entering the name and press RETURN the selected file must be renamed to the new name.
 - if F7 is pressed the selected file must be executed.
 - if F8 is pressed the application must be quit.
+- if the key 'r' is pressed, the application asks in the prompt area for the drive number. Allowed values are 8,9,10,and 11. Check only of this numbers. After entering the drive number, the right column should list the files list of the entered drive.
+- if the key 'l' is pressed, the application asks in the prompt area for the drive number. Allowed values are 8,9,10,and 11. Check only of this numbers. After entering the drive number, the left column should list the files list of the entered drive.
 
 ## Dev Environment
 - that is the cc65 environment
