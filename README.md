@@ -105,4 +105,20 @@ Some of us may also be around on IRC [#cc65](https://web.libera.chat/#cc65) on l
 * [Windows 32bit Snapshot](https://sourceforge.net/projects/cc65/files/cc65-snapshot-win32.zip)
 * [Linux Snapshot DEB and RPM](https://software.opensuse.org/download.html?project=home%3Astrik&package=cc65)
 
+# Building from source
+
+To build the cc65 suite from source, a simple `make` in the root directory
+is usually enough:
+
+```bash
+make
+```
+
+By default, the build includes debug information. To create a release build
+without debug information, you can set the `DEBUG` variable to `0`:
+
+```bash
+make DEBUG=0
+```
+
 [![Snapshot Build](https://github.com/cc65/cc65/actions/workflows/snapshot-on-push-master.yml/badge.svg?branch=master)](https://github.com/cc65/cc65/actions/workflows/snapshot-on-push-master.yml)
