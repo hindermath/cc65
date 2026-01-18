@@ -39,6 +39,7 @@ typedef struct {
     char name[32];          /* Filename (null-terminated) */
     unsigned char is_dir;   /* Flag: 1 if entry is a directory, 0 otherwise */
     unsigned char type;     /* CBM file type (e.g., SEQ, PRG, DIR) */
+    unsigned int blocks;    /* File size in blocks (CBM specific) */
 } file_entry;
 
 /* Global state - Extern declarations to be defined in tcmdrlib.c */
@@ -47,12 +48,16 @@ extern int left_count;                   /* Total number of file entries in the 
 extern int left_sel;                     /* Index of the currently highlighted file in the left panel */
 extern int left_top;                     /* Index of the first visible file in the left panel (for scrolling) */
 extern char left_path[256];              /* Current working directory or device path for the left panel */
+extern unsigned int left_used;           /* Total blocks used on left drive/path */
+extern unsigned int left_free;           /* Total blocks free on left drive/path */
 
 extern file_entry right_files[MAX_FILES]; /* File entries currently loaded in the right panel */
 extern int right_count;                  /* Total number of file entries in the right panel */
 extern int right_sel;                    /* Index of the currently highlighted file in the right panel */
 extern int right_top;                    /* Index of the first visible file in the right panel (for scrolling) */
 extern char right_path[256];             /* Current working directory or device path for the right panel */
+extern unsigned int right_used;          /* Total blocks used on right drive/path */
+extern unsigned int right_free;          /* Total blocks free on right drive/path */
 
 extern int active_col; /* Index of the panel that currently has keyboard focus (0: left, 1: right) */
 
