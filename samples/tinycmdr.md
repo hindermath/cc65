@@ -4,10 +4,11 @@
 TinyCmdr ia a simple (Tiny) Text User Interface (TUI) file commander like DOS Norton Commander oder Linux Midnight Commander.
 
 ## Text User Interface
-- 2 columns layout that contains only the filenames and subdirectory names.
+- 2 columns layout that contains only the filenames, subdirectory names and the block size (on CBM targets).
   - the types of the files should also displayed correct, whether they are executable, archive, or other
   - if the file selection goes beyond the bottom of the column, the content should scroll up and vice versa.
   - each column have a border around them
+  - at the bottom of each column, the used and free blocks on the disk are displayed in yellow (e.g., `Used:123  Free:541 `).
 - 2 rows the bottom have a special meaning:
   - the bottom row have the short cut informations for the F1-F8 functions keys
   - the row above the bottom row is used for prompts (like for F1 and F3) and can also be used for messages.
@@ -62,6 +63,7 @@ To avoid compilation errors and warnings in the cc65 environment (especially for
 - **Memory Optimization (BSS Segment)**: Since memory is limited on 8-bit systems like the C64, large arrays (e.g., for file lists) must be restricted in size. `MAX_FILES` wurde auf 144 erhöht, um alle möglichen Dateien eines .d64 Disk-Images (max. 144) anzeigen zu können. Dies belegt ca. 10 KB im BSS-Segment, was für den C64 tragbar ist.
 - **Platform compatibility**: Functions such as `chdir`, `rmdir`, and `getcwd` are not available on all cc65 targets (e.g., C64) in the standard library. Diese müssen mit Präprozessor-Abfragen wie `#ifdef HAVE_SUBDIRS` abgesichert werden, um Linker-Fehler ("Unresolved external") zu vermeiden.
 - **CBM Drive Access**: On CBM systems, `opendir()` only supports ".", "0:", or "1:". To change the active device, `chdir()` must be called with the device number (e.g., `chdir("8")`). TinyCmdr handles this by first switching the device and then using `opendir(".")` to read the directory.
+- **Disk Capacity and Block Calculation**: On CBM targets, the total number of used blocks is calculated by summing up the blocks of all directory entries. The number of free blocks is determined by subtracting the used blocks from the standard capacity of a 1541 floppy disk (664 usable blocks). These values are automatically refreshed after every file operation (copy, delete, rename).
 - **File Copying on CBM**:
     - **Drive Switching**: Since `open()` doesn't support drive prefixes on all CBM targets, the program performs a `chdir()` to the source drive, opens the file, and then a `chdir()` to the destination drive to create the copy. It restores the original device afterwards using `getcurrentdevice()`.
     - **File Types**: When creating files on CBM, the global `_filetype` variable (from `cc65.h`) is used to set the correct type (e.g., 'p' for PRG). Adding suffixes like `,p` manually to the destination filename can lead to errors because the library adds them automatically based on `_filetype` during `O_CREAT`. For reading, explicit suffixes (like `filename,p`) are used to ensure the correct file is accessed.
