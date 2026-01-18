@@ -12,22 +12,22 @@
 #define HAVE_SUBDIRS 1       /* Enable subdirectory support for specific platforms */
 #endif
 
-/* Defines */
-#define MAX_FILES 144        /* Maximum number of files to display in a list */
-#define COL_WIDTH 19         /* Width of each directory column */
-#define COL_HEIGHT 21        /* Height of each directory column */
-#define LEFT_COL_X 0         /* X-coordinate of the left panel */
-#define RIGHT_COL_X 20       /* X-coordinate of the right panel */
-#define TOP_Y 1              /* Y-coordinate of the top of the panels */
-#define PROMPT_Y 22          /* Y-coordinate for the input prompt */
-#define SHORTCUT_Y 23        /* Y-coordinate for the shortcut keys bar */
+/* Defines for UI layout and limits */
+#define MAX_FILES 144        /* Maximum number of files to display in a list panel */
+#define COL_WIDTH 19         /* Width of each directory column (panel) in characters */
+#define COL_HEIGHT 21        /* Height of each directory column (panel) in characters */
+#define LEFT_COL_X 0         /* X-coordinate (left edge) of the left panel */
+#define RIGHT_COL_X 20       /* X-coordinate (left edge) of the right panel */
+#define TOP_Y 1              /* Y-coordinate (top edge) of the file panels */
+#define PROMPT_Y 22          /* Y-coordinate for the input prompt and messages */
+#define SHORTCUT_Y 23        /* Y-coordinate for the shortcut/function keys bar at the bottom */
 
-/* Colors - based on tinycmdr.md */
+/* Colors - based on tinycmdr.md specification */
 /* background blue, unselected white, selected yellow, subdirs green */
-#define BGC COLOR_BLUE       /* Background color */
-#define TEXT_COLOR COLOR_WHITE /* Default text color */
-#define SEL_COLOR COLOR_YELLOW /* Color for the selected item */
-#define DIR_COLOR COLOR_GREEN /* Color for directory entries */
+#define BGC COLOR_BLUE       /* Application background color */
+#define TEXT_COLOR COLOR_WHITE /* Standard text color for file names and UI */
+#define SEL_COLOR COLOR_YELLOW /* Highlight color for the currently selected item */
+#define DIR_COLOR COLOR_GREEN /* Color to distinguish directory entries from files */
 
 /*****************************************************************************
  * Structure:   file_entry                                                   *
@@ -41,20 +41,20 @@ typedef struct {
     unsigned char type;     /* CBM file type (e.g., SEQ, PRG, DIR) */
 } file_entry;
 
-/* Global state */
-extern file_entry left_files[MAX_FILES]; /* Array of file entries for the left panel */
-extern int left_count;              /* Number of files in the left panel */
-extern int left_sel;                /* Index of the currently selected file in the left panel */
-extern int left_top;                /* Index of the top-most visible file in the left panel */
-extern char left_path[256];             /* Current directory path of the left panel */
+/* Global state - Extern declarations to be defined in tcmdrlib.c */
+extern file_entry left_files[MAX_FILES];  /* File entries currently loaded in the left panel */
+extern int left_count;                   /* Total number of file entries in the left panel */
+extern int left_sel;                     /* Index of the currently highlighted file in the left panel */
+extern int left_top;                     /* Index of the first visible file in the left panel (for scrolling) */
+extern char left_path[256];              /* Current working directory or device path for the left panel */
 
-extern file_entry right_files[MAX_FILES]; /* Array of file entries for the right panel */
-extern int right_count;               /* Number of files in the right panel */
-extern int right_sel;                 /* Index of the currently selected file in the right panel */
-extern int right_top;                 /* Index of the top-most visible file in the right panel */
-extern char right_path[256];              /* Current directory path of the right panel */
+extern file_entry right_files[MAX_FILES]; /* File entries currently loaded in the right panel */
+extern int right_count;                  /* Total number of file entries in the right panel */
+extern int right_sel;                    /* Index of the currently highlighted file in the right panel */
+extern int right_top;                    /* Index of the first visible file in the right panel (for scrolling) */
+extern char right_path[256];             /* Current working directory or device path for the right panel */
 
-extern int active_col; /* Index of the currently active column (0: left, 1: right) */
+extern int active_col; /* Index of the panel that currently has keyboard focus (0: left, 1: right) */
 
 /* Prototypes */
 

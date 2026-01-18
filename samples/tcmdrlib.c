@@ -20,20 +20,20 @@
 #endif
 #include "tinycmdr.h" /* Global declarations and state */
 
-/* Global state definitions */
-file_entry left_files[MAX_FILES];
-int left_count = 0;
-int left_sel = 0;
-int left_top = 0;
-char left_path[256];
+/* Global state definitions (initialized in tinycmdr.c or through logic) */
+file_entry left_files[MAX_FILES];   /* Data for the left list panel */
+int left_count = 0;                 /* Entries in left list */
+int left_sel = 0;                   /* Highlighted entry in left list */
+int left_top = 0;                   /* Scrolling offset for left list */
+char left_path[256];                /* Current path/device for left list */
 
-file_entry right_files[MAX_FILES];
-int right_count = 0;
-int right_sel = 0;
-int right_top = 0;
-char right_path[256];
+file_entry right_files[MAX_FILES];  /* Data for the right list panel */
+int right_count = 0;                /* Entries in right list */
+int right_sel = 0;                  /* Highlighted entry in right list */
+int right_top = 0;                  /* Scrolling offset for right list */
+char right_path[256];               /* Current path/device for right list */
 
-int active_col = 0;
+int active_col = 0;                 /* 0 = Left panel active, 1 = Right panel active */
 
 /*****************************************************************************
  * Function:    get_input                                                    *
@@ -56,6 +56,7 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
     cursor(1);
 
     while (1) {
+        /* Render prompt and current buffer content */
         gotoxy(0, PROMPT_Y);
         cclear(40);
         textcolor(COLOR_WHITE);
@@ -64,14 +65,16 @@ void get_input(const char* prompt, char* buffer, unsigned char maxlen) {
         cprintf("%s", buffer);
 
         key = cgetc();
-        if (key == 13) { /* ENTER */
+        if (key == 13) { /* ENTER key: Finish input */
             break;
-        } else if (key == CH_DEL || key == CH_CURS_LEFT || key == 20) { /* 20 is Backspace on C64 */
+        } else if (key == CH_DEL || key == CH_CURS_LEFT || key == 20) {
+            /* Handle backspace/delete (20 is PETSCII Backspace on C64) */
             if (pos > 0) {
                 pos--;
                 buffer[pos] = '\0';
             }
         } else if (key >= 32 && key < 127 && pos < maxlen - 1) {
+            /* Accept printable ASCII characters within buffer limits */
             /* Map uppercase to lowercase if needed, but for drive numbers it doesn't matter.
                However, cc65's cgetc() on C64 might return PETSCII.
                In PETSCII, numbers are the same as ASCII. */
@@ -104,15 +107,18 @@ void read_directory(const char* path, file_entry* files, int* count) {
     *count = 0;
 
 #ifdef __CBM__
-    /* Check if the path is a drive specification like "8:" */
+    /* Check if the path is a drive specification like "8:" (C64/C128 specific).
+       cc65 opendir/readdir implementation for CBM targets typically handles
+       drive numbers and device access. */
     if (path[0] >= '8' && path[0] <= '9' && path[1] == ':' && path[2] == '\0') {
-        dir = opendir(".");
+        dir = opendir("."); /* Fallback to current device if needed */
         if (!dir) {
             /* Try opendir with the path as a fallback, although opendir in cc65-cbm
                usually only supports "0:", "1:", or "." */
             dir = opendir(path);
         }
     } else if (path[0] == '1' && (path[1] == '0' || path[1] == '1') && path[2] == ':' && path[3] == '\0') {
+        /* Support for dual-digit drive numbers (10, 11) */
         dir = opendir(".");
         if (!dir) {
             dir = opendir(path);
@@ -122,6 +128,7 @@ void read_directory(const char* path, file_entry* files, int* count) {
         dir = opendir(path);
     }
 #else
+    /* Non-CBM targets (Apple II, Atari) use standard filesystem paths */
     dir = opendir(path);
 #endif
     if (!dir) return;
@@ -134,6 +141,7 @@ void read_directory(const char* path, file_entry* files, int* count) {
         files[*count].name[FILENAME_MAX - 1] = '\0';
 
 #ifdef __CBM__
+        /* Map CBM specific directory/file type info */
         files[*count].type = ent->d_type;
         if (ent->d_type == _CBM_T_DIR) {
             files[*count].is_dir = 1;
@@ -141,15 +149,16 @@ void read_directory(const char* path, file_entry* files, int* count) {
             files[*count].is_dir = 0;
         }
 #else
+        /* Generic filesystem logic (e.g. Apple II, Atari) */
         /* Simple check for directory */
-        /* In many cc65 targets, we can't easily check d_type. */
-        /* For this 'tiny' app, we'll mark '.' and '..' as dirs. */
+        /* In many cc65 targets, we can't easily check d_type in dirent. */
+        /* For this 'tiny' app, we'll mark '.' and '..' as dirs by default. */
         files[*count].type = 0;
         if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0) {
             files[*count].is_dir = 1;
         } else {
 #ifdef HAVE_SUBDIRS
-            /* Try to opendir it to see if it's a directory */
+            /* Try to opendir it to see if it's actually a directory */
             subdir = opendir(ent->d_name);
             if (subdir) {
                 files[*count].is_dir = 1;
@@ -224,16 +233,18 @@ void update_list(int col) {
         int idx = top + i;
         gotoxy(x, TOP_Y + 1 + i);
         if (idx < count) {
+            /* If this is the selected item in the active column, highlight it */
             if (idx == sel && col == active_col) {
                 revers(1);
                 textcolor(SEL_COLOR);
             } else {
                 revers(0);
+                /* Directories are shown in a different color */
                 if (files[idx].is_dir) textcolor(DIR_COLOR);
                 else textcolor(TEXT_COLOR);
             }
 
-            /* Display type on CBM targets */
+            /* Display name and type on CBM targets (fixed width) */
 #ifdef __CBM__
             switch (files[idx].type) {
                 case _CBM_T_DEL: strcpy(type_str, "DEL"); break;
@@ -347,6 +358,9 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
     static char old_drive[4];
 
 #ifdef __CBM__
+    /* --- CBM specific parsing logic ---
+       We need to separate the drive number from the filename to use the
+       appropriate cc65 library calls (chdir, open). */
     /* Parse source drive and name */
     if (src[1] == ':' && src[0] >= '8' && src[0] <= '9') {
         src_drive[0] = src[0];
@@ -419,7 +433,8 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
     strcpy(src_full_cbm, src_name);
     strcpy(dst_full_cbm, dst_name);
 
-    /* Set the file type for creation */
+    /* Set the file type for creation on CBM devices.
+       This uses the global _filetype variable from the cc65 runtime. */
     base_type = type & 0x0F;
     if (base_type == (_CBM_T_PRG & 0x0F)) {
         _filetype = 'p';
@@ -431,7 +446,7 @@ void copy_file(const char* src, const char* dst, unsigned char type) {
         _filetype = 'u';
         strcat(src_full_cbm, ",u");
     } else {
-        _filetype = 's'; /* Default */
+        _filetype = 's'; /* Default to SEQ if unknown */
     }
 
     /* Save current device to restore later */
@@ -531,6 +546,7 @@ void execute_command(int key) {
     static char src_full_name[FILENAME_MAX + 8];
     static char dest_full_name[FILENAME_MAX + 8];
 
+    /* Determine source/destination pointers based on the active panel */
     files = (active_col == 0) ? left_files : right_files;
     count = (active_col == 0) ? &left_count : &right_count;
     sel = (active_col == 0) ? &left_sel : &right_sel;
@@ -539,9 +555,7 @@ void execute_command(int key) {
 
     if (*sel < *count) {
         strcpy(filename, files[*sel].name);
-        /* If path is like "8:", we ensure there is no extra slash if it was added elsewhere.
-           TinyCmdr usually stores "8:" or a real path.
-        */
+        /* Construct the full source path including drive or directory prefix */
 #ifdef __CBM__
         /* CBM uses ':' for drive, and usually no subdirectories.
            If path is ".", we just use the filename.
@@ -566,10 +580,10 @@ void execute_command(int key) {
     }
 
     switch (key) {
-        case CH_F1: /* CP */
+        case CH_F1: /* CP - Copy File */
             if (filename[0]) {
                 get_input("DEST DRIVE (8-11): ", drive_buf, 3);
-                /* Validating input */
+                /* Validating input: TinyCmdr currently supports CBM device numbers 8 to 11 */
                 if (strcmp(drive_buf, "8") == 0 || strcmp(drive_buf, "9") == 0 ||
                     strcmp(drive_buf, "10") == 0 || strcmp(drive_buf, "11") == 0) {
 
@@ -599,15 +613,17 @@ void execute_command(int key) {
                         }
 
                         copy_file(src_full_name, dest_full_name, files[*sel].type);
+                        /* Refresh both lists after operation */
                         read_directory(left_path, left_files, &left_count);
                         read_directory(right_path, right_files, &right_count);
-                        /* Reset scroll position if count changed significantly */
+                        /* Reset scroll position if count changed significantly to keep selection visible */
                         if (left_sel >= left_count) { left_sel = left_count > 0 ? left_count - 1 : 0; }
                         if (left_top + visible_height > left_count) { left_top = left_count > visible_height ? left_count - visible_height : 0; }
                         if (right_sel >= right_count) { right_sel = right_count > 0 ? right_count - 1 : 0; }
                         if (right_top + visible_height > right_count) { right_top = right_count > visible_height ? right_count - visible_height : 0; }
                     }
                 } else {
+                    /* Show error message for unsupported device numbers */
                     gotoxy(0, PROMPT_Y);
                     cclear(40);
                     textcolor(COLOR_RED);
@@ -616,7 +632,7 @@ void execute_command(int key) {
                 }
             }
             break;
-        case CH_F2: /* DL */
+        case CH_F2: /* DL - Delete File */
             if (filename[0]) {
                 int confirm_key;
                 gotoxy(0, PROMPT_Y);
@@ -626,6 +642,7 @@ void execute_command(int key) {
                 confirm_key = cgetc();
                 if (confirm_key == CH_F2) {
                     unlink(filename);
+                    /* Refresh directories after deletion */
                     read_directory(left_path, left_files, &left_count);
                     read_directory(right_path, right_files, &right_count);
                     if (*sel >= *count && *count > 0) *sel = *count - 1;
@@ -635,7 +652,7 @@ void execute_command(int key) {
                 cclear(40);
             }
             break;
-        case CH_F3: /* RN */
+        case CH_F3: /* RN - Rename File */
             if (filename[0]) {
                 get_input("RENAME TO: ", newname, FILENAME_MAX);
                 if (newname[0]) {
@@ -645,11 +662,12 @@ void execute_command(int key) {
                 }
             }
             break;
-        case CH_F4: /* CD */
-        case 13:    /* Enter */
+        case CH_F4: /* CD - Change Directory */
+        case 13:    /* Enter - Also triggers CD if selection is a directory */
 #ifdef HAVE_SUBDIRS
             if (filename[0]) {
                 if (chdir(filename) == 0) {
+                    /* Update current path and reload files */
                     getcwd(path, 255);
                     read_directory(".", files, count);
                     *sel = 0;
@@ -658,7 +676,7 @@ void execute_command(int key) {
             }
 #endif
             break;
-        case CH_F5: /* MD */
+        case CH_F5: /* MD - Make Directory */
 #ifdef HAVE_SUBDIRS
             get_input("MKDIR: ", newname, FILENAME_MAX);
             if (newname[0]) {
@@ -668,7 +686,7 @@ void execute_command(int key) {
             }
 #endif
             break;
-        case CH_F6: /* RD */
+        case CH_F6: /* RD - Remove Directory */
 #ifdef HAVE_SUBDIRS
             if (filename[0]) {
                 rmdir(filename);
@@ -677,25 +695,27 @@ void execute_command(int key) {
             }
 #endif
             break;
-        case CH_F7: /* EX */
+        case CH_F7: /* EX - Execute Program */
             if (filename[0]) {
                 int is_exe = 0;
 #ifdef __CBM__
+                /* On CBM, only PRG files can be executed via exec() */
                 if (files[*sel].type == _CBM_T_PRG) is_exe = 1;
 #else
+                /* On other platforms, we assume anything might be executable */
                 is_exe = 1;
 #endif
                 if (is_exe) {
                     clrscr();
                     exec(filename, "");
-                    /* If exec returns, it failed */
+                    /* If exec returns, it failed (e.g. file not found or wrong format) */
                     cprintf("Exec failed: %s\n", strerror(errno));
                     cgetc();
                     clrscr();
                 }
             }
             break;
-        case CH_F8: /* QT */
+        case CH_F8: /* QT - Quit Application */
             clrscr();
             exit(0);
             break;
@@ -723,6 +743,7 @@ void handle_input(void) {
     key = cgetc();
     switch (key) {
         case CH_CURS_UP:
+            /* Move selection up and scroll if necessary */
             if (*sel > 0) {
                 (*sel)--;
                 if (*sel < *top) {
@@ -731,6 +752,7 @@ void handle_input(void) {
             }
             break;
         case CH_CURS_DOWN:
+            /* Move selection down and scroll if necessary */
             if (*sel < count - 1) {
                 (*sel)++;
                 if (*sel >= *top + visible_height) {
@@ -739,16 +761,20 @@ void handle_input(void) {
             }
             break;
         case CH_CURS_LEFT:
+            /* Switch keyboard focus to the left panel */
             active_col = 0;
             break;
         case CH_CURS_RIGHT:
+            /* Switch keyboard focus to the right panel */
             active_col = 1;
             break;
         case 13: /* ENTER */
+            /* Execute the default action (CD for dirs, or handle as F-key command) */
             execute_command(13);
             break;
         case 'd':
         case 'D':
+            /* Enter the debugger (if available) */
             BREAK();
             /* The debugger might have changed the colors. Restore them. */
             (void)bordercolor(COLOR_BLUE);
@@ -761,6 +787,7 @@ void handle_input(void) {
         case 'r':
         case 'R':
             {
+                /* Quick shortcut to change the drive for the RIGHT panel */
                 char drive_buf[4];
                 char* colon;
                 get_input("RIGHT DRIVE (8-11): ", drive_buf, 3);
@@ -795,6 +822,7 @@ void handle_input(void) {
         case 'l':
         case 'L':
             {
+                /* Quick shortcut to change the drive for the LEFT panel */
                 char drive_buf[4];
                 char* colon;
                 get_input("LEFT DRIVE (8-11): ", drive_buf, 3);

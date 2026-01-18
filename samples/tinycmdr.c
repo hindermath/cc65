@@ -47,7 +47,9 @@ int main(void) {
     read_directory(right_path, right_files, &right_count);
 
     while (1) {
+        /* Update the display with current panel contents and status */
         draw_ui();
+        /* Wait for and process user input */
         handle_input();
     }
 }
