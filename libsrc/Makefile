@@ -151,8 +151,12 @@ $(TARGETS): | ../lib
 
 else # TARGET
 
-CA65FLAGS = -g
-CC65FLAGS = -g -Or -W error
+ifdef DEBUG
+  DEBUG_FLAGS = -g
+endif
+
+CA65FLAGS = $(DEBUG_FLAGS)
+CC65FLAGS = $(DEBUG_FLAGS) -Or -W error
 
 EXTZP = cbm510 \
         cbm610 \

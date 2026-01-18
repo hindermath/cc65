@@ -157,25 +157,29 @@ LDFLAGS_tgidemo_atarixl    = --start-addr 0x4000
 %: %.c
 %: %.s
 
+ifdef DEBUG
+  DEBUG_FLAGS = -g
+endif
+
 .c.o:
-	$(CC) $(CFLAGS) -Ors --codesize 500 -T -g -t $(SYS) $<
-	$(AS) -g $(<:.c=.s)
+	$(CC) $(CFLAGS) -Ors --codesize 500 -T $(DEBUG_FLAGS) -t $(SYS) $<
+	$(AS) $(DEBUG_FLAGS) $(<:.c=.s)
 
 .s.o:
-	$(AS) $(ASFLAGS) -g -t $(SYS) $<
+	$(AS) $(ASFLAGS) $(DEBUG_FLAGS) -t $(SYS) $<
 
 .PRECIOUS: %.o
 
 .o:
 ifeq ($(SYS),vic20)
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 else ifeq ($(SYS),plus4)
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C plus4-hires.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -C plus4-hires.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 else
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 
@@ -588,19 +592,19 @@ endif
 # GEOS programs need a resource file linked to them
 ifeq ($(SYS),geos-cbm)
 asciires.o: asciires.grc
-	$(CL) -c -g -t $(SYS) $<
+	$(CL) -c $(DEBUG_FLAGS) -t $(SYS) $<
 ascii.cvt: ascii.o asciires.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 ifeq ($(SYS),geos-apple)
 asciires.o: asciires.grc
 	$(GRC) -t $(SYS) $<
-	$(AS) -g $(<:.grc=.s)
+	$(AS) $(DEBUG_FLAGS) $(<:.grc=.s)
 ascii.cvt: ascii.o asciires.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # --------------------------------------------------------------------------
@@ -608,20 +612,20 @@ endif
 
 tinycmdr: tinycmdr.o tcmdrlib.o
 	$(if $(QUIET),echo $(SYS):$@)
-	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) --dbgfile $@.dbg -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS_$(@F)_$(SYS)) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -t $(SYS) -m $@.map -Ln $@.lbl $^ $(SYS).lib
 
 getsp.o: getsp.s
-	$(AS) $(ASFLAGS) -g -t $(SYS) $<
+	$(AS) $(ASFLAGS) $(DEBUG_FLAGS) -t $(SYS) $<
 
 ifneq ($(SYS),vic20)
 tinyshell: tinyshell.o getsp.o
-	$(LD) $(LDFLAGS) --dbgfile $@.dbg -t $(SYS) -o $@ -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -t $(SYS) -o $@ -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # some programs need more memory on the vic20
 ifeq ($(SYS),vic20)
 tinyshell:  tinyshell.o getsp.o
-	$(LD) $(LDFLAGS) --dbgfile $@.dbg -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
+	$(LD) $(LDFLAGS) $(if $(DEBUG),--dbgfile $@.dbg) -o $@ -C vic20-32k.cfg -m $@.map -Ln $@.lbl $^ $(SYS).lib
 endif
 
 # --------------------------------------------------------------------------

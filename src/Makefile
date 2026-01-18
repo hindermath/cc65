@@ -84,6 +84,10 @@ ifneq ($(SILENT),s)
   $(info BUILD_ID: $(BUILD_ID))
 endif
 
+ifdef DEBUG
+  CFLAGS += -g
+endif
+
 CFLAGS += -MMD -MP -O3 -I common \
           -Wall -Wextra -Wno-char-subscripts $(USER_CFLAGS) \
           -DCA65_INC="\"$(CA65_INC)\"" -DCC65_INC="\"$(CC65_INC)\"" -DCL65_TGT="\"$(CL65_TGT)\"" \
