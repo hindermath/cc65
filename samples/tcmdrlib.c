@@ -26,12 +26,16 @@ int left_count = 0;                 /* Entries in left list */
 int left_sel = 0;                   /* Highlighted entry in left list */
 int left_top = 0;                   /* Scrolling offset for left list */
 char left_path[256];                /* Current path/device for left list */
+unsigned int left_used = 0;         /* Total blocks used on left drive */
+unsigned int left_free = 0;         /* Total blocks free on left drive */
 
 file_entry right_files[MAX_FILES];  /* Data for the right list panel */
 int right_count = 0;                /* Entries in right list */
 int right_sel = 0;                  /* Highlighted entry in right list */
 int right_top = 0;                  /* Scrolling offset for right list */
 char right_path[256];               /* Current path/device for right list */
+unsigned int right_used = 0;        /* Total blocks used on right drive */
+unsigned int right_free = 0;        /* Total blocks free on right drive */
 
 int active_col = 0;                 /* 0 = Left panel active, 1 = Right panel active */
 
@@ -104,7 +108,12 @@ void read_directory(const char* path, file_entry* files, int* count) {
 #ifdef HAVE_SUBDIRS
     static DIR* subdir;
 #endif
+    unsigned int* used = (files == left_files) ? &left_used : &right_used;
+    unsigned int* free = (files == left_files) ? &left_free : &right_free;
+
     *count = 0;
+    *used = 0;
+    *free = 0;
 
 #ifdef __CBM__
     /* Check if the path is a drive specification like "8:" (C64/C128 specific).
@@ -141,18 +150,23 @@ void read_directory(const char* path, file_entry* files, int* count) {
         files[*count].name[FILENAME_MAX - 1] = '\0';
 
 #ifdef __CBM__
-        /* Map CBM specific directory/file type info */
+        /* Map CBM specific directory/file type info and block size */
         files[*count].type = ent->d_type;
+        files[*count].blocks = ent->d_blocks;
+
         if (ent->d_type == _CBM_T_DIR) {
             files[*count].is_dir = 1;
+            *used += ent->d_blocks;
+        } else if (ent->d_type == _CBM_T_HEADER) {
+            /* We don't want to show the header in our file list usually. */
+            continue;
         } else {
             files[*count].is_dir = 0;
+            *used += ent->d_blocks;
         }
 #else
         /* Generic filesystem logic (e.g. Apple II, Atari) */
-        /* Simple check for directory */
-        /* In many cc65 targets, we can't easily check d_type in dirent. */
-        /* For this 'tiny' app, we'll mark '.' and '..' as dirs by default. */
+        files[*count].blocks = 0; /* Not easily available via dirent on all targets */
         files[*count].type = 0;
         if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0) {
             files[*count].is_dir = 1;
@@ -174,6 +188,13 @@ void read_directory(const char* path, file_entry* files, int* count) {
         (*count)++;
     }
     closedir(dir);
+
+#ifdef __CBM__
+    /* Calculate free blocks: total capacity - used blocks.
+       A standard 1541 disk (C64) has 683 blocks total, 664 usable.
+       Using 664 as a safe default for 'free' display. */
+    *free = (664 > *used) ? (664 - *used) : 0;
+#endif
 }
 
 /*****************************************************************************
@@ -244,7 +265,7 @@ void update_list(int col) {
                 else textcolor(TEXT_COLOR);
             }
 
-            /* Display name and type on CBM targets (fixed width) */
+            /* Display name, blocks and type on CBM targets (fixed width) */
 #ifdef __CBM__
             switch (files[idx].type) {
                 case _CBM_T_DEL: strcpy(type_str, "DEL"); break;
@@ -260,7 +281,7 @@ void update_list(int col) {
                 case _CBM_T_HEADER: strcpy(type_str, "HDR"); break;
                 default: strcpy(type_str, "???"); break;
             }
-            cprintf("%-13.13s %s", files[idx].name, type_str);
+            cprintf("%-10.10s %3u %s", files[idx].name, files[idx].blocks, type_str);
 #else
             cprintf("%-17.17s", files[idx].name);
 #endif
@@ -271,6 +292,16 @@ void update_list(int col) {
         }
     }
     revers(0);
+
+    /* Display summary (Used/Free blocks) at the bottom line of the frame */
+    gotoxy(x, TOP_Y + COL_HEIGHT - 1);
+    textcolor(COLOR_YELLOW);
+    {
+        unsigned int used = (col == 0) ? left_used : right_used;
+        unsigned int free = (col == 0) ? left_free : right_free;
+        cprintf("Used:%-4u Free:%-4u", used, free);
+    }
+
     textcolor(TEXT_COLOR);
 }
 
