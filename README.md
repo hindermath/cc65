@@ -122,3 +122,45 @@ make DEBUG=0
 ```
 
 [![Snapshot Build](https://github.com/cc65/cc65/actions/workflows/snapshot-on-push-master.yml/badge.svg?branch=master)](https://github.com/cc65/cc65/actions/workflows/snapshot-on-push-master.yml)
+
+---
+
+## Fork-Entwicklungsinfrastruktur / Fork development tooling
+
+Dieser Fork enthält in `.dev-tools/` lokale Hilfsskripte für den Pre-Push Secret-Scan.
+Sie liegen bewusst in einem versteckten Verzeichnis, um nicht mit der Upstream-Struktur zu kollidieren.
+
+*This fork includes local helper scripts in `.dev-tools/` for pre-push secret scanning.
+They are intentionally placed in a hidden directory to avoid conflicts with the upstream structure.*
+
+### Ersteinrichtung nach dem Clonen / Initial setup after cloning
+
+```bash
+# macOS / Linux
+git clone https://github.com/hindermath/cc65.git
+cd cc65
+bash .dev-tools/install-hooks.sh
+```
+
+```powershell
+# Windows (PowerShell Core >= 7)
+git clone https://github.com/hindermath/cc65.git
+Set-Location cc65
+pwsh .dev-tools/install-hooks.ps1
+```
+
+### Verfügbare Skripte / Available scripts
+
+| Skript / Script | Beschreibung / Description |
+|---|---|
+| `.dev-tools/install-hooks.sh` | Git-Hooks installieren (Bash) |
+| `.dev-tools/install-hooks.ps1` | Git-Hooks installieren (PowerShell Core) |
+| `.dev-tools/scan-agent-secrets.sh` | Secret-Scan manuell ausführen (Bash) |
+| `.dev-tools/scan-agent-secrets.ps1` | Secret-Scan manuell ausführen (PowerShell Core) |
+| `.dev-tools/hooks/pre-push` | Pre-Push Hook – blockiert Push bei Secrets |
+
+Der `pre-push`-Hook läuft automatisch bei jedem `git push` und prüft alle
+git-getrackten Dateien auf Credentials, Tokens und andere Secrets.
+
+*The `pre-push` hook runs automatically on every `git push` and checks all
+git-tracked files for credentials, tokens, and other secrets.*
