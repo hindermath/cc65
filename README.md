@@ -227,6 +227,74 @@ Steps for a new feature:
 
 All spec artefacts are stored and versioned in the branch directory `specs/{branch}/`.
 
+---
+
+## Homogeneity Guardian — Skript-Kurzreferenz / Script Quick Reference
+
+### `.dev-tools/check-homogeneity.sh` / `.dev-tools/check-homogeneity.ps1`
+
+Prüft dieses Projekt auf Compliance (constitution.md, A11Y, Spec-kit, Azubis-Abschnitte, STATS.md).
+*Checks this project for compliance (constitution.md, A11Y, Spec-kit, Azubis sections, STATS.md).*
+
+```bash
+bash .dev-tools/check-homogeneity.sh
+
+# JSON-Ausgabe für CI/Scripting / JSON output for CI/scripting
+bash .dev-tools/check-homogeneity.sh --json
+```
+
+```powershell
+pwsh .dev-tools/check-homogeneity.ps1
+pwsh .dev-tools/check-homogeneity.ps1 -Json
+```
+
+---
+
+### `.dev-tools/init-stats.sh` / `.dev-tools/init-stats.ps1`
+
+Schreibt einen Baseline-Eintrag in `STATS.md`. Einmalig nach dem Einrichten ausführen.
+*Writes a baseline entry to `STATS.md`. Run once after initial setup.*
+
+```bash
+bash .dev-tools/init-stats.sh
+```
+
+```powershell
+pwsh .dev-tools/init-stats.ps1
+```
+
+---
+
+### `.dev-tools/rename-lastenheft.sh` / `.dev-tools/rename-lastenheft.ps1`
+
+Benennt eine Lastenheft-Datei via `git mv` um und committet — fügt Branch-Suffix hinzu.
+*Renames a Lastenheft file via `git mv` and commits — adds branch suffix.*
+
+```bash
+# Datei umbenennen und committen / Rename and commit
+bash .dev-tools/rename-lastenheft.sh Lastenheft_foo.md 002-feature-branch
+# Ergebnis / Result: Lastenheft_foo.002-feature-branch.md
+```
+
+```powershell
+pwsh .dev-tools/rename-lastenheft.ps1 -File Lastenheft_foo.md -Branch 002-feature-branch
+```
+
+---
+
+### `.dev-tools/install-hooks.sh` / `.dev-tools/install-hooks.ps1`
+
+Installiert den `pre-push`-Hook nach dem Clonen auf einem neuen Gerät.
+*Installs the `pre-push` hook after cloning on a new device.*
+
+```bash
+bash .dev-tools/install-hooks.sh
+```
+
+```powershell
+pwsh .dev-tools/install-hooks.ps1
+```
+
 ## Für Azubis / For Apprentices
 
 Willkommen! Diese Sektion beschreibt den Einstieg in die Entwicklungsumgebung

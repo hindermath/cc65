@@ -19,7 +19,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$hooksSrc = if ($HookSourcePath) { $HookSourcePath } else { Join-Path (Split-Path -Parent $PSScriptRoot) '.dev-tools' 'hooks' }
+$hooksSrc = if ($HookSourcePath) { $HookSourcePath } else { Join-Path $PSScriptRoot 'hooks' }
 $hooksDst = Join-Path $repoRoot '.git' 'hooks'
 
 if (-not (Test-Path -Path $hooksDst -PathType Container)) {

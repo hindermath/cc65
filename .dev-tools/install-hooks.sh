@@ -6,7 +6,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-HOOKS_SRC="$REPO_ROOT/.dev-tools/hooks"
+HOOKS_SRC="$REPO_ROOT/scripts/hooks"
 HOOKS_DST="$REPO_ROOT/.git/hooks"
 
 if [ ! -d "$HOOKS_DST" ]; then
