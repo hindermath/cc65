@@ -1,0 +1,72 @@
+# CLAUDE.md — {{PROJECT_NAME}}
+
+**Workspace**: {{WORKSPACE}}
+**Projekt / Project**: {{PROJECT_NAME}}
+
+---
+
+## Überblick / Overview
+
+Dieses Dokument gibt Claude Code Anweisungen für die Arbeit in diesem Projekt.
+
+This document provides Claude Code with instructions for working in this project.
+
+---
+
+## Projektkontext / Project Context
+
+**Projektname / Project Name**: {{PROJECT_NAME}}
+**Workspace**: {{WORKSPACE}}
+**Sprache / Language**: C# / .NET
+
+---
+
+## Verwendung / Usage
+
+### Für Claude Code / For Claude Code
+
+Dieses Repository folgt dem **Workspace Homogeneity Guardian**-Standard:
+
+- Alle Markdown-Dateien sind zweisprachig (Deutsch primär, Englisch sekundär, CEFR B2)
+- Skripte in `scripts/` kommen in `.sh`- und `.ps1`-Varianten
+- Secrets werden niemals eingecheckt (Whitelist-`.gitignore`)
+- Pre-Push-Hook prüft auf Secret-Muster vor jedem Push
+
+This repository follows the **Workspace Homogeneity Guardian** standard:
+
+- All Markdown files are bilingual (German primary, English secondary, CEFR B2)
+- Scripts in `scripts/` come in `.sh` and `.ps1` variants
+- Secrets are never committed (whitelist `.gitignore`)
+- Pre-push hook checks for secret patterns before each push
+
+---
+
+## Einrichtung / Setup
+
+### Voraussetzungen / Prerequisites
+
+- `git` ≥ 2.x
+- `bash` ≥ 5.x (macOS: `brew install bash`)
+- `ripgrep` (`rg`) — `brew install ripgrep` / `apt install ripgrep`
+
+### Schnellstart / Quickstart
+
+```bash
+# Compliance-Check
+bash ~/scripts/check-homogeneity.sh ~/
+
+# Bootstrap neues Projekt
+bash ~/scripts/bootstrap-project.sh <ProjectName> ~/{{WORKSPACE}}
+```
+
+---
+
+## Hinweise / Notes
+
+- Keine ANSI-Farbcodes in Skript-Output
+- Heading-Hierarchie ohne Lücken (h1 → h2 → h3, kein Überspringen)
+- Keine leeren Alt-Texte in Markdown-Bildern
+
+- No ANSI color codes in script output
+- Heading hierarchy without gaps (h1 → h2 → h3, no skipping)
+- No empty alt texts in Markdown images

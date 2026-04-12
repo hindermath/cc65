@@ -1,0 +1,61 @@
+# GitHub Copilot Instructions — {{PROJECT_NAME}}
+
+**Workspace**: {{WORKSPACE}}
+**Projekt / Project**: {{PROJECT_NAME}}
+
+---
+
+## Überblick / Overview
+
+Dieses Dokument konfiguriert GitHub Copilot für das Projekt **{{PROJECT_NAME}}**.
+
+This document configures GitHub Copilot for the **{{PROJECT_NAME}}** project.
+
+---
+
+## Projektkontext / Project Context
+
+- **Projektname**: {{PROJECT_NAME}}
+- **Workspace**: {{WORKSPACE}}
+- **Primärsprache / Primary Language**: C# / .NET Framework
+- **Standard / Standard**: Workspace Homogeneity Guardian
+
+---
+
+## Verwendung / Usage
+
+### Coding-Konventionen / Coding Conventions
+
+Dieses Projekt verwendet folgende Konventionen:
+
+- C# mit .NET Framework (kein .NET Core, es sei denn explizit anders vermerkt)
+- Deutsch als primäre Kommentarsprache, Englisch als sekundär
+- XML-Dokumentationskommentare für öffentliche API-Mitglieder
+- Keine bezahlten NuGet-Pakete (DevExpress, Telerik, Syncfusion etc.)
+
+This project uses the following conventions:
+
+- C# with .NET Framework (no .NET Core unless explicitly noted otherwise)
+- German as primary comment language, English as secondary
+- XML documentation comments for public API members
+- No paid NuGet packages (DevExpress, Telerik, Syncfusion etc.)
+
+---
+
+## Einrichtung / Setup
+
+### Voraussetzungen / Prerequisites
+
+- Visual Studio / JetBrains Rider
+- .NET Framework SDK
+- GitHub Copilot Extension
+
+---
+
+## Hinweise / Notes
+
+- Secrets niemals in Code einfügen — immer Keychain/Umgebungsvariablen verwenden
+- Pre-Push-Hook prüft auf Secret-Muster — Commits mit Credentials werden abgelehnt
+
+- Never embed secrets in code — always use Keychain/environment variables
+- Pre-push hook checks for secret patterns — commits with credentials are rejected

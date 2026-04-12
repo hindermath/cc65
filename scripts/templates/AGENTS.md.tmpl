@@ -1,0 +1,81 @@
+# AGENTS.md — {{PROJECT_NAME}}
+
+**Workspace**: {{WORKSPACE}}
+**Projekt / Project**: {{PROJECT_NAME}}
+
+---
+
+## Überblick / Overview
+
+Dieses Dokument gibt KI-Agenten (OpenAI Codex, GitHub Copilot) Anweisungen für die Arbeit in diesem Projekt.
+
+This document provides AI agents (OpenAI Codex, GitHub Copilot) with instructions for working in this project.
+
+---
+
+## Projektkontext / Project Context
+
+**Projektname / Project Name**: {{PROJECT_NAME}}
+**Workspace**: {{WORKSPACE}}
+**Primärsprache / Primary Language**: C# / .NET Framework
+
+---
+
+## Verwendung / Usage
+
+### Für Codex und Copilot / For Codex and Copilot
+
+Dieses Repository folgt dem **Workspace Homogeneity Guardian**-Standard:
+
+- Alle Markdown-Dateien sind zweisprachig (Deutsch primär, Englisch sekundär)
+- Skripte liegen als `.sh` (Bash 5+) und `.ps1` (PowerShell Core 7+) vor
+- Secrets werden nie eingecheckt
+- Neue Projekte werden mit `bootstrap-project.sh` angelegt
+
+This repository follows the **Workspace Homogeneity Guardian** standard:
+
+- All Markdown files are bilingual (German primary, English secondary)
+- Scripts exist as `.sh` (Bash 5+) and `.ps1` (PowerShell Core 7+)
+- Secrets are never committed
+- New projects are created with `bootstrap-project.sh`
+
+---
+
+## Für Azubis / For Apprentices
+
+Willkommen! Hier sind deine ersten Schritte:
+
+1. **Voraussetzungen prüfen**: `git`, `bash`, `ripgrep (rg)` installiert?
+2. **Compliance-Check ausführen**: `bash ~/scripts/check-homogeneity.sh ~/`
+3. **WARNs und FAILs lesen** und beheben
+4. **Fragen?** Schau in `~/README.md §Für Azubis` oder frag deinen Senior
+
+Welcome! Here are your first steps:
+
+1. **Check prerequisites**: `git`, `bash`, `ripgrep (rg)` installed?
+2. **Run compliance check**: `bash ~/scripts/check-homogeneity.sh ~/`
+3. **Read WARNs and FAILs** and fix them
+4. **Questions?** See `~/README.md §For Apprentices` or ask your senior
+
+---
+
+## Einrichtung / Setup
+
+### Voraussetzungen / Prerequisites
+
+- `git` ≥ 2.x
+- `bash` ≥ 5.x
+- `ripgrep` (`rg`)
+- `node` / `npx` (optional — für Spec-kit / for Spec-kit)
+
+---
+
+## Hinweise / Notes
+
+- Keine ANSI-Farbcodes in Skript-Output
+- Keine leeren Alt-Texte in Bildern
+- Heading-Hierarchie ohne Lücken einhalten
+
+- No ANSI color codes in script output
+- No empty alt texts in images
+- Maintain heading hierarchy without gaps

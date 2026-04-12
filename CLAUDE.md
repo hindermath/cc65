@@ -99,3 +99,4 @@ Tests live in `test/` with subdirectories by category:
 PRs must pass `make check` with no failures. If compiler output format changes (error/warning messages), update the affected reference files in `test/ref/`.
 
 To compile with strict warnings: `make USER_CFLAGS=-Werror`
+<!-- claude-init-done -->
