@@ -58,23 +58,28 @@ $root = if ($WorkspaceRoot) {
 } else {
     Resolve-Path (Join-Path $PSScriptRoot '..')
 }
+$rootPath = $root.ProviderPath
 
-Write-Verbose "Repository-Root: $root"
+Write-Verbose "Repository-Root: $rootPath"
 
 # --- Nur git-getrackte Dateien laden -------------------------------------------------
 
-$trackedRelative = & git -C $root ls-files
+$trackedRelative = & git -C $rootPath ls-files
 if (-not $trackedRelative) {
     Write-Host 'Keine git-getrackten Dateien gefunden. Scan übersprungen.' -ForegroundColor Yellow
     exit 0
 }
 
-$trackedFiles = $trackedRelative | ForEach-Object { Join-Path $root $_ }
+$trackedFiles = $trackedRelative | ForEach-Object { Join-Path $rootPath $_ }
 Write-Verbose "$($trackedFiles.Count) getrackte Datei(en) werden geprüft."
 
 # --- Scan: Dateinamen ----------------------------------------------------------------
 
 $nameHits = $trackedFiles | Where-Object {
+    $relative = [IO.Path]::GetRelativePath($rootPath, $_)
+    if ($relative -like '.github/workflows/*') {
+        return $false
+    }
     $name = Split-Path $_ -Leaf
     $SecretNamePatterns | Where-Object { $name -match $_ }
 }
