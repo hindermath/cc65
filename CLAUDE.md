@@ -100,3 +100,8 @@ PRs must pass `make check` with no failures. If compiler output format changes (
 
 To compile with strict warnings: `make USER_CFLAGS=-Werror`
 <!-- claude-init-done -->
+
+## Hinweise / Notes
+
+- Diese Datei ergaenzt die projektspezifische Dokumentation mit agentischen Arbeitsregeln.
+- This file complements the project-specific documentation with agent-oriented working rules.
