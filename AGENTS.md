@@ -27,3 +27,10 @@ There is no numeric coverage gate; contributors are expected to add or update re
 ## Commit & Pull Request Guidelines
 
 Keep each commit and PR focused on one issue. Recent history uses short, imperative subjects, often with a touched area first, for example `Update Makefile: ...` or `Add disk usage tracking ...`. PRs should include a concise summary, link the relevant issue when one exists, confirm codestyle compliance, and note any new tests or documentation updates. Follow `.github/PULL_REQUEST_TEMPLATE.md`.
+
+---
+
+## Hinweise / Notes
+
+- Diese Datei bleibt bewusst kompakt und ergänzt die projektspezifische Dokumentation.
+- This file intentionally stays compact and complements the project-specific documentation.

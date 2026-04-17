@@ -62,3 +62,10 @@ cc65 is a complete cross-development package for 65(C)02 systems, including a po
 - `samples/`: Example programs and the `tinycmdr` project.
 - `test/`: Regression test suite.
 - `doc/`: Documentation (LinuxDoc format).
+
+---
+
+## Hinweise / Notes
+
+- Diese Datei bleibt bewusst kompakt und ergänzt die projektspezifische Dokumentation.
+- This file intentionally stays compact and complements the project-specific documentation.
