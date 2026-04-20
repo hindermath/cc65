@@ -87,3 +87,8 @@ cc65 is a complete cross-development package for 65(C)02 systems, including a po
 
 - Diese Datei bleibt bewusst kompakt und ergänzt die projektspezifische Dokumentation.
 - This file intentionally stays compact and complements the project-specific documentation.
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->

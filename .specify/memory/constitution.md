@@ -1,20 +1,25 @@
 <!--
-SYNC IMPACT REPORT
-==================
-Version change: (template) → 1.0.0
-Modified principles: N/A — initial creation from template
-Added sections:
-  - Core Principles (I–V)
-  - C64 / tinycmdr Development Standards
-  - Build & CI Standards
-  - Governance
-Removed sections: N/A
-Templates requiring updates:
-  - .specify/templates/plan-template.md   ✅ No change needed (Constitution Check section already present)
-  - .specify/templates/spec-template.md   ✅ No change needed (structure aligns with principles)
-  - .specify/templates/tasks-template.md  ✅ No change needed (task categories align with principles)
-  - .specify/templates/constitution-template.md  ✅ Reference only — not modified
-Follow-up TODOs: None; all placeholders resolved from repository context.
+Sync Impact Report
+- Version change: 1.0.0 -> 1.1.0
+- Bump rationale:
+  - MINOR: Added workspace-baseline alignment guidance from the repository root `constitution.md` without removing repository-specific principles.
+- Modified principles:
+  - None
+- Added sections:
+  - Workspace Baseline Alignment / Observability & Continuous Measurement
+  - Workspace Baseline Alignment / Programmierung #include<everyone> — Inclusion & Accessibility By Default
+  - Workspace Baseline Alignment / DE-First / EN-Second Delivery
+  - Workspace Baseline Alignment / Four-Agent Guidance Parity
+  - Workspace Baseline Alignment / Runtime Guidance References
+- Removed sections:
+  - None
+- Templates requiring updates:
+  - .specify/templates/plan-template.md: pending review
+  - .specify/templates/spec-template.md: pending review
+  - .specify/templates/tasks-template.md: pending review
+  - .specify/templates/commands/constitution.md: pending review
+- Follow-up TODOs:
+  - Review template and runtime-guidance wording for repository-specific propagation where needed.
 -->
 
 # cc65 Constitution
@@ -130,6 +135,30 @@ Commander-style file manager for C64) carries these additional rules:
 - All samples (including `tinycmdr`) MUST build without errors after any
   toolchain change.
 
+## Workspace Baseline Alignment
+
+This Spec-Kit constitution inherits the binding workspace-family governance from `constitution.md` in the repository root. Project-specific rules remain in force; where both apply, the stricter rule wins.
+
+### A. Observability & Continuous Measurement
+
+Every repository MUST maintain `docs/project-statistics.md` as a living statistics ledger. The conservative manual reference is `80` lines/workday. If this repository later documents a project-specific Thorsten-Solo baseline, it MUST be recorded consistently across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`. The TVöD workday baseline is `7.8 h` (`7h 48m`). Shared statistics guidance MUST stay consistent across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`.
+
+### B. Programmierung #include<everyone> — Inclusion & Accessibility By Default
+
+`Programmierung #include<everyone>` is a binding repository-wide principle. All user-facing artefacts — including CLI output, documentation and Markdown, HTML and generated websites, graphical user interfaces, and generated templates or scaffolding — MUST follow WCAG 2.2 Level AA wherever the criteria are applicable. They MUST remain usable with keyboard-only interaction, screen readers, Braille displays, and text browsers. Accessibility review is part of completion, not post-processing.
+
+### C. DE-First / EN-Second Delivery
+
+German is the canonical first language for user-facing governance and documentation in this repository family; English follows directly after it. User-facing and learner-facing guidance MUST remain bilingual at approximately CEFR-B2 readability, and materially changed guidance MUST update both language tracks in the same change.
+
+### D. Four-Agent Guidance Parity
+
+Shared operational guidance MUST be kept aligned across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`. Shared rules MUST NOT be updated in only one file. Any intentional deviation MUST be documented explicitly in the same change. The same shared rules MUST also be propagated to the relevant project templates and `.specify/memory/constitution.md`.
+
+### E. Runtime Guidance References
+
+Governance text that references runtime guidance MUST name all four maintained agent surfaces: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`.
+
 ## Governance
 
 This constitution supersedes all informal conventions in the cc65 repository.
@@ -155,4 +184,4 @@ deviations MUST be recorded in the plan's "Complexity Tracking" table.
 **Runtime guidance**: For AI-assistant conventions and build command
 reference, see `CLAUDE.md` at the repository root.
 
-**Version**: 1.0.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-03-31
+**Version**: 1.1.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-04-20
