@@ -126,7 +126,9 @@
   in `docs/security/` (`asvs-verification.md`, `supply-chain-evidence.md`,
   `zero-trust-applicability.md`, `samm-assessment.md`) or an explicitly
   justified equivalent governance location.
-
+- **CR-011**: The feature MUST state which installed Spec-Kit governance
+  presets apply. C#/.NET Level-2 projects default to all six home-baseline
+  presets unless a justified exception is documented.
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

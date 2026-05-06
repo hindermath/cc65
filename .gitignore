@@ -259,3 +259,9 @@ fabric.properties
 /.output.txt
 .DS_Store
 macOS/
+
+# Spec-Kit Presets (Policy-Dateien tracken, lokalen Cache ignorieren)
+!.specify/presets/
+!.specify/presets/**
+.specify/presets/.cache/
+.specify/presets/.cache/**
