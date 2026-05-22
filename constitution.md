@@ -1,21 +1,20 @@
 <!--
 Sync Impact Report
-Version change: 1.11.0 -> 1.12.0
+Version change: 1.12.0 -> 1.14.0
 Modified principles:
-- None (purely additive)
+- XIV. Secure Development Standards & Applicability Matrix (add AI-SBOM)
+- XVI. Supply-Chain Transparency & Build Integrity (add G7/BSI AI-SBOM applicability)
+- XIX. EU Cyber Resilience Act (CRA) Compliance Awareness (add AI Act / AI-SBOM awareness)
 Added sections:
 - None
 Removed sections:
 - None
 Templates requiring updates:
+- ✅ .specify/templates/constitution-template.md
 - ✅ .specify/templates/plan-template.md
 - ✅ .specify/templates/spec-template.md
-- ✅ .specify/templates/tasks-template.md
-- ✅ .specify/templates/asvs-verification-template.md
 - ✅ .specify/templates/supply-chain-evidence-template.md
-- ✅ .specify/templates/zero-trust-applicability-template.md
-- ✅ .specify/templates/samm-assessment-template.md
-- ✅ .specify/templates/threat-model-template.md
+- ✅ .specify/templates/tasks-template.md
 Runtime guidance requiring updates:
 - ✅ AGENTS.md
 - ✅ CLAUDE.md
@@ -26,7 +25,7 @@ Follow-up TODOs:
 - None
 -->
 
-# Constitution v1.12.0
+# Constitution v1.14.0
 
 # home-baseline Constitution
 
@@ -498,6 +497,7 @@ MUST use this matrix to determine which standards apply.
 | CWE Top 25 | MUST | All Level-2 projects | Relevant weaknesses are checked during design, implementation, review, and remediation |
 | OWASP ASVS | MUST | Web, API, HTTP, or authentication-bearing services | Select and document an ASVS level and verification scope |
 | SBOM | MUST | Release-capable or distributable artefacts | Generate machine-readable component inventory per release |
+| AI-SBOM / G7 SBOM for AI Minimum Elements | Project-type-dependent | AI models, AI services, training or embedding datasets, inference infrastructure, or AI runtime components are part of the released or operated system | Assess AI-SBOM applicability; when applicable, record the seven G7/BSI clusters: metadata, system-level properties, models, datasets, infrastructure, security properties, and key performance indicators |
 | VEX | MUST | Known vulnerabilities in shipped or evaluated components | Record whether the project is affected, not affected, mitigated, or under investigation |
 | SLSA | SHOULD | CI/CD-built or published artefacts | Target build provenance and integrity controls; at least L1 where feasible |
 | OWASP SAMM | SHOULD | Long-lived Level-1 and Level-2 workspaces/projects | Periodic self-assessment with prioritized improvement actions |
@@ -587,16 +587,17 @@ Mandatory rules:
 - Public OSS repositories and the adoption of high-impact external
   dependencies SHOULD consider `OpenSSF Scorecard` findings (or an equivalent
   source of repository security posture evidence) before release or adoption.
-- Dependency, SBOM, VEX, provenance, and Scorecard evidence MUST feed into the
+- Dependency, SBOM, AI-SBOM, VEX, provenance, and Scorecard evidence MUST feed into the
   repository's dependency audit and release review process.
 - Release-capable projects MUST maintain a supply-chain evidence document using
   `supply-chain-evidence-template.md` or an equivalent repository-local format.
-  That document MUST reference the current SBOM, VEX decisions, provenance or
+  That document MUST reference the current SBOM, AI-SBOM applicability/evidence, VEX decisions, provenance or
   SLSA status, and any relevant OpenSSF Scorecard observations.
 
 **Rationale**: A project can follow secure coding rules and still ship opaque
-or tampered artefacts. SBOM, VEX, SLSA, and Scorecard address transparency,
+or tampered artefacts. SBOM, AI-SBOM, VEX, SLSA, and Scorecard address transparency,
 integrity, and supplier trustworthiness across the software supply chain.
+The G7/BSI AI-SBOM minimum elements extend that transparency to AI-specific dependencies without creating a blanket requirement for development-tool-only AI usage.
 
 ### XVII. Threat Modeling & Attack Pattern Coverage
 
@@ -749,12 +750,14 @@ workspace family consists of:
 
 | Preset | Version | Priority | Scope |
 |---|---:|---:|---|
-| `security-governance` | `v0.2.0` | `10` | secure development, MSL, SSDF, ASVS, SBOM/VEX/SLSA, CRA awareness |
+| `security-governance` | `v0.3.0` | `10` | secure development, MSL, SSDF, ASVS, SBOM/VEX/SLSA, AI-SBOM, CRA awareness |
 | `architecture-governance` | `v0.2.0` | `20` | secure architecture, STRIDE/CAPEC, Zero Trust, SAMM, S-ADR |
 | `isaqb-architecture-governance` | `v0.1.0` | `30` | general iSAQB/arc42 architecture governance |
 | `a11y-governance` | `v0.2.0` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts |
 | `cross-platform-governance` | `v0.1.0` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
 | `agent-parity-governance` | `v0.1.0` | `60` | synchronized agent guidance across declared AI-agent files |
+
+`security-governance` v0.3.0 adds conditional `AI-SBOM` evidence: development-tool-only AI usage is `N/A`, while AI runtime/product components require G7/BSI AI-SBOM cluster evidence.
 
 All six presets are published as standalone repositories under
 `https://github.com/hindermath/spec-kit-preset-*` and are included in the
@@ -788,7 +791,7 @@ Community/catalog coordination is tracked in `github/spec-kit#2362`.
 `.github/copilot-instructions.md` for per-agent operational guidance. This
 constitution is the authoritative policy layer above all agent-specific files.
 
-**Version**: 1.13.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-06
+**Version**: 1.14.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-22
 
 <!-- EN: constitution.md placeholder
 [DE-Zusammenfassung: constitution.md beschreibt die Prinzipien und Standards für alle home-baseline Workspaces.]

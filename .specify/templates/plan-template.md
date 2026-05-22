@@ -57,13 +57,19 @@
 - **Security standards applicability**: Determine which standards from
   `constitution.md`, Principles XIV-XVIII apply. `NIST SSDF` and `CWE Top 25`
   always apply to Level-2; add `OWASP ASVS`, `SBOM`, `VEX`, `SLSA`, `CAPEC`,
-  `NIST Zero Trust`, `OWASP SAMM`, `OWASP Cheat Sheet Series` /
+  `AI-SBOM`, `NIST Zero Trust`, `OWASP SAMM`, `OWASP Cheat Sheet Series` /
   `OWASP Proactive Controls`, and `OpenSSF Scorecard` where relevant. Mark
   non-applicable standards as `N/A` with justification.
+- **AI-SBOM applicability**: State whether AI is used only as a development
+  tool, absent from the released/operated system, or present as a runtime or
+  product component. If AI runtime or product components are present, plan the
+  G7/BSI AI-SBOM evidence across metadata, system-level properties, models,
+  datasets, infrastructure, security properties, and key performance
+  indicators. If not, record the `N/A` rationale.
 - **Release / supply-chain evidence**: State whether the feature requires
-  ASVS verification notes, SBOM/VEX artefacts, provenance/SLSA evidence,
-  CAPEC references, Zero-Trust applicability notes, or SAMM follow-up items,
-  and where that evidence will live.
+  ASVS verification notes, SBOM/VEX artefacts, AI-SBOM evidence,
+  provenance/SLSA evidence, CAPEC references, Zero-Trust applicability notes,
+  or SAMM follow-up items, and where that evidence will live.
 - **Default evidence files**: Prefer `docs/security/asvs-verification.md`,
   `docs/security/supply-chain-evidence.md`,
   `docs/security/zero-trust-applicability.md`, and
