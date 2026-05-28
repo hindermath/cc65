@@ -227,14 +227,40 @@ check_markdown_file() {
 
 # ─── REV-B01 New Check Helpers ────────────────────────────────────────────────
 
-check_en_placeholder() {
+has_en_guidance() {
+  local full="$1"
+  local bil_result bil_status
+
+  if rg -q '<!-- EN:' "$full" 2>/dev/null; then
+    return 0
+  fi
+
+  bil_result=$(hg_check_bilingual "$full" 2>/dev/null || true)
+  bil_status="${bil_result%%|*}"
+  if [ "$bil_status" = "PASS" ]; then
+    return 0
+  fi
+
+  if rg -qi '^#{1,6}[[:space:]].+[[:space:]]/[[:space:]].*(Shared|Environment|Registry|Security|Secure|Architecture|Documentation|Standards|Workflow|Maintenance|Notes|Description|Accessibility|For Apprentices|Spec[- ]Kit|Governance|Guidelines|Instructions|tooling)' "$full" 2>/dev/null; then
+    return 0
+  fi
+
+  if rg -qi 'Gemeinsame|Barrierefreiheit|Sichere|Sicherheits|Umgebungsregister|Hinweise|Beschreibung|deutsch' "$full" 2>/dev/null &&
+     rg -qi 'Shared|Accessibility|Secure|Security|Environment|Notes|Description|English|englisch' "$full" 2>/dev/null; then
+    return 0
+  fi
+
+  return 1
+}
+
+check_en_guidance() {
   local dir="$1" file="$2"
   local full="${dir}/${file}"
   [ -f "$full" ] || return 0
-  if rg -q '<!-- EN:' "$full" 2>/dev/null; then
-    emit_result "PASS" "$file" "EN placeholder" "$dir"
+  if has_en_guidance "$full"; then
+    emit_result "PASS" "$file" "EN guidance present" "$dir"
   else
-    emit_result "FAIL" "$file" "EN placeholder missing" "$dir"
+    emit_result "FAIL" "$file" "EN guidance missing" "$dir"
   fi
 }
 
@@ -353,12 +379,12 @@ while IFS='|' read -r level dir _type; do
     check_copilot_instructions "$dir"
   fi
 
-  # EN placeholder checks (Level 0 and 1)
+  # EN guidance checks (Level 0 and 1)
   if [ "$level" -le 1 ]; then
-    for en_file in README.md AGENTS.md CLAUDE.md GEMINI.md constitution.md; do
-      check_en_placeholder "$dir" "$en_file"
+    for en_file in AGENTS.md CLAUDE.md GEMINI.md constitution.md; do
+      check_en_guidance "$dir" "$en_file"
     done
-    check_en_placeholder "$dir" ".github/copilot-instructions.md"
+    check_en_guidance "$dir" ".github/copilot-instructions.md"
   fi
 
   # homogeneity-check.yml presence (all levels)

@@ -122,15 +122,28 @@ function Emit-Result {
     }
 }
 
-function Check-EnPlaceholder {
+function Test-EnGuidance {
+    param([string]$Content)
+    if ($Content -match '<!-- EN:') { return $true }
+    if ($Content -match '(?im)^#{1,6}\s+.+\s/\s+.*(Shared|Environment|Registry|Security|Secure|Architecture|Documentation|Standards|Workflow|Maintenance|Notes|Description|Accessibility|For Apprentices|Spec[- ]Kit|Governance|Guidelines|Instructions|tooling)') {
+        return $true
+    }
+    if (($Content -match '(?i)Gemeinsame|Barrierefreiheit|Sichere|Sicherheits|Umgebungsregister|Hinweise|Beschreibung|deutsch') -and
+        ($Content -match '(?i)Shared|Accessibility|Secure|Security|Environment|Notes|Description|English|englisch')) {
+        return $true
+    }
+    return $false
+}
+
+function Check-EnGuidance {
     param([string]$Dir, [string]$File)
     $full = Join-Path $Dir $File
     if (-not (Test-Path $full)) { return }
     $content = Get-Content $full -Raw -ErrorAction SilentlyContinue
-    if ($content -match '<!-- EN:') {
-        Emit-Result 'PASS' $File 'EN placeholder' $Dir
+    if (Test-EnGuidance -Content $content) {
+        Emit-Result 'PASS' $File 'EN guidance present' $Dir
     } else {
-        Emit-Result 'FAIL' $File 'EN placeholder missing' $Dir
+        Emit-Result 'FAIL' $File 'EN guidance missing' $Dir
     }
 }
 
@@ -268,12 +281,12 @@ foreach ($entry in $scanResults) {
         Check-CopilotInstructions -Dir $dir
     }
 
-    # EN placeholder checks (Level 0 and 1)
+    # EN guidance checks (Level 0 and 1)
     if ($level -le 1) {
-        foreach ($enFile in @('README.md','AGENTS.md','CLAUDE.md','GEMINI.md','constitution.md')) {
-            Check-EnPlaceholder -Dir $dir -File $enFile
+        foreach ($enFile in @('AGENTS.md','CLAUDE.md','GEMINI.md','constitution.md')) {
+            Check-EnGuidance -Dir $dir -File $enFile
         }
-        Check-EnPlaceholder -Dir $dir -File '.github/copilot-instructions.md'
+        Check-EnGuidance -Dir $dir -File '.github/copilot-instructions.md'
     }
 
     # homogeneity-check.yml presence (all levels)

@@ -4,15 +4,16 @@
 #
 # Usage: pwsh scripts/migrate-workspace.ps1 [-WorkspaceName <string>] [-WhatIf] [-Force]
 # Exit codes: 0=success, 1=partial fail, 2=critical error
-Set-StrictMode -Version Latest
-$ErrorActionPreference = 'Stop'
 
-[CmdletBinding(SupportsShouldProcess)]
+[CmdletBinding()]
 param(
     [string]$WorkspaceName = '',
     [switch]$WhatIf,
     [switch]$Force
 )
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
 
 $ScriptDir    = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TemplatesDir = Join-Path $ScriptDir 'templates'
@@ -135,12 +136,25 @@ indent_size = 2
     return $true
 }
 
+function Test-EnGuidance {
+    param([string]$Content)
+    if ($Content -match '<!-- EN:') { return $true }
+    if ($Content -match '(?im)^#{1,6}\s+.+\s/\s+.*(Shared|Environment|Registry|Security|Secure|Architecture|Documentation|Standards|Workflow|Maintenance|Notes|Description|Accessibility|For Apprentices|Spec[- ]Kit|Governance|Guidelines|Instructions|tooling)') {
+        return $true
+    }
+    if (($Content -match '(?i)Gemeinsame|Barrierefreiheit|Sichere|Sicherheits|Umgebungsregister|Hinweise|Beschreibung|deutsch') -and
+        ($Content -match '(?i)Shared|Accessibility|Secure|Security|Environment|Notes|Description|English|englisch')) {
+        return $true
+    }
+    return $false
+}
+
 function Add-EnPlaceholder {
     param([string]$File, [string]$Label)
     if (-not (Test-Path $File)) { return $false }
     $content = Get-Content $File -Raw -ErrorAction SilentlyContinue
-    if ($content -match '<!-- EN:') {
-        Write-Host "  INFO: EN block already present — skip ($($File -replace [regex]::Escape($HomeDir), '~'))"
+    if (Test-EnGuidance -Content $content) {
+        Write-Host "  INFO: EN guidance already present — skip ($($File -replace [regex]::Escape($HomeDir), '~'))"
         return $false
     }
     if ($WhatIf) {
@@ -203,7 +217,8 @@ function Migrate-Workspace {
 
     $changed = $false
 
-    foreach ($agentFile in @('README.md','AGENTS.md','CLAUDE.md','GEMINI.md','constitution.md')) {
+    # Ensure EN guidance for agent/governance files. README has dedicated sections.
+    foreach ($agentFile in @('AGENTS.md','CLAUDE.md','GEMINI.md','constitution.md')) {
         $fullPath = Join-Path $WsDir $agentFile
         if (Test-Path $fullPath) {
             if (Add-EnPlaceholder -File $fullPath -Label $agentFile) { $changed = $true }

@@ -147,13 +147,28 @@ ECEOF
   echo "  CREATED: ${ec_file/#$HOME/~}"
 }
 
-# ─── Append EN Placeholder ────────────────────────────────────────────────────
+# ─── Ensure EN Guidance ───────────────────────────────────────────────────────
+
+has_en_guidance() {
+  local file="$1"
+  if rg -q '<!-- EN:' "$file" 2>/dev/null; then
+    return 0
+  fi
+  if rg -qi '^#{1,6}[[:space:]].+[[:space:]]/[[:space:]].*(Shared|Environment|Registry|Security|Secure|Architecture|Documentation|Standards|Workflow|Maintenance|Notes|Description|Accessibility|For Apprentices|Spec[- ]Kit|Governance|Guidelines|Instructions|tooling)' "$file" 2>/dev/null; then
+    return 0
+  fi
+  if rg -qi 'Gemeinsame|Barrierefreiheit|Sichere|Sicherheits|Umgebungsregister|Hinweise|Beschreibung|deutsch' "$file" 2>/dev/null &&
+     rg -qi 'Shared|Accessibility|Secure|Security|Environment|Notes|Description|English|englisch' "$file" 2>/dev/null; then
+    return 0
+  fi
+  return 1
+}
 
 append_en_placeholder() {
   local file="$1" label="$2"
   if ! [ -f "$file" ]; then return 0; fi
-  if rg -q '<!-- EN:' "$file" 2>/dev/null; then
-    echo "  INFO: EN block already present — skip (${file/#$HOME/~})"
+  if has_en_guidance "$file"; then
+    echo "  INFO: EN guidance already present — skip (${file/#$HOME/~})"
     return 0
   fi
   local basename_label="${label:-$(basename "$file")}"
@@ -229,10 +244,10 @@ migrate_workspace() {
 
   local changed=false
 
-  # Append EN placeholders to agent files
-  for agent_file in README.md AGENTS.md CLAUDE.md GEMINI.md constitution.md; do
+  # Ensure EN guidance for agent/governance files. README has dedicated sections.
+  for agent_file in AGENTS.md CLAUDE.md GEMINI.md constitution.md; do
     if [ -f "${ws_dir}/${agent_file}" ]; then
-      if ! rg -q '<!-- EN:' "${ws_dir}/${agent_file}" 2>/dev/null; then
+      if ! has_en_guidance "${ws_dir}/${agent_file}"; then
         changed=true
       fi
       append_en_placeholder "${ws_dir}/${agent_file}" "$agent_file"
@@ -242,7 +257,7 @@ migrate_workspace() {
   # copilot-instructions.md
   local copilot_file="${ws_dir}/.github/copilot-instructions.md"
   if [ -f "$copilot_file" ]; then
-    if ! rg -q '<!-- EN:' "$copilot_file" 2>/dev/null; then
+    if ! has_en_guidance "$copilot_file"; then
       changed=true
     fi
     append_en_placeholder "$copilot_file" "copilot-instructions.md"
