@@ -9,10 +9,13 @@ Use this command to generate review checklists for a feature or release.
    - branch/PR compliance
    - constitution gate compliance
    - test evidence completeness
-   - coverage evidence (`>=70%` minimum, `>=80%` target tracking)
-   - .NET 10 + C# 14.0 toolchain alignment
-   - NuGet dependency currency / pinning documentation
-   - documentation completeness (bilingual + XML + DocFX when required)
+   - cc65 C/C89, 6502 assembler, and target-platform alignment
+   - selected GNU `make` build/test commands and their results
+   - generated artefact handling (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`,
+     sample object/map/debug/disk outputs)
+   - C89/limited-C99 style and secure-C/CERT-C review
+   - dependency and supply-chain documentation when release artefacts change
+   - documentation completeness (bilingual + generated docs where required)
 
 ## Validation Checklist
 

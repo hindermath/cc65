@@ -17,9 +17,12 @@ Use this command when governance or project rules change.
    - `.github/copilot-instructions.md`
 5. Ensure no unresolved placeholders remain in the constitution.
 6. Verify toolchain, coverage, and dependency governance alignment:
-   - `.NET 10` + `C# 14.0`
-   - coverage gate `>=70%` with target `>=80%`
-   - NuGet packages tracked against latest stable versions
+   - cc65 C/C89 host tools, 6502 assembler/runtime libraries, and target
+     platform support
+   - GNU `make` build/test commands and generated artefact policy
+   - C89/limited-C99 style and secure-C/CERT-C governance
+   - non-MSL justification for cc65 C89 / 6502 assembly
+   - dependency and supply-chain evidence for release-capable artefacts
 
 ## Validation Checklist
 
@@ -27,4 +30,5 @@ Use this command when governance or project rules change.
 - Dates are ISO `YYYY-MM-DD`.
 - Principles are declarative and auditable.
 - `main` protection workflow is respected (new branch + PR).
-- Toolchain/coverage/dependency rules are reflected in templates and guidance files.
+- Toolchain, generated artefact, secure-C, test, and dependency rules are
+  reflected in templates and guidance files.
