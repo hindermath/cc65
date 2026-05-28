@@ -37,14 +37,24 @@
   MUST cite the matching row from the Level-2 Project Environment Registry in
   `constitution.md` and use its runtime, build/test, docs/A11Y, statistics, and
   agent-surface baselines.
+- **Build and Makefile chain**: For Makefile-driven changes, identify the
+  root Makefile, affected recursive Makefiles, included/common Makefiles, and
+  the exact targets that create or clean generated artefacts. For cc65, include
+  sample/image targets such as `make -C samples disk SYS=c64` when target
+  output changes.
 - **Memory-safe languages (MSL)**: State the primary implementation language
   and confirm it is on the MSL allow-list in `constitution.md`, Principle XI.
   If the primary language is not an MSL (e.g. C, C++, Assembly, `cc65`), cite
-  the justification recorded in the Level-2 `constitution.md`.
+  the justification recorded in the Level-2 `constitution.md`; for cc65, cite
+  the C89/6502 target-toolchain justification and compensating secure-C,
+  Makefile-chain, generated-artefact, and target/sample validation controls.
 - **Secure code generation**: Confirm that AI-generated code will follow the
   language-specific secure-coding rules in `constitution.md`, Principle XII
   (OWASP Top 10 avoidance, parameterised queries, output encoding, quoted
   variables, current cryptographic algorithms, no internal state exposure).
+  For cc65/C89, explicitly review integer truncation, pointer arithmetic,
+  fixed-size buffers, disk/file-name parsing, and generated assembler/linker
+  output when affected.
 - **Secure software architecture**: Confirm the architecture follows the
   secure-architecture principles in `constitution.md`, Principle XIII (trust
   boundaries, defense in depth, least privilege, fail-safe defaults, attack
@@ -89,7 +99,8 @@
 - **Statistics**: State whether `docs/project-statistics.md` needs an update
   and which manual/Thorsten-Solo baseline applies.
 - **Agent guidance parity**: State whether `AGENTS.md`, `CLAUDE.md`,
-  `GEMINI.md`, and `.github/copilot-instructions.md` are affected together.
+  `GEMINI.md`, `.github/copilot-instructions.md`, and generated Spec-Kit
+  skill/command/agent surfaces are affected together.
 
 ## Project Structure
 

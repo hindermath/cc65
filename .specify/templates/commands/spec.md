@@ -11,14 +11,18 @@ Use this command to create or update a feature specification.
    - cc65 C/C89 host-tool, 6502 assembler/runtime, or target-platform impact
    - GNU `make` build/test target impact (`make`, `make test`, `make check`,
      `make checkstyle`, `make -C targettest SYS=<target>`, sample disk builds)
+     plus the Makefile chain that owns the affected targets
    - generated artefact impact (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`,
      sample `.o`/`.s`/`.map`/`.dbg` files, disk images)
    - C89/limited-C99 coding-style and secure-C/CERT-C impact
    - module placement (`src/`, `libsrc/`, `include/`, `cfg/`, `asminc/`,
      `target/`, `test/`, `targettest/`, `samples/`, `doc/`)
    - bilingual documentation impact (German first, English second, CEFR B2)
-   - non-MSL justification impact for cc65 C89 / 6502 assembly
+   - non-MSL justification and compensating-control impact for cc65 C89 /
+     6502 assembly
    - regression, target, sample, and documentation test impact
+   - generated Spec-Kit skill/command/agent surface impact when templates or
+     presets change
    - data contract implications
 
 ## Validation Checklist

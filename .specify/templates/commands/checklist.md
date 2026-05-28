@@ -11,9 +11,13 @@ Use this command to generate review checklists for a feature or release.
    - test evidence completeness
    - cc65 C/C89, 6502 assembler, and target-platform alignment
    - selected GNU `make` build/test commands and their results
+   - Makefile-chain evidence for build-target changes
    - generated artefact handling (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`,
      sample object/map/debug/disk outputs)
    - C89/limited-C99 style and secure-C/CERT-C review
+   - real DE/EN guidance evidence where bilingual checks are relevant
+   - generated Spec-Kit skill/command/agent surface parity where templates or
+     presets changed
    - dependency and supply-chain documentation when release artefacts change
    - documentation completeness (bilingual + generated docs where required)
 

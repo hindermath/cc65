@@ -152,16 +152,19 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX [P] Verify the implementation against the matching Level-2 Project Environment Registry row in `constitution.md`
+- [ ] TXXX [P] For Makefile-driven changes, read and cite the relevant Makefile chain before editing target behaviour; include root, recursive, and included/common Makefiles
+- [ ] TXXX [P] Verify generated artefact policy for affected outputs (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`, sample objects/maps/debug files, disk images) so build products are not committed accidentally
 - [ ] TXXX [P] Verify installed Spec-Kit governance presets with `specify preset list`; for C#/.NET Level-2 projects confirm the all-six default or document the justified exception
-- [ ] TXXX [P] Verify primary implementation language against the MSL allow-list in `constitution.md`, Principle XI; cite the Level-2 non-MSL justification if applicable
+- [ ] TXXX [P] Verify primary implementation language against the MSL allow-list in `constitution.md`, Principle XI; cite the Level-2 non-MSL justification and compensating controls if applicable
 - [ ] TXXX [P] Run the required A11Y/text-first review path for affected user-facing artefacts
 - [ ] TXXX [P] Update `docs/project-statistics.md` when the feature changes statistics-relevant artefacts or delivery evidence
-- [ ] TXXX [P] Review and synchronize affected AI-agent guidance files: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`
+- [ ] TXXX [P] Review and synchronize affected AI-agent guidance files and generated Spec-Kit skill/command/agent surfaces: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.agents/skills/`, `.claude/skills/`, `.claude/commands/`, `.gemini/commands/`, `.github/agents/`, `.github/prompts/`, `.opencode/command/`
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
 - [ ] TXXX [P] Verify AI-generated and human-written code against secure-coding rules in `constitution.md`, Principle XII, plus the applicable profile in `.specify/templates/secure-coding-language-rules-template.md`; MSL status alone is not sufficient evidence for secure API, I/O, auth, SQL, crypto, logging, or dependency handling
+- [ ] TXXX [P] For cc65/C89 changes, verify integer truncation, pointer arithmetic, fixed-size buffers, disk/file-name parsing, target runtime limitations, and generated assembler/linker/sample output where affected
 - [ ] TXXX [P] Verify architecture against secure-architecture principles in `constitution.md`, Principle XIII (trust boundaries, defense in depth, least privilege, fail-safe defaults, attack surface reduction, separation of concerns, secure configuration, supply-chain security)
 - [ ] TXXX [P] Update mandatory security documentation in `docs/security/`: threat model, security checklist, dependency audit, arc42 security concepts, and security quality scenarios (SHOULD) - using templates from `.specify/templates/`
 - [ ] TXXX [P] Create or update Security Architecture Decision Records (S-ADR) in `docs/security/adr/` for any security-relevant architectural decisions made during this feature

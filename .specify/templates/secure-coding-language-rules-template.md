@@ -27,9 +27,17 @@
 - Bounds checking on all buffer writes:
 - No `gets()`:
 - No unchecked `sprintf()`/`strcpy()`/`strcat()`:
-- Integer overflow guards on size arithmetic:
+- Integer overflow guards on size, offset, and index arithmetic:
+- Narrow integer conversions reviewed for 8-bit/16-bit truncation:
+- Pointer arithmetic and array indexing are bounded and documented:
+- Fixed-size stack/static buffers have explicit maximum lengths:
 - `malloc`/`free` ownership documented; no use-after-free or double-free:
 - Format strings are constant, never user-controlled:
+- File names, disk image contents, and target input data are validated before
+  parsing:
+- cc65/6502 runtime limitations are documented for affected code paths:
+- Generated assembler, linker configuration, map/debug output, or sample disk
+  images are reviewed when the change affects code generation or target output:
 
 ## C# / .NET (Microsoft Secure Coding Guidelines)
 

@@ -1,10 +1,12 @@
 <!--
 Sync Impact Report
-Version change: 1.12.0 -> 1.14.0
+Version change: 1.14.0 -> 1.15.0
 Modified principles:
-- XIV. Secure Development Standards & Applicability Matrix (add AI-SBOM)
-- XVI. Supply-Chain Transparency & Build Integrity (add G7/BSI AI-SBOM applicability)
-- XIX. EU Cyber Resilience Act (CRA) Compliance Awareness (add AI Act / AI-SBOM awareness)
+- VIII. DE-First / EN-Second Bilingual Delivery (clarify real bilingual guidance vs. placeholder markers)
+- IX. Four-Agent Guidance Parity & Template Synchronization (include generated Spec-Kit agent/command surfaces)
+- X. Level-2 Project Environment Addenda (add Makefile-chain and generated artefact verification rules)
+- XI. Memory-Safe Languages (MSL) Preference for Level-2 Projects (make cc65 non-MSL justification explicit)
+- XII. Secure Code Generation (tighten C/C89 and cc65 secure-coding expectations)
 Added sections:
 - None
 Removed sections:
@@ -13,19 +15,21 @@ Templates requiring updates:
 - ✅ .specify/templates/constitution-template.md
 - ✅ .specify/templates/plan-template.md
 - ✅ .specify/templates/spec-template.md
-- ✅ .specify/templates/supply-chain-evidence-template.md
+- ✅ .specify/templates/secure-coding-language-rules-template.md
 - ✅ .specify/templates/tasks-template.md
+- ✅ .specify/templates/commands/*.md
 Runtime guidance requiring updates:
 - ✅ AGENTS.md
 - ✅ CLAUDE.md
 - ✅ GEMINI.md
 - ✅ .github/copilot-instructions.md
+- ✅ Generated Spec-Kit skill/command/agent surfaces
 - ✅ .specify/memory/constitution.md (mirror)
 Follow-up TODOs:
 - None
 -->
 
-# Constitution v1.14.0
+# Constitution v1.15.0
 
 # home-baseline Constitution
 
@@ -223,6 +227,12 @@ Mandatory rules:
 - Learner-facing and user-facing documentation MUST be maintained bilingually at approximately CEFR-B2 readability.
 - Large normative documents MAY use a synchronized `.EN.md` companion file when inline bilingual maintenance would become unreadable.
 - Changes that materially affect user-facing guidance MUST update both language tracks in the same change.
+- Homogeneity checks and migration scripts MUST accept real bilingual guidance
+  as evidence. A literal placeholder marker such as `<!-- EN:` MAY be used in
+  templates or unfinished files, but it MUST NOT be the only accepted proof that
+  an already maintained guidance file contains English content.
+- Placeholder markers in finished governance files MUST be treated as technical
+  debt unless they are part of a documented template workflow.
 
 **Rationale**: DE-first / EN-second delivery reflects the actual audience while keeping the content usable for mixed-language teams, apprentices, and external review.
 
@@ -240,6 +250,14 @@ Mandatory rules:
 - Any intentional deviation MUST be documented explicitly in the same change.
 - The corresponding project templates and `.specify/memory/constitution.md` MUST be updated in the same change whenever a shared principle changes.
 - Runtime guidance references in governance text MUST name all four maintained agent surfaces.
+- Generated Spec-Kit agent and command surfaces are parity-controlled artefacts.
+  Changes to `.agents/skills/`, `.claude/skills/`, `.claude/commands/`,
+  `.gemini/commands/`, `.github/agents/`, `.github/prompts/`, and
+  `.opencode/command/` MUST be regenerated or reviewed together when presets,
+  command templates, or shared agent guidance change.
+- Manual edits to generated agent/command files MUST either be propagated to
+  the source templates/presets in the same change or explicitly documented as
+  a temporary local divergence with a follow-up path.
 
 **Rationale**: Divergent agent instructions create silent process drift. Atomic parity keeps different AI tools aligned and makes future project bootstraps inherit the same governance baseline.
 
@@ -253,6 +271,13 @@ Mandatory rules:
 - Each Level-2 `constitution.md` MUST document the local runtime, build system,
   test framework, documentation/A11Y toolchain, statistics baseline, and
   repository-specific agent surfaces.
+- For Makefile-driven projects, build-governance changes MUST inspect the
+  relevant Makefile chain before editing or planning target behaviour. The
+  plan or task list MUST name the root Makefile, recursive Makefiles, and any
+  included/common Makefiles that define the affected targets.
+- Build and test validation MUST distinguish source files from generated
+  artefacts. Plans/tasks MUST name the generated output directories and target
+  outputs that are expected to appear, be cleaned, or remain untracked.
 - The shared Level-2 Project Environment Registry in this constitution is the
   canonical cross-repository index for those project environments.
 - Project-specific addenda MUST enrich the shared constitution; they MUST NOT
@@ -319,9 +344,14 @@ the `cc65` C89 toolchain, Zig (pre-1.0, only partial runtime checks), Nim
 - `DataGripProjects/InventarDb` (C# / .NET integration context) — MSL ✓
 - `C64Projects/cc65` (C / 6502 assembler targeting Commodore 64) —
   **not MSL**; justification: the target platform is 8-bit retro hardware
-  with no MSL toolchain available, and the repository's purpose is parity
-  with the historical cc65 reference. Justification to be documented inline
-  in its Level-2 `constitution.md`.
+  with no practical MSL toolchain for the repository's purpose. The project
+  is itself a C89-oriented cross-development suite and must preserve
+  compatibility with cc65 C, 6502 assembly, linker configurations, runtime
+  libraries, and historical target behaviour. The compensating controls are
+  explicit secure-C rules, Makefile-chain review, generated artefact hygiene,
+  regression/target/sample validation, and bounded handling of disk, file, and
+  target inputs. Plans and tasks in this repository MUST cite this justification
+  rather than merely stating "not MSL".
 
 **Rationale**: Since 2022/2023 NSA and CISA have identified the transition to
 memory-safe languages as the single highest-leverage mitigation against the
@@ -343,9 +373,12 @@ Mandatory rules:
 - Language-specific secure-coding standards MUST be applied (see
   `.specify/templates/secure-coding-language-rules-template.md` for the
   detailed checklist):
-  - **C / C89 (cc65)**: bounds checking on all buffer operations, no `gets()`,
-    no unchecked `sprintf()`/`strcpy()`, integer overflow guards, CERT C Coding
-    Standard where applicable.
+  - **C / C89 (cc65)**: bounds checking on all buffer and string operations,
+    no `gets()`, no unchecked `sprintf()`/`strcpy()`/`strcat()`, integer
+    overflow guards for size and offset arithmetic, explicit ownership for
+    allocated memory, constant format strings, validated file/disk image input,
+    and CERT C Coding Standard practices where applicable to C89 and the cc65
+    runtime.
   - **C# / .NET**: parameterised queries, output encoding against XSS,
     anti-forgery tokens for forms, policy-based authorisation, secure
     deserialisation defaults, `HttpClient` timeout/SSRF review, Microsoft
@@ -387,6 +420,11 @@ Mandatory rules:
 - Code reviews (human or automated) MUST include a security perspective
   for any change that touches input handling, authentication, authorisation,
   cryptography, or file/network I/O.
+- In cc65/C89 work, secure-coding review MUST also cover 8-bit and 16-bit
+  integer truncation, pointer arithmetic, fixed-size stack/static buffers,
+  target-specific runtime limitations, disk-image/file-name parsing, and any
+  generated assembler, linker configuration, or sample image affected by the
+  change.
 
 **Rationale**: ISO 27002:2022 control A.8.28 (Secure coding) requires that
 secure coding principles are applied to software development. LLMs routinely
@@ -687,7 +725,7 @@ project context.
 
 | Level-2 Project | Runtime / Language | Build & Test Baseline | Docs / A11Y Baseline | Statistics Baseline | Agent Surfaces |
 |---|---|---|---|---|---|
-| `C64Projects/cc65` | C/C89-oriented host tools, 6502 assembler/runtime libraries, C64 and 8-bit target support | GNU `make`; `make`, `make test`, `make check`, `make checkstyle`, `make -C targettest SYS=c64` | `doc/`, `samples/`, generated `html/`; DE-first/EN-second additions where local scope allows; no color-only meaning | Manual conservative `80` lines/workday; no C# default unless a justified Thorsten-Solo baseline is documented | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit command/prompt surfaces |
+| `C64Projects/cc65` | C/C89-oriented host tools, 6502 assembler/runtime libraries, C64 and 8-bit target support; **not MSL** by target/toolchain necessity | GNU `make`; read the relevant Makefile chain before build changes; `make`, `make test`, `make check`, `make checkstyle`, `make -C targettest SYS=c64`, and sample/image checks such as `make -C samples disk SYS=c64` when target output changes | `doc/`, `samples/`, generated `html/`; DE-first/EN-second additions where local scope allows; no color-only meaning; distinguish source docs from generated docs | Manual conservative `80` lines/workday; no C# default unless a justified Thorsten-Solo baseline is documented | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, plus generated Spec-Kit skill/command/agent surfaces |
 | `DataGripProjects/InventarDb` | Database/schema artefacts with C#/.NET Framework integration context where documented | Repository-specific DataGrip/database validation plus homogeneity checks after agent-guidance changes | SQL, documentation, generated templates, and reports remain text-first, bilingual where user-facing, and WCAG 2.2 AA-oriented where applicable | Manual conservative `80` lines/workday; C#/.NET integration work uses `125` lines/workday unless justified otherwise | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/InventarWorkerService` | .NET 10 / C# 14 multi-project inventory solution: worker/API, harvester, Terminal UI, shared libraries, SQLite/MongoDB/PostgreSQL | `dotnet restore/build/test` on `InventarWorkerService.sln`; MSTest unit/integration tests; Playwright setup when required | DocFX output and learner-facing docs require text-oriented A11Y review; generated `api/` and `_site/` remain build artefacts | Manual conservative `80`; repo-specific Thorsten-Solo `100` lines/workday unless all agent files change it | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/TinyCalc` | .NET 10 / C# spreadsheet and Terminal.Gui TUI port; Pascal reference artefacts for behaviour parity | `dotnet restore/build/test MicroCalc.sln`; xUnit suites; non-interactive TUI smoke mode | DocFX changes require text-oriented A11Y smoke review; documentation and didactic comments stay DE-first/EN-second at CEFR B2 | Manual conservative `80`; Thorsten-Solo `125` lines/workday for this Pascal-derived C#/.NET port | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
@@ -810,17 +848,26 @@ Community/catalog coordination is tracked in `github/spec-kit#2362`.
 `.github/copilot-instructions.md` for per-agent operational guidance. This
 constitution is the authoritative policy layer above all agent-specific files.
 
-**Version**: 1.14.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-22
-
-<!-- EN: constitution.md placeholder
-[DE-Zusammenfassung: constitution.md beschreibt die Prinzipien und Standards für alle home-baseline Workspaces.]
--->
+**Version**: 1.15.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-28
 
 ## Level-2 Project Environment Addendum / Level-2-Projektumgebung
 
 - Projekt / Project: cc65 6502 cross-development suite.
 - Laufzeit und Sprache / Runtime and language: C/C89-oriented host tools, 6502 assembler/runtime libraries, target-specific C64 and 8-bit platform support.
-- Build und Tests / Build and tests: GNU make; use make, make test, make check, make checkstyle, and targettest flows such as make -C targettest SYS=c64.
+- Nicht-MSL-Begruendung / Non-MSL justification: cc65 intentionally uses C89
+  and 6502 assembly because the repository is a C/assembler cross-development
+  suite for 8-bit targets and no practical memory-safe toolchain can preserve
+  the required target/runtime compatibility. Secure-C review, Makefile-chain
+  inspection, generated artefact hygiene, and target/sample validation are the
+  compensating controls.
+- Build und Tests / Build and tests: GNU make; before build changes, inspect
+  the relevant Makefile chain (root Makefile, recursive Makefiles such as
+  samples/Makefile, and included/common files). Use make, make test, make
+  check, make checkstyle, targettest flows such as make -C targettest SYS=c64,
+  and sample/image checks such as make -C samples disk SYS=c64 when target
+  output changes.
 - Doku und A11Y / Docs and A11Y: doc/, samples/, generated html/ output; user-facing documentation keeps DE-first/EN-second additions where local project scope allows it and avoids color-only meaning.
 - Statistik / Statistics: manual conservative baseline 80 lines/workday; no C# default applies unless a project-specific Thorsten-Solo value is documented in the agent files.
-- Agentenflaechen / Agent surfaces: AGENTS.md, CLAUDE.md, GEMINI.md, .github/copilot-instructions.md, and Spec-Kit command/prompt surfaces stay synchronized when shared guidance changes.
+- Agentenflaechen / Agent surfaces: AGENTS.md, CLAUDE.md, GEMINI.md,
+  .github/copilot-instructions.md, and generated Spec-Kit skill/command/agent
+  surfaces stay synchronized when shared guidance changes.

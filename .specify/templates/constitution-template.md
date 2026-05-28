@@ -28,11 +28,25 @@
 [PRINCIPLE_5_DESCRIPTION]
 <!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
 
+<!--
+  For Level-2 projects, consider whether the concrete constitution needs
+  principles or mandatory rules for:
+  - memory-safe language preference and documented non-MSL justification
+  - secure-coding profiles for the primary language and scripts
+  - build/test governance, including Makefile-chain ownership where relevant
+  - generated artefact handling
+  - DE-first / EN-second guidance and real bilingual evidence
+  - agent guidance and generated Spec-Kit skill/command/agent surface parity
+-->
+
 ## [SECTION_2_NAME]
 <!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
 
 [SECTION_2_CONTENT]
 <!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+<!-- Include project runtime, build/test baseline, documentation/A11Y baseline,
+     statistics baseline, and agent-surface inventory when this is a Level-2
+     project constitution. -->
 
 ## [SECTION_3_NAME]
 <!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
