@@ -137,10 +137,15 @@
   presets unless a justified exception is documented.
 - **CR-013**: If the feature changes build behaviour, generated artefacts, or
   target output, it MUST identify the relevant Makefile chain, GNU `make`
-  targets, expected generated outputs, and cleanup/untracked-artifact policy.
+  targets, expected generated outputs, and cleanup/untracked-artifact policy
+  derived from the nearest project-local `.gitignore` where available.
 - **CR-014**: If the feature changes shared guidance, command templates, or
   presets, it MUST state whether generated Spec-Kit skill/command/agent
   surfaces require regeneration or synchronized review.
+- **CR-015**: If the feature changes hook installation or secret-scanning
+  behaviour in this cc65 fork, it MUST state how `scripts/` and the permanent
+  `.dev-tools/` fork surface stay synchronized, or document intentional
+  divergence.
 
 ### Key Entities *(include if feature involves data)*
 

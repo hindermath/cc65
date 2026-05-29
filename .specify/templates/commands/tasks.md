@@ -15,8 +15,10 @@ Use this command to generate an executable task list from `plan.md` and `spec.md
    - focused GNU `make` target(s) for the changed area
    - regression or reference-file updates under `test/` when behavior changes
    - `targettest` or sample disk-image checks when target output changes
-   - generated artefact classification so build outputs are not committed
-     accidentally
+   - generated artefact classification from the nearest project-local
+     `.gitignore` so build outputs are not committed accidentally
+   - `scripts/` plus permanent `.dev-tools/` review when hook or secret-scan
+     behaviour changes in this fork
    - generated Spec-Kit skill/command/agent parity checks when templates,
      presets, or shared guidance change
 5. Include PR preparation task (purpose, touched projects, test evidence, config/API impact).

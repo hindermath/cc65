@@ -41,7 +41,8 @@
   root Makefile, affected recursive Makefiles, included/common Makefiles, and
   the exact targets that create or clean generated artefacts. For cc65, include
   sample/image targets such as `make -C samples disk SYS=c64` when target
-  output changes.
+  output changes, and derive typical generated-output patterns from the nearest
+  project-local `.gitignore`.
 - **Memory-safe languages (MSL)**: State the primary implementation language
   and confirm it is on the MSL allow-list in `constitution.md`, Principle XI.
   If the primary language is not an MSL (e.g. C, C++, Assembly, `cc65`), cite
@@ -92,7 +93,9 @@
   `cross-platform-governance`, `agent-parity-governance`) unless a justified
   exception is documented.
 - **Security-first**: Confirm no credential files, agent state, logs, history,
-  or SQLite state are planned for tracking.
+  or SQLite state are planned for tracking. For hook or scanner changes in the
+  cc65 fork, state whether `scripts/` and the permanent `.dev-tools/` fork
+  surface were reviewed together or why they intentionally diverge.
 - **Inclusion/A11Y**: Identify affected user-facing artefacts and the WCAG 2.2
   Level AA or text-first review path.
 - **Bilingual delivery**: State how DE-first/EN-second requirements apply.

@@ -12,8 +12,12 @@ Use this command to create or update a feature specification.
    - GNU `make` build/test target impact (`make`, `make test`, `make check`,
      `make checkstyle`, `make -C targettest SYS=<target>`, sample disk builds)
      plus the Makefile chain that owns the affected targets
-   - generated artefact impact (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`,
-     sample `.o`/`.s`/`.map`/`.dbg` files, disk images)
+   - generated artefact impact from the nearest project-local `.gitignore`
+     (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`, `info/`, `target/`,
+     `testwrk/`, sample `.o`/`.s`/`.map`/`.dbg` files, target binaries, disk
+     or tape images)
+   - permanent `.dev-tools/` fork-surface impact when hook or secret-scan
+     behaviour changes
    - C89/limited-C99 coding-style and secure-C/CERT-C impact
    - module placement (`src/`, `libsrc/`, `include/`, `cfg/`, `asminc/`,
      `target/`, `test/`, `targettest/`, `samples/`, `doc/`)

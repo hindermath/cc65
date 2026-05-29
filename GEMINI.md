@@ -90,9 +90,10 @@ cc65 is a complete cross-development package for 65(C)02 systems, including a po
 - Die zentrale `constitution.md` enthält das verbindliche Level-2 Project Environment Registry.
 - Spec-Kit-Pläne und Gemini-Arbeit in Level-2-Projekten müssen die passende Registry-Zeile als verbindlichen Kontext für Runtime, Build/Test, A11Y, Statistik und Agentenflächen verwenden.
 - Änderungen an einer Level-2-Runtime, Toolchain oder Statistik-Basis müssen `constitution.md`, `.specify/memory/constitution.md` und betroffene KI-Agenten-Dateien gemeinsam prüfen.
-- In Makefile-getriebenen Level-2-Projekten muss vor Build-Änderungen die relevante Makefile-Kette gelesen und die erzeugten Artefakte benannt werden.
+- In Makefile-getriebenen Level-2-Projekten muss vor Build-Änderungen die relevante Makefile-Kette gelesen und die erzeugten Artefakte anhand der naechstliegenden `.gitignore` benannt werden.
+- Im cc65-Fork ist `.dev-tools/` dauerhaft fork-lokale Hook-/Secret-Scan-Infrastruktur und bei Hook-/Scanner-Änderungen gemeinsam mit `scripts/` zu prüfen.
 
-*The central `constitution.md` contains the binding Level-2 Project Environment Registry. Spec-Kit plans and Gemini work in Level-2 projects must use the matching registry row as binding context for runtime, build/test, A11Y, statistics, and agent surfaces. Changes to Level-2 runtime, toolchain, or statistics baselines require a joint review of `constitution.md`, `.specify/memory/constitution.md`, and affected AI-agent files. In Makefile-driven Level-2 projects, agents must read the relevant Makefile chain before build changes and name the generated artefacts.*
+*The central `constitution.md` contains the binding Level-2 Project Environment Registry. Spec-Kit plans and Gemini work in Level-2 projects must use the matching registry row as binding context for runtime, build/test, A11Y, statistics, and agent surfaces. Changes to Level-2 runtime, toolchain, or statistics baselines require a joint review of `constitution.md`, `.specify/memory/constitution.md`, and affected AI-agent files. In Makefile-driven Level-2 projects, agents must read the relevant Makefile chain before build changes and name generated artefacts from the nearest `.gitignore`. In this cc65 fork, `.dev-tools/` is permanent fork-local hook/secret-scan infrastructure and must be reviewed together with `scripts/` for hook/scanner changes.*
 
 ## Memory-Safe Languages (MSL) / Speichersichere Sprachen
 

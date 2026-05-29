@@ -61,7 +61,10 @@ Use this command to produce an implementation plan from an approved specificatio
    - branching and PR flow
    - cc65 C/C89, 6502 assembler, and target-platform alignment
    - GNU `make` build/test path selection with relevant Makefile-chain evidence
-   - generated artefact ownership and cleanup expectations
+   - generated artefact ownership and cleanup expectations derived from the
+     nearest project-local `.gitignore` where available
+   - permanent `.dev-tools/` fork-surface impact when hook or secret-scan
+     behaviour changes
    - architecture/module boundaries across host tools, runtime libraries,
      target descriptors, tests, samples, and docs
    - C89/limited-C99 style and secure-C/CERT-C review

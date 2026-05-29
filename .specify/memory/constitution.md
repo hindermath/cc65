@@ -1,12 +1,8 @@
 <!--
 Sync Impact Report
-Version change: 1.14.0 -> 1.15.0
+Version change: 1.15.0 -> 1.15.1
 Modified principles:
-- VIII. DE-First / EN-Second Bilingual Delivery (clarify real bilingual guidance vs. placeholder markers)
-- IX. Four-Agent Guidance Parity & Template Synchronization (include generated Spec-Kit agent/command surfaces)
-- X. Level-2 Project Environment Addenda (add Makefile-chain and generated artefact verification rules)
-- XI. Memory-Safe Languages (MSL) Preference for Level-2 Projects (make cc65 non-MSL justification explicit)
-- XII. Secure Code Generation (tighten C/C89 and cc65 secure-coding expectations)
+- X. Level-2 Project Environment Addenda (clarify generated artefact policy and permanent fork-local `.dev-tools/` surface)
 Added sections:
 - None
 Removed sections:
@@ -15,7 +11,6 @@ Templates requiring updates:
 - ✅ .specify/templates/constitution-template.md
 - ✅ .specify/templates/plan-template.md
 - ✅ .specify/templates/spec-template.md
-- ✅ .specify/templates/secure-coding-language-rules-template.md
 - ✅ .specify/templates/tasks-template.md
 - ✅ .specify/templates/commands/*.md
 Runtime guidance requiring updates:
@@ -29,7 +24,7 @@ Follow-up TODOs:
 - None
 -->
 
-# Constitution v1.15.0
+# Constitution v1.15.1
 
 # home-baseline Constitution
 
@@ -278,6 +273,15 @@ Mandatory rules:
 - Build and test validation MUST distinguish source files from generated
   artefacts. Plans/tasks MUST name the generated output directories and target
   outputs that are expected to appear, be cleaned, or remain untracked.
+- Project-local `.gitignore` files are the canonical source for typical
+  generated artefact patterns when a plan or task classifies build output. For
+  cc65, this includes common object/list/map/debug outputs, target binaries,
+  disk/tape images, package archives, and generated directories such as `bin/`,
+  `html/`, `info/`, `lib/`, `libwrk/`, `target/`, `testwrk/`, and `wrk/`.
+- Fork-local development surfaces that are declared permanent MUST be included
+  in the project environment addendum. For this cc65 fork, `.dev-tools/` is a
+  permanent hook and secret-scan support surface and MUST be reviewed together
+  with `scripts/` when hook or scanner behaviour changes.
 - The shared Level-2 Project Environment Registry in this constitution is the
   canonical cross-repository index for those project environments.
 - Project-specific addenda MUST enrich the shared constitution; they MUST NOT
@@ -725,7 +729,7 @@ project context.
 
 | Level-2 Project | Runtime / Language | Build & Test Baseline | Docs / A11Y Baseline | Statistics Baseline | Agent Surfaces |
 |---|---|---|---|---|---|
-| `C64Projects/cc65` | C/C89-oriented host tools, 6502 assembler/runtime libraries, C64 and 8-bit target support; **not MSL** by target/toolchain necessity | GNU `make`; read the relevant Makefile chain before build changes; `make`, `make test`, `make check`, `make checkstyle`, `make -C targettest SYS=c64`, and sample/image checks such as `make -C samples disk SYS=c64` when target output changes | `doc/`, `samples/`, generated `html/`; DE-first/EN-second additions where local scope allows; no color-only meaning; distinguish source docs from generated docs | Manual conservative `80` lines/workday; no C# default unless a justified Thorsten-Solo baseline is documented | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, plus generated Spec-Kit skill/command/agent surfaces |
+| `C64Projects/cc65` | C/C89-oriented host tools, 6502 assembler/runtime libraries, C64 and 8-bit target support; **not MSL** by target/toolchain necessity | GNU `make`; read the relevant Makefile chain before build changes; classify generated outputs from the nearest `.gitignore`; `make`, `make test`, `make check`, `make checkstyle`, `make -C targettest SYS=c64`, and sample/image checks such as `make -C samples disk SYS=c64` when target output changes | `doc/`, `samples/`, generated `html/`; DE-first/EN-second additions where local scope allows; no color-only meaning; distinguish source docs from generated docs | Manual conservative `80` lines/workday; no C# default unless a justified Thorsten-Solo baseline is documented | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, permanent `.dev-tools/` fork tooling, plus generated Spec-Kit skill/command/agent surfaces |
 | `DataGripProjects/InventarDb` | Database/schema artefacts with C#/.NET Framework integration context where documented | Repository-specific DataGrip/database validation plus homogeneity checks after agent-guidance changes | SQL, documentation, generated templates, and reports remain text-first, bilingual where user-facing, and WCAG 2.2 AA-oriented where applicable | Manual conservative `80` lines/workday; C#/.NET integration work uses `125` lines/workday unless justified otherwise | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/InventarWorkerService` | .NET 10 / C# 14 multi-project inventory solution: worker/API, harvester, Terminal UI, shared libraries, SQLite/MongoDB/PostgreSQL | `dotnet restore/build/test` on `InventarWorkerService.sln`; MSTest unit/integration tests; Playwright setup when required | DocFX output and learner-facing docs require text-oriented A11Y review; generated `api/` and `_site/` remain build artefacts | Manual conservative `80`; repo-specific Thorsten-Solo `100` lines/workday unless all agent files change it | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/TinyCalc` | .NET 10 / C# spreadsheet and Terminal.Gui TUI port; Pascal reference artefacts for behaviour parity | `dotnet restore/build/test MicroCalc.sln`; xUnit suites; non-interactive TUI smoke mode | DocFX changes require text-oriented A11Y smoke review; documentation and didactic comments stay DE-first/EN-second at CEFR B2 | Manual conservative `80`; Thorsten-Solo `125` lines/workday for this Pascal-derived C#/.NET port | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
@@ -848,7 +852,7 @@ Community/catalog coordination is tracked in `github/spec-kit#2362`.
 `.github/copilot-instructions.md` for per-agent operational guidance. This
 constitution is the authoritative policy layer above all agent-specific files.
 
-**Version**: 1.15.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-28
+**Version**: 1.15.1 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-05-29
 
 ## Level-2 Project Environment Addendum / Level-2-Projektumgebung
 
@@ -866,8 +870,21 @@ constitution is the authoritative policy layer above all agent-specific files.
   check, make checkstyle, targettest flows such as make -C targettest SYS=c64,
   and sample/image checks such as make -C samples disk SYS=c64 when target
   output changes.
+- Erzeugte Artefakte / Generated artefacts: use the nearest project-local
+  `.gitignore` as the canonical source for generated output classification.
+  Typical cc65 outputs include `*.lst`, `*.lbl`, `*.map`, `*.dbg`, `*.o`,
+  `*.s`, target binaries such as `*.prg`, `*.xex`, `*.bin`, `*.com`, `*.cvt`,
+  `*.lnx`, disk/tape images such as `*.d64`, `*.d81`, `*.d71`, `*.g64`,
+  `*.tap`, `*.cas`, generated directories such as `bin/`, `html/`, `info/`,
+  `lib/`, `libwrk/`, `target/`, `testwrk/`, `wrk/`, and package output such
+  as `cc65.zip`.
 - Doku und A11Y / Docs and A11Y: doc/, samples/, generated html/ output; user-facing documentation keeps DE-first/EN-second additions where local project scope allows it and avoids color-only meaning.
 - Statistik / Statistics: manual conservative baseline 80 lines/workday; no C# default applies unless a project-specific Thorsten-Solo value is documented in the agent files.
+- Fork-Werkzeuge / Fork tooling: `.dev-tools/` is a permanent fork-local
+  support surface for hook installation and secret scanning. Changes to
+  `scripts/` hook/scanner logic and `.dev-tools/` hook/scanner logic MUST be
+  reviewed together, or an intentional divergence MUST be documented in the
+  same change.
 - Agentenflaechen / Agent surfaces: AGENTS.md, CLAUDE.md, GEMINI.md,
   .github/copilot-instructions.md, and generated Spec-Kit skill/command/agent
   surfaces stay synchronized when shared guidance changes.

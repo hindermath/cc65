@@ -34,7 +34,10 @@
   - memory-safe language preference and documented non-MSL justification
   - secure-coding profiles for the primary language and scripts
   - build/test governance, including Makefile-chain ownership where relevant
-  - generated artefact handling
+  - generated artefact handling, with project-local `.gitignore` as the
+    canonical source for typical generated-output patterns where available
+  - permanent fork-local support surfaces such as `.dev-tools/` when a fork
+    declares them as policy
   - DE-first / EN-second guidance and real bilingual evidence
   - agent guidance and generated Spec-Kit skill/command/agent surface parity
 -->

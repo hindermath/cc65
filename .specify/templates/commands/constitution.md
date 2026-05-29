@@ -22,7 +22,9 @@ Use this command when governance or project rules change.
    - cc65 C/C89 host tools, 6502 assembler/runtime libraries, and target
      platform support
    - GNU `make` build/test commands, relevant Makefile chain, and generated
-     artefact policy
+     artefact policy from project-local `.gitignore` files
+   - permanent fork-local support surfaces such as `.dev-tools/` when declared
+     as project policy
    - C89/limited-C99 style and secure-C/CERT-C governance
    - non-MSL justification and compensating controls for cc65 C89 / 6502
      assembly
@@ -36,6 +38,6 @@ Use this command when governance or project rules change.
 - Dates are ISO `YYYY-MM-DD`.
 - Principles are declarative and auditable.
 - `main` protection workflow is respected (new branch + PR).
-- Toolchain, Makefile-chain, generated artefact, secure-C, test, dependency,
-  bilingual, and generated-agent-surface rules are reflected in templates and
-  guidance files.
+- Toolchain, Makefile-chain, generated artefact, permanent fork-surface,
+  secure-C, test, dependency, bilingual, and generated-agent-surface rules are
+  reflected in templates and guidance files.

@@ -153,7 +153,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX [P] Verify the implementation against the matching Level-2 Project Environment Registry row in `constitution.md`
 - [ ] TXXX [P] For Makefile-driven changes, read and cite the relevant Makefile chain before editing target behaviour; include root, recursive, and included/common Makefiles
-- [ ] TXXX [P] Verify generated artefact policy for affected outputs (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`, sample objects/maps/debug files, disk images) so build products are not committed accidentally
+- [ ] TXXX [P] Verify generated artefact policy for affected outputs from the nearest project-local `.gitignore` (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`, `info/`, `target/`, `testwrk/`, object/list/map/debug files, target binaries, disk/tape images, package archives) so build products are not committed accidentally
 - [ ] TXXX [P] Verify installed Spec-Kit governance presets with `specify preset list`; for C#/.NET Level-2 projects confirm the all-six default or document the justified exception
 - [ ] TXXX [P] Verify primary implementation language against the MSL allow-list in `constitution.md`, Principle XI; cite the Level-2 non-MSL justification and compensating controls if applicable
 - [ ] TXXX [P] Run the required A11Y/text-first review path for affected user-facing artefacts
@@ -163,6 +163,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
+- [ ] TXXX [P] For hook or secret-scan changes in the cc65 fork, review `scripts/` and permanent `.dev-tools/` hook/scanner surfaces together, or document intentional divergence
 - [ ] TXXX [P] Verify AI-generated and human-written code against secure-coding rules in `constitution.md`, Principle XII, plus the applicable profile in `.specify/templates/secure-coding-language-rules-template.md`; MSL status alone is not sufficient evidence for secure API, I/O, auth, SQL, crypto, logging, or dependency handling
 - [ ] TXXX [P] For cc65/C89 changes, verify integer truncation, pointer arithmetic, fixed-size buffers, disk/file-name parsing, target runtime limitations, and generated assembler/linker/sample output where affected
 - [ ] TXXX [P] Verify architecture against secure-architecture principles in `constitution.md`, Principle XIII (trust boundaries, defense in depth, least privilege, fail-safe defaults, attack surface reduction, separation of concerns, secure configuration, supply-chain security)
