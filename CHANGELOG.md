@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.1](https://github.com/hindermath/cc65/compare/v0.2.0...v0.2.1) (2026-05-30)
+
+
+### Documentation / Dokumentation
+
+* add GitHub and GitLab CLI-first guidance ([8ca2773](https://github.com/hindermath/cc65/commit/8ca2773b079b78bf5cd82238e6acf3d6be6785da))
+* add Spec-Kit model routing guidance ([4f35729](https://github.com/hindermath/cc65/commit/4f35729045bb7e7305b8efe52ec5be9d68e9951d))
+* clarify cc65 artifact and fork tooling governance ([caae75b](https://github.com/hindermath/cc65/commit/caae75b7c5d28f3b1b90b1384ee912368792a689))
+* propagate AI-SBOM governance ([e51dea0](https://github.com/hindermath/cc65/commit/e51dea0efa37736c81e2b87e4de21e19ca8e2483))
+* propagate security-governance v0.4.0 ([3d1008e](https://github.com/hindermath/cc65/commit/3d1008e0b1518aa6a9055bcd437f390f3e3eac23))
+* propagate spec-kit preset governance ([5a0f2a2](https://github.com/hindermath/cc65/commit/5a0f2a270b8e7035eea4e57e9d388d0c924daae1))
+* update constitution governance to v1.15.0 ([9a81f89](https://github.com/hindermath/cc65/commit/9a81f8994a77984e247aa774e6225e0fa1119e4f))
+
 ## [0.2.0](https://github.com/hindermath/cc65/compare/v0.1.0...v0.2.0) (2026-04-30)
 
 
