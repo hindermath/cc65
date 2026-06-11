@@ -4,15 +4,15 @@ description: 'Spec-kit workflow command: speckit-tasks'
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
   author: github-spec-kit
-  source: agent-parity-governance:commands/speckit.tasks.md
+  source: architecture-governance:commands/speckit.tasks.md
 ---
 
-Before continuing, apply the Agent Parity Governance preset:
+Before continuing, apply the Architecture Governance preset:
 
-- add explicit tasks to update every maintained agent surface in the
-  same change
-- add tasks to propagate shared rules into project templates and the
-  local constitution mirror
-- add a parity-verification task using the agent-parity checklist
+- convert architecture obligations into explicit tasks
+- include `docs/security/` evidence updates
+- add BSI C3A cloud autonomy applicability tasks when cloud services or
+  provider-dependent deployments are in scope
+- do not leave threat-modeling or ADR work implicit
 
 {CORE_TEMPLATE}

@@ -27,6 +27,8 @@ Before continuing, apply the Architecture Governance preset:
   choice
 - identify trust boundaries affected by the requested work
 - determine whether threat modeling, ADR updates, or Zero Trust review apply
+- determine whether BSI C3A cloud autonomy applicability applies for cloud
+  services or provider-dependent deployments
 - document `N/A` decisions with rationale
 
 Before continuing, apply the iSAQB Architecture Governance preset:

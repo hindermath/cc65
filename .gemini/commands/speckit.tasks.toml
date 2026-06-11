@@ -12,6 +12,8 @@ Before continuing, apply the Architecture Governance preset:
 
 - convert architecture obligations into explicit tasks
 - include `docs/security/` evidence updates
+- add BSI C3A cloud autonomy applicability tasks when cloud services or
+  provider-dependent deployments are in scope
 - do not leave threat-modeling or ADR work implicit
 
 Before continuing, apply the iSAQB Architecture Governance preset:
@@ -67,7 +69,7 @@ Use this command to generate an executable task list from `plan.md` and `spec.md
    - `targettest` or sample disk-image checks when target output changes
    - generated artefact classification from the nearest project-local
      `.gitignore` so build outputs are not committed accidentally
-   - `scripts/` plus permanent `.dev-tools/` review when hook or secret-scan
+   - `.specify/scripts/` plus permanent `.dev-tools/` review when hook or secret-scan
      behaviour changes in this fork
    - generated Spec-Kit skill/command/agent parity checks when templates,
      presets, or shared guidance change

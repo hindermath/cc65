@@ -22,6 +22,8 @@ Before continuing, apply the Architecture Governance preset:
 - plan threat-model and ADR updates when boundaries, integrations, or flows
   change
 - surface Zero Trust and SAMM work explicitly when relevant
+- surface BSI C3A cloud autonomy work explicitly for cloud services and
+  provider-dependent deployments
 
 Before continuing, apply the iSAQB Architecture Governance preset:
 
@@ -68,7 +70,8 @@ Use this command to produce an implementation plan from an approved specificatio
 2. Execute the Constitution Check gates explicitly:
    - branching and PR flow
    - cc65 C/C89, 6502 assembler, and target-platform alignment
-   - GNU `make` build/test path selection with relevant Makefile-chain evidence
+   - GNU `make` build/test path selection with relevant Makefile-chain
+     evidence
    - generated artefact ownership and cleanup expectations derived from the
      nearest project-local `.gitignore` where available
    - permanent `.dev-tools/` fork-surface impact when hook or secret-scan
@@ -77,7 +80,8 @@ Use this command to produce an implementation plan from an approved specificatio
      target descriptors, tests, samples, and docs
    - C89/limited-C99 style and secure-C/CERT-C review
    - bilingual CEFR B2 documentation scope
-   - non-MSL justification and compensating controls for cc65 C89 / 6502 assembly where relevant
+   - non-MSL justification and compensating controls for cc65 C89 / 6502
+     assembly where relevant
    - regression, targettest, sample-build, and documentation validation scope
    - dependency and supply-chain evidence for host tools and release artefacts
    - serialization/data conventions
@@ -89,3 +93,5 @@ Use this command to produce an implementation plan from an approved specificatio
 - No gate is left unresolved without rationale.
 - Build, test, generated artefact, dependency, and documentation impacts are
   planned before implementation.
+- Generated Spec-Kit skill/command/agent surfaces are identified when command
+  templates, presets, or shared guidance change.
