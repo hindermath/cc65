@@ -1,5 +1,31 @@
 # Secure Coding Language Rules
 
+## Spec-Kit Run Evidence
+
+- Feature / Spec ID:
+- Spec-Kit phase: [specify / plan / tasks / implement / review / release]
+- Branch / commit / PR:
+- Run date:
+- Evidence owner:
+- Reviewer:
+- Standards / criteria checked: ISO 27001/27002 secure development controls, NIST SSDF, CWE Top 25, OWASP ASVS, SBOM, AI-SBOM, VEX, SLSA, OpenSSF Scorecard, CRA, NIS2, EU AI Act, DORA
+- Decision: [Applicable / N/A / Open]
+- Evidence path:
+- N/A rationale, if not applicable:
+- Open follow-up owner and trigger:
+- Re-evaluation trigger:
+- Certification-readiness note: Use this record as internal certification-readiness evidence; it does not replace an external auditor, legal assessment, C5 report, or formal conformity assessment.
+
+## Audit Evidence Matrix
+
+| Checkpoint / control reference | Applicability | Evidence produced or linked | Result | Residual risk / rationale |
+| --- | --- | --- | --- | --- |
+| Spec-Kit run scope is identified | [Applicable / N/A / Open] | | [OK / Open / N/A] | |
+| Standard-specific criteria are mapped | [Applicable / N/A / Open] | | [OK / Open / N/A] | |
+| Evidence artefact path is recorded | [Applicable / N/A / Open] | | [OK / Open / N/A] | |
+| N/A decisions are justified | [Applicable / N/A / Open] | | [OK / Open / N/A] | |
+| Open findings have owner and trigger | [Applicable / N/A / Open] | | [OK / Open / N/A] | |
+
 ## Context
 
 - Feature or component:
@@ -27,17 +53,9 @@
 - Bounds checking on all buffer writes:
 - No `gets()`:
 - No unchecked `sprintf()`/`strcpy()`/`strcat()`:
-- Integer overflow guards on size, offset, and index arithmetic:
-- Narrow integer conversions reviewed for 8-bit/16-bit truncation:
-- Pointer arithmetic and array indexing are bounded and documented:
-- Fixed-size stack/static buffers have explicit maximum lengths:
+- Integer overflow guards on size arithmetic:
 - `malloc`/`free` ownership documented; no use-after-free or double-free:
 - Format strings are constant, never user-controlled:
-- File names, disk image contents, and target input data are validated before
-  parsing:
-- cc65/6502 runtime limitations are documented for affected code paths:
-- Generated assembler, linker configuration, map/debug output, or sample disk
-  images are reviewed when the change affects code generation or target output:
 
 ## C# / .NET (Microsoft Secure Coding Guidelines)
 

@@ -79,3 +79,45 @@ Use this command to generate an executable task list from `plan.md` and `spec.md
 - Task ordering supports incremental, verifiable delivery.
 - Build, regression, target, sample, and dependency/supply-chain tasks are
   explicitly scheduled where applicable.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.

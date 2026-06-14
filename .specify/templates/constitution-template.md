@@ -28,28 +28,11 @@
 [PRINCIPLE_5_DESCRIPTION]
 <!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
 
-<!--
-  For Level-2 projects, consider whether the concrete constitution needs
-  principles or mandatory rules for:
-  - memory-safe language preference and documented non-MSL justification
-  - secure-coding profiles for the primary language and scripts
-  - build/test governance, including Makefile-chain ownership where relevant
-  - generated artefact handling, with project-local `.gitignore` as the
-    canonical source for typical generated-output patterns where available
-  - permanent fork-local support surfaces such as `.dev-tools/` when a fork
-    declares them as policy
-  - DE-first / EN-second guidance and real bilingual evidence
-  - agent guidance and generated Spec-Kit skill/command/agent surface parity
--->
-
 ## [SECTION_2_NAME]
 <!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
 
 [SECTION_2_CONTENT]
 <!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-<!-- Include project runtime, build/test baseline, documentation/A11Y baseline,
-     statistics baseline, and agent-surface inventory when this is a Level-2
-     project constitution. -->
 
 ## [SECTION_3_NAME]
 <!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
@@ -62,13 +45,16 @@
 <!--
   If this project uses Spec-Kit governance presets, list the installed presets,
   versions, priorities, and evidence paths here. The home-baseline default set is:
-  security-governance v0.4.0 prio 10, architecture-governance v0.2.0 prio 20,
-  isaqb-architecture-governance v0.1.0 prio 30, a11y-governance v0.2.0 prio 40,
-  cross-platform-governance v0.1.0 prio 50, agent-parity-governance v0.2.0 prio 60.
-  security-governance v0.4.0 keeps conditional AI-SBOM evidence and adds
-  language-specific secure-coding profiles for Rust, Go, Swift, Java/Kotlin,
-  Python, and TypeScript/JavaScript. Development-tool-only AI usage is N/A;
-  AI runtime/product components require G7/BSI cluster evidence.
+  security-governance v0.6.0 prio 10, architecture-governance v0.5.0 prio 20,
+  isaqb-architecture-governance v0.2.0 prio 30, a11y-governance v0.4.0 prio 40,
+  cross-platform-governance v0.2.0 prio 50, agent-parity-governance v0.3.0 prio 60.
+  security-governance v0.6.0 keeps conditional AI-SBOM evidence, language-
+  specific secure-coding profiles, and regulatory applicability screening for
+  NIS2, CRA, EU AI Act, and DORA. Development-tool-only AI usage is N/A; AI
+  runtime/product components require G7/BSI cluster evidence.
+  architecture-governance v0.5.0 adds conditional BSI C3A cloud-autonomy and
+  BSI C5 cloud-compliance assurance evidence for cloud-service selection and
+  provider-dependent deployments.
   C#/.NET Level-2 projects default to all six unless a justified exception is documented.
 -->
 
@@ -82,3 +68,5 @@
 
 **Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
 <!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+
+- All six governance presets include audit-ready Spec-Kit run evidence fields; do not treat starter templates as evidence until the current run records concrete decisions, rationale, evidence paths, reviewer, residual risk, and follow-up.
