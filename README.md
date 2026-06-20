@@ -165,6 +165,28 @@ git-getrackten Dateien auf Credentials, Tokens und andere Secrets.
 *The `pre-push` hook runs automatically on every `git push` and checks all
 git-tracked files for credentials, tokens, and other secrets.*
 
+## Secure-Development-Hardening-Intake
+
+Dieser Fork ist bewusst ein Nicht-MSL-Repository: C89 und 6502-Assembly sind
+wegen Zielplattform, Toolchain-Zweck und historischer Kompatibilitaet
+erforderlich. Spaetere Spec-Kit-Haertungslaeufe starten deshalb nicht mit der
+vollen MSL-Dokumentenbasis der C#-Level-2-Repos, sondern mit dem gezielten
+Intake `Lastenheft_Secure-Development-Hardening.md`.
+
+Das Lastenheft ist nur Vorbereitung. Es startet keinen Spec-Kit-Lauf, aendert
+keine Makefile-Kette und erzeugt keine Release-Artefakte. Der spaetere Lauf
+soll C/C89-, 6502-Assembly-, Makefile-, Artefakt-, SBOM-, VEX-, SLSA- und
+AI-SBOM-`N/A`-Entscheidungen pruefbar dokumentieren. Die aktive Reihenfolge
+fuer spaetere Laeufe steht in `Lastenheft_Abarbeitungsreihenfolge.md`.
+
+*This fork is intentionally a non-MSL repository: C89 and 6502 assembly are
+required because of the target platforms, toolchain purpose, and historical
+compatibility. Later Spec Kit hardening runs therefore start from the targeted
+intake `Lastenheft_Secure-Development-Hardening.md`, not from the full MSL
+documentation baseline used by the C# Level-2 repositories. The intake is
+preparation only; it does not start a Spec Kit run, change the Makefile chain,
+or create release artifacts.*
+
 ## Spec-Kit-Governance-Presets / Spec Kit Governance Presets
 
 Alle sechs Governance-Presets sind seit 2026-05-04 im `github/spec-kit`

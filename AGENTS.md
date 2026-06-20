@@ -155,6 +155,28 @@ Keep each commit and PR focused on one issue. Recent history uses short, imperat
 
 *Capture the applicable standards and the evidence path in `spec.md`, `plan.md`, and `tasks.md`. Use `STRIDE` as the base for threat modeling and add relevant `CAPEC` patterns for the highest-risk flows. For web/API work, record the chosen `ASVS` level and verification scope in `docs/security/` or equivalent project documentation. Classify AI usage as development tooling, absent from the released/operated system, or AI runtime/product component; document `AI-SBOM` as `N/A` or as supply-chain evidence accordingly. For release and artefact work, plan `SBOM`, `AI-SBOM`, `VEX`, provenance/SLSA evidence, and `OpenSSF Scorecard` review where applicable. For architectural changes, evaluate `Zero Trust`; for long-lived projects, consider `OWASP SAMM` follow-up actions. The default evidence path is `docs/security/asvs-verification.md`, `docs/security/supply-chain-evidence.md`, `docs/security/zero-trust-applicability.md`, and `docs/security/samm-assessment.md`, unless the repository documents a justified equivalent location.*
 
+## Agentische Skriptausfuehrung / Agentic Script Execution
+
+Vor lokaler Automation zuerst das Betriebssystem erkennen. Wenn `pwsh`
+verfuegbar ist, vorhandene PowerShell-7-Skripte oder Cmdlets bevorzugen und
+auf diesem macOS-Host wegen Profil-Nebenwirkungen `pwsh -NoProfile` nutzen.
+Fuer strukturierte lokale Automation ist C# ueber `.NET` oder `mono` ein
+zulaessiger zweiter Weg, wenn Typisierung, Dateiformate oder
+Wiederverwendbarkeit davon profitieren. Erst wenn PowerShell oder C# nicht
+sinnvoll passen, die OS-nahe vorhandene Repo-Variante nutzen, in diesem
+Repository typischerweise Bash, Make oder `.dev-tools`-Skripte. Keine neue
+Sprache nur aus Bequemlichkeit einfuehren, wenn ein bestehendes Repo-Skript
+denselben Zweck erfuellt.
+
+*Before local automation, detect the operating system. If `pwsh` is available,
+prefer existing PowerShell 7 scripts or Cmdlets and use `pwsh -NoProfile` on
+this macOS host because the profile has side effects. For structured local
+automation, C# via `.NET` or `mono` is an acceptable second option when typing,
+file formats, or reuse benefit from it. Only use the OS-native existing
+repository variant when PowerShell or C# does not fit, typically Bash, Make, or
+`.dev-tools` scripts in this repository. Do not introduce a new language for
+convenience when an existing repository script already solves the task.*
+
 ## GitHub/GitLab CLI First / GitHub/GitLab CLI zuerst
 
 Für GitHub-Repositories zuerst die authentifizierte `gh` CLI für mögliche Schreibaktionen und Live-Repository-Operationen verwenden, einschließlich PR-/Issue-Kommentaren, PR-Statusprüfungen, Review-Follow-up, Workflow-Prüfung und Merge-/Statusabfragen. GitHub-Connector-Tools hauptsächlich für strukturierte Read-only-Inspektion oder Fälle nutzen, in denen die CLI nicht geeignet ist.
