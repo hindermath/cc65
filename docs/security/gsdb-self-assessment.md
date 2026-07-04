@@ -1,9 +1,9 @@
 # GSDB Self-Assessment / GSDB Preflight
 
 **Projekt / Project:** cc65
-**Datum / Date:** 2026-07-02
+**Datum / Date:** 2026-07-04
 **Repository:** `/Users/thorstenhindermann/C64Projects/cc65`
-**Primaersprache / Primary language:** C
+**Primaersprache / Primary language:** cc65
 
 Dieses Dokument ist ein Preflight-Bericht. Es startet keinen Spec-Kit-Lauf und
 ist keine formale Freigabe.

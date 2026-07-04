@@ -1,7 +1,7 @@
 <!-- gsdb-spec-kit-intensivpruefung:start -->
 # Lastenheft GSDB-Spec-Kit-Intensivpruefung fuer cc65
 
-**Stand / Date:** 2026-07-02
+**Stand / Date:** 2026-07-04
 
 ## Zweck / Purpose
 
