@@ -25,21 +25,21 @@ description: "Task list template for feature implementation"
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
 - Paths shown below assume single project - adjust based on plan.md structure
 
-<!-- 
+<!--
   ============================================================================
   IMPORTANT: The tasks below are SAMPLE TASKS for illustration purposes only.
-  
+
   The /speckit-tasks command MUST replace these with actual tasks based on:
   - User stories from spec.md (with their priorities P1, P2, P3...)
   - Feature requirements from plan.md
   - Entities from data-model.md
   - Endpoints from contracts/
-  
+
   Tasks MUST be organized by user story so each story can be:
   - Implemented independently
   - Tested independently
   - Delivered as an MVP increment
-  
+
   DO NOT keep these sample tasks in the generated tasks.md file.
   ============================================================================
 -->
@@ -152,31 +152,30 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX [P] Verify the implementation against the matching Level-2 Project Environment Registry row in `constitution.md`
-- [ ] TXXX [P] For Makefile-driven changes, read and cite the relevant Makefile chain before editing target behaviour; include root, recursive, and included/common Makefiles
-- [ ] TXXX [P] Verify generated artefact policy for affected outputs from the nearest project-local `.gitignore` (`bin/`, `wrk/`, `lib/`, `libwrk/`, `html/`, `info/`, `target/`, `testwrk/`, object/list/map/debug files, target binaries, disk/tape images, package archives) so build products are not committed accidentally
 - [ ] TXXX [P] Verify installed Spec-Kit governance presets with `specify preset list`; for C#/.NET Level-2 projects confirm the all-six default or document the justified exception
-- [ ] TXXX [P] Verify primary implementation language against the MSL allow-list in `constitution.md`, Principle XI; cite the Level-2 non-MSL justification and compensating controls if applicable
+- [ ] TXXX [P] Verify primary implementation language against the MSL allow-list in `constitution.md`, Principle XI; cite the Level-2 non-MSL justification if applicable
 - [ ] TXXX [P] Run the required A11Y/text-first review path for affected user-facing artefacts
 - [ ] TXXX [P] Update `docs/project-statistics.md` when the feature changes statistics-relevant artefacts or delivery evidence
-- [ ] TXXX [P] Review and synchronize affected AI-agent guidance files and generated Spec-Kit skill/command/agent surfaces: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.agents/skills/`, `.claude/skills/`, `.claude/commands/`, `.gemini/commands/`, `.github/agents/`, `.github/prompts/`, `.opencode/command/`
+- [ ] TXXX [P] Review and synchronize affected AI-agent guidance files: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
-- [ ] TXXX [P] For hook or secret-scan changes in the cc65 fork, review `scripts/` and permanent `.dev-tools/` hook/scanner surfaces together, or document intentional divergence
 - [ ] TXXX [P] Verify AI-generated and human-written code against secure-coding rules in `constitution.md`, Principle XII, plus the applicable profile in `.specify/templates/secure-coding-language-rules-template.md`; MSL status alone is not sufficient evidence for secure API, I/O, auth, SQL, crypto, logging, or dependency handling
-- [ ] TXXX [P] For cc65/C89 changes, verify integer truncation, pointer arithmetic, fixed-size buffers, disk/file-name parsing, target runtime limitations, and generated assembler/linker/sample output where affected
 - [ ] TXXX [P] Verify architecture against secure-architecture principles in `constitution.md`, Principle XIII (trust boundaries, defense in depth, least privilege, fail-safe defaults, attack surface reduction, separation of concerns, secure configuration, supply-chain security)
 - [ ] TXXX [P] Update mandatory security documentation in `docs/security/`: threat model, security checklist, dependency audit, arc42 security concepts, and security quality scenarios (SHOULD) - using templates from `.specify/templates/`
 - [ ] TXXX [P] Create or update Security Architecture Decision Records (S-ADR) in `docs/security/adr/` for any security-relevant architectural decisions made during this feature
-- [ ] TXXX [P] Record the applicable security standards from `constitution.md`, Principles XIV-XVIII, and mark non-applicable entries as `N/A` with justification
+- [ ] TXXX [P] Record the applicable security standards from `constitution.md`, Principles XIV-XIX, and mark non-applicable entries as `N/A` with justification
 - [ ] TXXX [P] Apply `NIST SSDF` and `CWE Top 25` to design/review/remediation evidence; add relevant notes to checklist, threat model, ADR, or PR as appropriate
 - [ ] TXXX [P] If the feature includes web/API/HTTP/auth-bearing services, document the selected `OWASP ASVS` level and verification scope in `docs/security/` or equivalent project-local documentation
 - [ ] TXXX [P] If the feature creates releasable or distributable artefacts, generate/update `SBOM` and, when relevant, `VEX` evidence; capture provenance/SLSA actions for CI/CD or published artefacts
 - [ ] TXXX [P] Record `AI-SBOM` applicability: if AI is only a development tool or absent from the released/operated system, document `N/A` with rationale; if AI models, AI services, datasets, inference infrastructure, or AI runtime components are present, update supply-chain evidence with the G7/BSI AI-SBOM clusters
 - [ ] TXXX [P] If threat boundaries or externally reachable flows changed, update STRIDE threat modeling and add relevant `CAPEC` references for the highest-risk attack paths
 - [ ] TXXX [P] If the system is distributed, service-based, cloud, or remotely managed, document `Zero Trust` applicability; if the project is long-lived, note any `OWASP SAMM` follow-up actions
-- [ ] TXXX [P] Prefer the default evidence files `docs/security/asvs-verification.md`, `docs/security/supply-chain-evidence.md`, `docs/security/zero-trust-applicability.md`, and `docs/security/samm-assessment.md`; document and justify any equivalent governance location
+- [ ] TXXX [P] If the feature selects, operates, or materially depends on cloud services, document `BSI C3A` cloud-autonomy applicability in `docs/security/cloud-autonomy-applicability.md`; if cloud use is only development infrastructure, record `N/A` with rationale
+- [ ] TXXX [P] If the feature selects, operates, or materially depends on cloud services, document `BSI C5` cloud-compliance assurance in `docs/security/cloud-compliance-assurance.md`; if cloud use is only development infrastructure, record `N/A` with rationale
+- [ ] TXXX [P] If release, market placement, customer handover, cloud operation, AI runtime/product components, financial-sector ICT dependencies, or regulated customers/supply chains are in scope, document regulatory applicability (`NIS2`, `CRA`, `EU AI Act`, `DORA`) in `docs/security/regulatory-applicability.md`; for private training projects, record explicit `N/A` rationale when no regulated scope exists
+- [ ] TXXX [P] Prefer the default evidence files `docs/security/asvs-verification.md`, `docs/security/supply-chain-evidence.md`, `docs/security/zero-trust-applicability.md`, `docs/security/samm-assessment.md`, `docs/security/cloud-autonomy-applicability.md`, `docs/security/cloud-compliance-assurance.md`, and `docs/security/regulatory-applicability.md`; document and justify any equivalent governance location
 - [ ] TXXX Run quickstart.md validation
 - [ ] TXXX Lastenheft umbenennen / Rename Lastenheft: `bash scripts/rename-lastenheft.sh <LH-Datei> <branch-name>` (macOS/Linux) . `pwsh scripts/rename-lastenheft.ps1 -File <LH-Datei> -BranchName <branch-name>` (Windows) - stamps the feature branch name onto the filename to mark it as archived
 

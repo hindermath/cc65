@@ -1,8 +1,8 @@
 # Feature Specification: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
+**Feature Branch**: `[###-feature-name]`
+**Created**: [DATE]
+**Status**: Draft
 **Input**: User description: "$ARGUMENTS"
 
 ## User Scenarios & Testing *(mandatory)*
@@ -11,7 +11,7 @@
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
   Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
   you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
+
   Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
   Think of each story as a standalone slice of functionality that can be:
   - Developed independently
@@ -85,7 +85,7 @@
 ### Functional Requirements
 
 - **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
@@ -111,7 +111,7 @@
   or cite the documented non-MSL justification from the Level-2
   `constitution.md`.
 - **CR-006**: The feature MUST determine the applicable security standards from
-  `constitution.md`, Principles XIV-XVIII, and mark non-applicable standards
+  `constitution.md`, Principles XIV-XIX, and mark non-applicable standards
   as `N/A` with justification. `NIST SSDF` and `CWE Top 25` are mandatory for
   all Level-2 work.
 - **CR-007**: If the feature includes web/API/HTTP/auth-bearing services, it
@@ -130,22 +130,13 @@
   `Zero Trust` applicability will be handled.
 - **CR-011**: The feature MUST state whether it uses the default evidence files
   in `docs/security/` (`asvs-verification.md`, `supply-chain-evidence.md`,
-  `zero-trust-applicability.md`, `samm-assessment.md`) or an explicitly
-  justified equivalent governance location.
+  `zero-trust-applicability.md`, `samm-assessment.md`,
+  `cloud-autonomy-applicability.md`, `cloud-compliance-assurance.md`,
+  `regulatory-applicability.md`) or an explicitly justified equivalent
+  governance location.
 - **CR-012**: The feature MUST state which installed Spec-Kit governance
   presets apply. C#/.NET Level-2 projects default to all six home-baseline
   presets unless a justified exception is documented.
-- **CR-013**: If the feature changes build behaviour, generated artefacts, or
-  target output, it MUST identify the relevant Makefile chain, GNU `make`
-  targets, expected generated outputs, and cleanup/untracked-artifact policy
-  derived from the nearest project-local `.gitignore` where available.
-- **CR-014**: If the feature changes shared guidance, command templates, or
-  presets, it MUST state whether generated Spec-Kit skill/command/agent
-  surfaces require regeneration or synchronized review.
-- **CR-015**: If the feature changes hook installation or secret-scanning
-  behaviour in this cc65 fork, it MUST state how `scripts/` and the permanent
-  `.dev-tools/` fork surface stay synchronized, or document intentional
-  divergence.
 
 ### Key Entities *(include if feature involves data)*
 
