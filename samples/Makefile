@@ -287,8 +287,7 @@ EXELIST_c65 = \
         hello \
         joydemo    \
         sieve \
-        tinyshell  \
-        tinycmdr
+        tinyshell
 
 EXELIST_c128 =     \
         ascii      \
@@ -312,7 +311,6 @@ EXELIST_c16 =      \
         debug      \
         enumdevdir \
         tinyshell  \
-        tinycmdr  \
         hello      \
         joydemo
 
@@ -383,8 +381,7 @@ EXELIST_mega65 = \
         hello \
         joydemo    \
         sieve \
-        tinyshell  \
-        tinycmdr
+        tinyshell
 
 EXELIST_nes = \
         hello      \
@@ -405,7 +402,6 @@ EXELIST_pet =      \
         hello      \
         joydemo    \
         tinyshell  \
-        tinycmdr  \
         sieve
 
 EXELIST_plus4 =    \
