@@ -409,7 +409,7 @@ Write-Host ("          -> Bitte manuell ausfuehren: cd $tdShort && codex")
 # 17. Gemini
 Step-Start "Gemini (interaktiv)"
 Write-Host ""
-Write-Host ("          -> Bitte manuell ausfuehren: cd $tdShort && gemini")
+Write-Host ("          -> Bitte manuell ausfuehren: cd $tdShort && agy")
 
 # 18. Copilot check
 Step-Start "Copilot verfuegbar pruefen"

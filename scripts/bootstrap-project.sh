@@ -573,7 +573,7 @@ printf "          -> Bitte manuell ausfuehren: cd %s && codex\n" "${TARGET_DIR/#
 # ─── Step 17: Gemini (manual) ────────────────────────────────────────────────
 step_start "Gemini (interaktiv)"
 printf "\n"
-printf "          -> Bitte manuell ausfuehren: cd %s && gemini\n" "${TARGET_DIR/#$HOME/\~}"
+printf "          -> Bitte manuell ausfuehren: cd %s && agy\n" "${TARGET_DIR/#$HOME/\~}"
 
 # ─── Step 18: Copilot check ──────────────────────────────────────────────────
 step_start "Copilot verfuegbar pruefen"
