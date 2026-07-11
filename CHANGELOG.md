@@ -1,5 +1,46 @@
 # Changelog
 
+## [0.3.0](https://github.com/hindermath/cc65/compare/v0.2.0...v0.3.0) (2026-07-11)
+
+
+### Features / Neue Funktionen
+
+* update architecture governance preset to v0.3.0 ([56496d9](https://github.com/hindermath/cc65/commit/56496d9f61b847fc0af3a3994f6d41a76acb0243))
+
+
+### Bug Fixes / Fehlerbehebungen
+
+* **ci:** allow release bot in Claude review ([7fe496c](https://github.com/hindermath/cc65/commit/7fe496c2e9a11629c819c6b0d658a18cbd16ef1d))
+* **ci:** skip unavailable Claude reviews ([09664ff](https://github.com/hindermath/cc65/commit/09664ffc21583299773e17712ea3d210b899fbde))
+* **samples:** enable TinyCmdr Apple II key mappings ([390d536](https://github.com/hindermath/cc65/commit/390d536766d1f4de4ca302689a17a7cee94067ef))
+* **samples:** list TinyCmdr only for supported targets ([503f171](https://github.com/hindermath/cc65/commit/503f1715cea5c7462a7c998a9eb6d881f0c6fd2b))
+
+
+### Documentation / Dokumentation
+
+* add GitHub and GitLab CLI-first guidance ([8ca2773](https://github.com/hindermath/cc65/commit/8ca2773b079b78bf5cd82238e6acf3d6be6785da))
+* add secure development hardening intake ([24d0d52](https://github.com/hindermath/cc65/commit/24d0d52f8d529e22ea3a530835a736419b4cccab))
+* add Spec-Kit model routing guidance ([4f35729](https://github.com/hindermath/cc65/commit/4f35729045bb7e7305b8efe52ec5be9d68e9951d))
+* clarify cc65 artifact and fork tooling governance ([caae75b](https://github.com/hindermath/cc65/commit/caae75b7c5d28f3b1b90b1384ee912368792a689))
+* propagate AI-SBOM governance ([e51dea0](https://github.com/hindermath/cc65/commit/e51dea0efa37736c81e2b87e4de21e19ca8e2483))
+* propagate security-governance v0.4.0 ([3d1008e](https://github.com/hindermath/cc65/commit/3d1008e0b1518aa6a9055bcd437f390f3e3eac23))
+* propagate spec-kit preset governance ([5a0f2a2](https://github.com/hindermath/cc65/commit/5a0f2a270b8e7035eea4e57e9d388d0c924daae1))
+* record GSDB self-assessment ([ce5927d](https://github.com/hindermath/cc65/commit/ce5927d16a9f78fbbc22fc1c0677cf46f75154a3))
+* update constitution governance to v1.15.0 ([9a81f89](https://github.com/hindermath/cc65/commit/9a81f8994a77984e247aa774e6225e0fa1119e4f))
+* update secure development baseline to 3.0.0 ([881e91e](https://github.com/hindermath/cc65/commit/881e91e3f659c548263a540b3cf50c77536f164c))
+
+
+### Maintenance / Wartung
+
+* **security:** add gitleaks.toml allowlist for secure-development teaching docs ([245e166](https://github.com/hindermath/cc65/commit/245e166dd6505b993d07fefdd877f7c74896805a))
+* update agent parity governance to v0.2.0 ([011f6b3](https://github.com/hindermath/cc65/commit/011f6b385d160db21b4e7b55e43b2af0cd30fc6d))
+* update governance presets ([efd83ce](https://github.com/hindermath/cc65/commit/efd83ce08d32ab71682fbb7e0b4c2de91ed4a4f4))
+* update governance presets for audit evidence ([8ff9f54](https://github.com/hindermath/cc65/commit/8ff9f54e7695431585c3e6103859bb565c9f53cd))
+* update spec-kit integrations ([f92390b](https://github.com/hindermath/cc65/commit/f92390b79365982dcfb8b266a820ecfe4f390589))
+* update spec-kit integrations ([90b7508](https://github.com/hindermath/cc65/commit/90b7508367ff639770a33fd20b2c6f8722cdc07b))
+* update spec-kit integrations ([82c1494](https://github.com/hindermath/cc65/commit/82c1494935700c0daf843501efb5e40c0285bafc))
+* update spec-kit integrations ([591239a](https://github.com/hindermath/cc65/commit/591239a087b76fc6a0008dc212984cc9aaade482))
+
 ## [0.2.0](https://github.com/hindermath/cc65/compare/v0.1.0...v0.2.0) (2026-04-30)
 
 
