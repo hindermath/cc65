@@ -4,6 +4,12 @@
 ** (C) Thorsten Hindermann, 2026
 */
 
+/* TinyCmdr uses the Apple //e cursor and OpenApple+number key mappings even
+** when it is built for the compatible Apple ][ target. */
+#if defined(__APPLE2__) && !defined(__APPLE2ENH__)
+#define APPLE2_INCLUDE_IIE_CHARS
+#endif
+
 #include <stdio.h>    /* Standard I/O functions */
 #include <stdlib.h>   /* Standard library functions */
 #include <string.h>   /* String manipulation functions */
