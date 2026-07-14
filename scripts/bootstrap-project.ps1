@@ -347,15 +347,19 @@ else {
 
 # 13. Repo create
 Step-Start "Repo erstellen (privat)"
+$existingRemote = ''
+if (-not $NoRemote) {
+    $existingRemote = (& git -C $TargetDir remote get-url origin 2>$null | Out-String).Trim()
+}
 if ($NoRemote) { Step-Skip "-NoRemote" }
-elseif ($existingRemote = (git -C $TargetDir remote get-url origin 2>$null | Out-String).Trim()) {
+elseif ($existingRemote) {
     $summaryRepoUrl = Convert-RemoteUrlToRepoUrl $existingRemote
     $summaryDisplayRepo = Get-RepoNameFromRemoteUrl $existingRemote
     Step-Skip "Remote vorhanden"
 }
 elseif ($Platform -eq 'github' -and (Get-Command gh -ErrorAction SilentlyContinue)) {
     $repoName = $ProjectName.ToLower() -replace '\s+','-'
-    $result = gh repo create $repoName --private --source $TargetDir --remote origin 2>$null
+    & gh repo create $repoName --private --source $TargetDir --remote origin 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) {
         $ghUser = ((gh api user --jq '.login' 2>$null) | Out-String).Trim()
         $summaryRepoUrl = "https://github.com/$ghUser/$repoName"
@@ -382,8 +386,12 @@ elseif ($Platform -eq 'gitlab') {
 
 # 14. git push
 Step-Start "git push"
+$originRemote = ''
+if (-not $NoRemote) {
+    $originRemote = (& git -C $TargetDir remote get-url origin 2>$null | Out-String).Trim()
+}
 if ($NoRemote) { Step-Skip "-NoRemote" }
-elseif (-not (git -C $TargetDir remote get-url origin 2>$null)) { Step-Skip "kein Remote konfiguriert" }
+elseif (-not $originRemote) { Step-Skip "kein Remote konfiguriert" }
 else {
     git -C $TargetDir push -u origin HEAD 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) { Step-Done } else { Step-Warn "git push fehlgeschlagen" }
@@ -413,9 +421,11 @@ Write-Host ("          -> Bitte manuell ausfuehren: cd $tdShort && agy")
 
 # 18. Copilot check
 Step-Start "Copilot verfuegbar pruefen"
-if ((Get-Command gh -ErrorAction SilentlyContinue) -and (gh extension list 2>$null | Select-String 'copilot')) {
-    Step-Done "gh copilot verfuegbar"
-} else { Step-Skip "gh copilot nicht installiert" }
+if (Get-Command copilot -ErrorAction SilentlyContinue) {
+    & copilot --version *> $null
+    if ($LASTEXITCODE -eq 0) { Step-Done 'copilot verfuegbar' }
+    else { Step-Skip 'copilot nicht nutzbar; Required-Host-Wartung ausfuehren' }
+} else { Step-Skip 'copilot nicht installiert; Required-Host-Wartung ausfuehren' }
 
 # 19. Spec-kit
 Step-Start "Spec-kit installieren"

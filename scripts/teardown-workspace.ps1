@@ -426,7 +426,8 @@ function Cleanup-IncludeFile {
 }
 
 function Commit-Artifacts {
-    if (-not (& git -C $script:HomeDir rev-parse --is-inside-work-tree 2>$null)) {
+    $insideWorkTree = (& git -C $script:HomeDir rev-parse --is-inside-work-tree 2>$null | Out-String).Trim()
+    if (-not $insideWorkTree) {
         Add-Result 'skip' 'Artefakt-Commit übersprungen, ~/ ist kein Git-Repo / Artifact commit skipped, ~/ is not a git repo'
         Set-WarningExit
         return

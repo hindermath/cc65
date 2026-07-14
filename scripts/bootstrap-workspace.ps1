@@ -317,7 +317,7 @@ Automatisch durch bootstrap-workspace.ps1 hinzugefügt.
 Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 "@
         & git -C $homeDir commit -m $msg
-        $hasRemote = (& git -C $homeDir remote get-url origin 2>$null) -ne $null
+        $hasRemote = $null -ne (& git -C $homeDir remote get-url origin 2>$null)
         if ($hasRemote) {
             & git -C $homeDir push
             Write-Host '    OK  home-baseline aktualisiert und gepusht' -ForegroundColor Green

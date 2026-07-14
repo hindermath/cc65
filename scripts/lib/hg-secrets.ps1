@@ -29,8 +29,8 @@ function Invoke-HgScanFileSecrets {
     }
 
     # Check content
-    $matches = Select-String -Path $FilePath -Pattern $HG_SECRET_PATTERN -ErrorAction SilentlyContinue
-    foreach ($m in $matches) {
+    $secretMatches = Select-String -Path $FilePath -Pattern $HG_SECRET_PATTERN -ErrorAction SilentlyContinue
+    foreach ($m in $secretMatches) {
         [PSCustomObject]@{
             Status  = 'FAIL'
             File    = $FilePath

@@ -13,7 +13,9 @@ function Invoke-HgCheckSpeckit {
         try {
             $opts = Get-Content $optionsFile | ConvertFrom-Json
             $speckitVer = $opts.speckit_version ?? 'unknown'
-        } catch {}
+        } catch {
+            Write-Verbose "Spec Kit options could not be read: $($_.Exception.Message)"
+        }
     }
 
     $content = Get-Content -Path $SpecFile -ErrorAction SilentlyContinue

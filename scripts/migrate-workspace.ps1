@@ -334,7 +334,11 @@ foreach ($ws in $workspaces) {
 $initStatsScript = Join-Path $ScriptDir 'init-stats.ps1'
 if (Test-Path $initStatsScript) {
     Write-Host "Starte init-stats.ps1..."
-    try { & pwsh $initStatsScript 2>$null } catch { }
+    try {
+        & pwsh $initStatsScript 2>$null
+    } catch {
+        Write-Verbose "init-stats.ps1 fehlgeschlagen / failed: $($_.Exception.Message)"
+    }
 }
 
 Write-Host ""
