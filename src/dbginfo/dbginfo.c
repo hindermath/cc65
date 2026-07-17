@@ -4175,7 +4175,6 @@ static void ParseSym (InputData* D)
     */
     Collection          DefLineIds = COLLECTION_INITIALIZER;
     unsigned            ExportId = CC65_INV_ID;
-    unsigned            FileId = CC65_INV_ID;
     unsigned            Id = CC65_INV_ID;
     StrBuf              Name = STRBUF_INITIALIZER;
     unsigned            ParentId = CC65_INV_ID;
@@ -4277,7 +4276,6 @@ static void ParseSym (InputData* D)
                 if (!IntConstFollows (D)) {
                     goto ErrorExit;
                 }
-                FileId = D->IVal;
                 InfoBits |= ibFileId;
                 NextToken (D);
                 break;
@@ -4655,50 +4653,6 @@ static int FindCSymInfoByName (const Collection* CSymInfos, const char* Name,
 
         /* Get item */
         const CSymInfo* CurItem = CollAt (CSymInfos, Cur);
-
-        /* Compare */
-        int Res = strcmp (CurItem->Name, Name);
-
-        /* Found? */
-        if (Res < 0) {
-            Lo = Cur + 1;
-        } else {
-            Hi = Cur - 1;
-            /* Since we may have duplicates, repeat the search until we've
-            ** the first item that has a match.
-            */
-            if (Res == 0) {
-                Found = 1;
-            }
-        }
-    }
-
-    /* Pass back the index. This is also the insert position */
-    *Index = Lo;
-    return Found;
-}
-
-
-
-static int FindFileInfoByName (const Collection* FileInfos, const char* Name,
-                               unsigned* Index)
-/* Find the FileInfo for a given file name. The function returns true if the
-** name was found. In this case, Index contains the index of the first item
-** that matches. If the item wasn't found, the function returns false and
-** Index contains the insert position for Name.
-*/
-{
-    /* Do a binary search */
-    int Lo = 0;
-    int Hi = (int) CollCount (FileInfos) - 1;
-    int Found = 0;
-    while (Lo <= Hi) {
-
-        /* Mid of range */
-        int Cur = (Lo + Hi) / 2;
-
-        /* Get item */
-        const FileInfo* CurItem = CollAt (FileInfos, Cur);
 
         /* Compare */
         int Res = strcmp (CurItem->Name, Name);
@@ -7400,6 +7354,5 @@ void cc65_free_typedata (cc65_dbginfo Handle, const cc65_typedata* data)
 
     /* Nothing to do */
 }
-
 
 

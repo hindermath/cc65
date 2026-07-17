@@ -46,7 +46,7 @@
 
 
 /* The memory */
-uint8_t Mem[0x10000];
+uint8_t Mem[0x10000] = { 0 };
 
 
 

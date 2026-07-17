@@ -53,7 +53,7 @@
 
 
 
-uint8_t CodeBuf[0x10000];               /* Code buffer */
+uint8_t CodeBuf[0x10000] = { 0 };       /* Code buffer */
 uint32_t CodeStart;                     /* Start address */
 uint32_t CodeEnd;                       /* End address */
 uint32_t PC;                            /* Current PC */
