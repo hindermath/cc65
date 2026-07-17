@@ -14,11 +14,11 @@ sorted:
 
 else
 
-.PHONY: checkstyle lineendings tabs lastline spaces noexec sorted
+.PHONY: checkstyle lineendings tabs lastline spaces noexec noexectest sorted
 
 all: checkstyle sorted
 
-checkstyle: lineendings tabs lastline spaces noexec
+checkstyle: lineendings tabs lastline spaces noexec noexectest
 
 lineendings: lineendings.sh
 	@./lineendings.sh
@@ -34,6 +34,9 @@ spaces: spaces.sh
 
 noexec: noexec.sh
 	@./noexec.sh
+
+noexectest: noexec-test.sh noexec.sh
+	@./noexec-test.sh
 
 sorted: sorted.sh sorted_codeopt.sh sorted_opcodes.sh
 	@./sorted.sh
