@@ -1,0 +1,15 @@
+{
+  "$schema": "../scripts/config/project-statistics.schema.json",
+  "schemaVersion": 1,
+  "methodologyVersion": 2,
+  "repositoryName": "cc65",
+  "timeZone": "Europe/Berlin",
+  "activityWindowWeeks": 52,
+  "references": {
+    "conservativeLinesPerDay": 80,
+    "thorstenLinesPerDay": 100
+  },
+  "phases": [],
+  "excludedPaths": [],
+  "categoryOverrides": []
+}

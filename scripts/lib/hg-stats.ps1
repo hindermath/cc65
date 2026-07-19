@@ -5,7 +5,7 @@ function Get-HgBar {
     param([int]$Score, [int]$Width = 20)
     $filled = [int]($Score * $Width / 100)
     $empty  = $Width - $filled
-    ('█' * $filled) + ('░' * $empty)
+    ('#' * $filled) + ('.' * $empty)
 }
 
 function Invoke-HgWriteStats {
