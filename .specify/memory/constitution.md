@@ -946,3 +946,11 @@ constitution is the authoritative policy layer above all agent-specific files.
 - Agentenflaechen / Agent surfaces: AGENTS.md, CLAUDE.md, GEMINI.md,
   .github/copilot-instructions.md, and generated Spec-Kit skill/command/agent
   surfaces stay synchronized when shared guidance changes.
+
+<!-- statistics-profile-2-governance:begin -->
+## Statistikprofil 2 / Statistics Profile 2
+
+Das Repository verwendet Statistikmethodik 2 mit reproduzierbarer JSON-Konfiguration, ASCII-only-Diagrammen, exakten Werten und bilingualer Textalternative. Der generierte Block in `docs/project-statistics.md` bleibt der letzte Top-Level-Abschnitt. Belastbare Phasenslots bleiben stabil; fehlen sie, wird Monatsvolumen gezeigt. Historische Profil-1-Inhalte werden archiviert und nicht umgeschrieben.
+
+*The repository uses Statistics Methodology 2 with reproducible JSON configuration, ASCII-only charts, exact values, and bilingual text alternatives. The generated block in `docs/project-statistics.md` remains the final top-level section. Verified phase slots stay stable; otherwise monthly volume is shown. Historical Profile 1 content is archived and not rewritten.*
+<!-- statistics-profile-2-governance:end -->

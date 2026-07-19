@@ -11,7 +11,7 @@ _hg_acquire_lock() {
     sleep 1
     elapsed=$((elapsed + 1))
     if [ "$elapsed" -ge "$timeout" ]; then
-      echo "WARN: stats file locked — try again later" >&2
+      echo "WARN: Statistikdatei gesperrt -- spaeter erneut versuchen / stats file locked -- try again later" >&2
       return 1
     fi
   done
@@ -22,24 +22,29 @@ _hg_release_lock() {
   rmdir "$1" 2>/dev/null || true
 }
 
-# Build ASCII bar (max 40 chars)
+# Build ASCII bar (20 chars)
 _hg_bar() {
   local score="$1" width=20
   local filled=$(( score * width / 100 ))
   local empty=$(( width - filled ))
   local bar=""
   local i=0
-  while [ $i -lt $filled ]; do bar="${bar}█"; i=$((i+1)); done
+  while [ $i -lt $filled ]; do bar="${bar}#"; i=$((i+1)); done
   i=0
-  while [ $i -lt $empty ]; do bar="${bar}░"; i=$((i+1)); done
+  while [ $i -lt $empty ]; do bar="${bar}."; i=$((i+1)); done
   echo "$bar"
 }
 
 # Count entries in STATS.md (## Run headings)
 _hg_count_entries() {
   local stats_file="$1"
-  [ -f "$stats_file" ] || echo 0
-  grep -c '^## Run ' "$stats_file" 2>/dev/null || echo 0
+  if ! [ -f "$stats_file" ]; then
+    echo 0
+    return 0
+  fi
+  local count
+  count=$(grep -c '^## Run ' "$stats_file" 2>/dev/null || true)
+  printf '%s\n' "${count:-0}"
 }
 
 # Archive STATS.md if >= 500 entries
@@ -54,10 +59,14 @@ _hg_maybe_archive() {
     archive_file="${stats_file%STATS.md}STATS-archive-${year}.md"
     cp "$stats_file" "$archive_file"
     # Keep header + last 50 entries
-    local header_lines
-    header_lines=$(grep -n '^## Run ' "$stats_file" | head -51 | tail -1 | cut -d: -f1)
-    if [ -n "$header_lines" ]; then
-      head -n "$((header_lines - 1))" "$stats_file" > "${stats_file}.new"
+    local first_entry_line keep_entry_line
+    first_entry_line=$(grep -n '^## Run ' "$stats_file" | head -1 | cut -d: -f1)
+    keep_entry_line=$(grep -n '^## Run ' "$stats_file" | tail -50 | head -1 | cut -d: -f1)
+    if [ -n "$first_entry_line" ] && [ -n "$keep_entry_line" ]; then
+      {
+        head -n "$((first_entry_line - 1))" "$stats_file"
+        tail -n "+${keep_entry_line}" "$stats_file"
+      } > "${stats_file}.new"
       mv "${stats_file}.new" "$stats_file"
     fi
     echo "STATS.md archived to: ${archive_file}" >&2
@@ -66,7 +75,7 @@ _hg_maybe_archive() {
 
 # Main: Write a STATS run entry
 # Usage: hg_write_stats <stats_file> <score> [dir1 dir2 ...]
-hg_write_stats() {
+hg_write_stats() (
   local stats_file="$1"
   local score="$2"
   shift 2
@@ -90,7 +99,7 @@ hg_write_stats() {
 
   # Ensure file exists with header
   if ! [ -f "$stats_file" ]; then
-    printf '# STATS.md\n\n## Überblick / Overview\n\nCompliance-Historie — Compliance History\n\n## Verwendung / Usage\n\nJeder `check-homogeneity.sh`-Aufruf fügt hier einen Eintrag hinzu.\n\nEach `check-homogeneity.sh` run appends an entry here.\n\n' > "$stats_file"
+    printf '# STATS.md\n\n## Überblick / Overview\n\nCompliance-Historie -- Compliance History\n\n## Verwendung / Usage\n\nJeder `check-homogeneity.*`-Aufruf fuegt hier einen Eintrag hinzu.\n\nEach `check-homogeneity.*` run appends an entry here.\n\n' > "$stats_file"
   fi
 
   # Append entry
@@ -102,7 +111,11 @@ hg_write_stats() {
 
     local i=0
     for dir in "${dirs[@]+"${dirs[@]}"}"; do
-      printf '| %s | `%s` | — |\n' "$i" "${dir/#$HOME/\~}"
+      local short_dir="$dir"
+      if [[ "$dir" == "$HOME"* ]]; then
+        short_dir="~${dir#"$HOME"}"
+      fi
+      printf '| %s | `%s` | -- |\n' "$i" "$short_dir"
       i=$((i + 1))
     done
 
@@ -116,4 +129,4 @@ hg_write_stats() {
 
   _hg_release_lock "$lockdir"
   trap - EXIT INT TERM
-}
+)
