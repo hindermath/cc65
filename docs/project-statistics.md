@@ -53,25 +53,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 675665 lines |
+| Textbasis / Text base | 675668 lines |
 | Textdateien / Text files | 4626 |
 | Beobachtbarer Zeitraum / Observable period | 2025-07-27..2026-07-19 |
 | Aktivtage / Active days | 108 |
-| Relevante Commits / Relevant commits | 312 |
+| Relevante Commits / Relevant commits | 313 |
 | Zeilen je Aktivtag / Lines per active day | 6256.2 |
 | Peak-Tag im Fenster / Peak day in window | 2026-07-02 / 29374 |
 | Peak-Woche im Fenster / Peak week in window | 2026-06-28 / 33755 |
 | Laengste Serie / Longest streak | 5 days |
 | Speedup vs. 80 lines/day | 78.2x |
 | Speedup vs. 100 lines/day | 62.6x |
-| Methodik / Methodology | v2; source `4517977dd173` |
+| Methodik / Methodology | v2; source `b953a35e9677` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#######.............]  32.8% | 221865
 Tests                           [#####...............]  23.5% | 158703
-Dokumentation / Documentation   [###.................]  17.3% | 116818
+Dokumentation / Documentation   [###.................]  17.3% | 116821
 Skripte / Scripts               [#...................]   2.4% | 16193
 Konfiguration / Configuration   [#...................]   0.1% | 784
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -227,6 +227,6 @@ DE: Das Fenster beginnt am 2025-07-27 und endet am 2026-07-19. Es enthaelt 108 a
 | 2026-04 | 25347 |
 | 2026-05 | 10351 |
 | 2026-06 | 4664 |
-| 2026-07 | 74479 |
+| 2026-07 | 74498 |
 
 <!-- project-statistics-v2:end -->
