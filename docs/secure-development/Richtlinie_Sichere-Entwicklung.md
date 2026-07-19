@@ -16,13 +16,13 @@ This document is organization-neutral and written as a generic training and revi
 | Feld | Wert |
 |---|---|
 | Titel | Richtlinie zur sicheren Softwareentwicklung |
-| Versionsnummer | 3.1.0 |
-| Freigabedatum | 17.07.2026 |
-| Inkrafttreten | 17.07.2026 |
+| Versionsnummer | 3.2.0 |
+| Freigabedatum | 19.07.2026 |
+| Inkrafttreten | 19.07.2026 |
 | Dokumentenklassifikation | öffentlich nutzbare Ausbildungs- und Prüfgrundlage |
 | Verantwortliche Stelle | Projekt- oder Ausbildungsverantwortliche mit Security-Review |
 | Freigegeben durch | Projekt- oder Ausbildungsverantwortliche nach Sicherheitsreview |
-| Nächster Review-Termin | 17.07.2027 (jährlich, ungeplant bei wesentlichen Änderungen) |
+| Nächster Review-Termin | 19.07.2027 (jährlich, ungeplant bei wesentlichen Änderungen) |
 | Dokumentennummer / Aktenzeichen | RL-SE-001 |
 | Nutzungskontext | Generischer Leitfaden fuer sichere Entwicklung und Ausbildungsprojekte |
 
@@ -345,7 +345,7 @@ Konkrete Referenzprofile, Mindestnachweise und Ausbildungsanforderungen fuer sic
 - Geheimnisse werden nicht in Prompts, Projektdateien, Logs oder Screenshots übernommen. Lokale Secret-Dateien bleiben außerhalb der versionierten Projektartefakte und werden über einen Secret Store oder geschützte Umgebungsvariablen eingebunden.
 - KI-Werkzeuge und ihre Konfigurationen sind reproduzierbar gepinnt (Versionen, Image-Digests, Modell-Identifikatoren). Selbst-aktualisierende Mechanismen der Werkzeuge sind deaktiviert.
 - Genehmigte KI-Werkzeuge, Provider, Modelle und Konfigurationen werden im KI-Werkzeug-Inventar des Projekts oder der nutzenden Organisation geführt (siehe Abschnitt „KI-gestützte Codeerzeugung").
-- Bei Feature-Implementierungen mit agentischer KI wird GitHub Spec Kit für Spec-Driven Development (SDD) verwendet. Der Ablauf erfolgt nacheinander über `/speckit.constitution`, `/speckit.specify`, `/speckit.clarify`, `/speckit.plan`, `/speckit.checklist`, `/speckit.tasks`, `/speckit.analyze` und `/speckit.implement`. Die sieben Governance-Presets `security-governance`, `architecture-governance`, `isaqb-architecture-governance`, `a11y-governance`, `cross-platform-governance`, `agent-parity-governance` und `autonomous-run-governance` werden installiert und nachweisbar dokumentiert, sofern kein begründeter Projektausnahmefall dokumentiert ist. Die Installation von `autonomous-run-governance` startet keinen autonomen Lauf und erteilt keine Remote-, Merge-, Bypass-, Secret- oder Provider-Rechte; vollständige autonome Läufe bleiben ausdrücklich delegationspflichtig.
+- Bei Feature-Implementierungen mit agentischer KI wird GitHub Spec Kit für Spec-Driven Development (SDD) verwendet. Der Ablauf erfolgt nacheinander über `/speckit.constitution`, `/speckit.specify`, `/speckit.clarify`, `/speckit.plan`, `/speckit.checklist`, `/speckit.tasks`, `/speckit.analyze` und `/speckit.implement`. Die acht Governance-Presets `security-governance`, `architecture-governance`, `isaqb-architecture-governance`, `a11y-governance`, `cross-platform-governance`, `agent-parity-governance`, `autonomous-run-governance` und `parallel-autonomous-run-governance` werden installiert und nachweisbar dokumentiert, sofern kein begründeter Projektausnahmefall dokumentiert ist. Die Installation der beiden Autonomous-Presets startet weder einen autonomen Einzel- noch einen parallelen Kampagnenlauf und erteilt keine Remote-, Merge-, Bypass-, Secret- oder Provider-Rechte. Vollständige autonome und parallele autonome Läufe bleiben ausdrücklich delegationspflichtig.
 - Die Presets werden mindestens quartalsweise und anlassbezogen kontrolliert aktualisiert. Anlassbezogen ist eine Prüfung nötig, wenn sich Spec-Kit-Preset-Kataloge, Preset-Inhalte, Prioritäten oder projektlokale Overrides ändern. Die Prüfung umfasst Preset-Liste, Preset-Informationen, wirksame Template-Auflösung und die Zuordnung der Preset-Inhalte zu den anwendbaren Checklisten. Erforderliche Änderungen werden in dieser Richtlinie und in den Checklisten eingearbeitet oder als begründete Ausnahme dokumentiert.
 - Die inhaltliche Preset-Abdeckung wird als eigene Auditfrage behandelt. Abgedeckt werden insbesondere regulatorisches Screening (NIS2, CRA, EU AI Act, DORA), BSI C3A, BSI C5, konkrete WCAG-2.2-AA-Prüfung, CLI-Barrierefreiheit, Cross-Platform-Skriptparität, sprachspezifische Secure-Coding-Profile und Agent-Guidance-Parität. Nicht anwendbare Preset-Prüfpunkte werden ausdrücklich mit Begründung dokumentiert.
 - Die Verzahnungsdatei der mitgeltenden Dokumente wird als Standardbrücke zwischen Richtlinienabschnitten, Checklisten-Kapiteln, mitgeltenden Dokumenten, Governance-Presets und Evidenzpfaden genutzt. Ein Spec-Kit-Lauf darf auf diese Datei verweisen, statt die gesamte Zuordnung zu wiederholen, muss aber weiterhin die konkrete Projektentscheidung und Evidenz dokumentieren.
@@ -693,6 +693,7 @@ Die Versionshistorie dokumentiert wesentliche Änderungen dieser Richtlinie gem�
 | 2.10.2 | 26.06.2026 | Security-Verantwortliche*r | Mitgeltende Leitlinie fuer sichere Entwicklungs-Sandboxen ergaenzt; Sandbox-Referenzprofil fuer MSL-basierte Level-2-Projekte, KI-Agenten, Spec Kit und Ausbildung eingeordnet; CL_12 und Sammelband synchronisiert |
 | 3.0.0 | 10.07.2026 | Projekt- oder Ausbildungsverantwortung mit Security-Review | Organisationsneutrale Ausbildungsbasis konsolidiert; 157 stabile CL-IDs, zweiachsiges Statusmodell, manifestgesteuerte Dokumente, generierter Sammelband, Standardsregister, Lernpfad und vertiefte mitgeltende Dokumente eingeführt. |
 | 3.1.0 | 17.07.2026 | Projekt- oder Ausbildungsverantwortung mit Security-Review | Verbindliches Spec-Kit-Standardprofil von sechs auf sieben Governance-Presets erweitert; `autonomous-run-governance` v0.2.2 standardmäßig installiert, ausdrückliche Delegation und bestehende Berechtigungsgrenzen beibehalten; CL_09, CL_12 und Preset-Verzahnung synchronisiert. |
+| 3.2.0 | 19.07.2026 | Projekt- oder Ausbildungsverantwortung mit Security-Review | Verbindliches Spec-Kit-Standardprofil auf acht Governance-Presets erweitert; `parallel-autonomous-run-governance` v0.2.0 ergänzt und Installation klar von Kampagnenstart und Berechtigungen getrennt; CL_09, CL_12 und Preset-Verzahnung synchronisiert. |
 
 **Genehmigung der aktuellen Fassung:**
 
@@ -708,13 +709,13 @@ Die Versionshistorie dokumentiert wesentliche Änderungen dieser Richtlinie gem�
 | Field | Value |
 |---|---|
 | Title | Secure Software Development Guideline |
-| Version | 3.0.0 |
-| Release date | 2026-07-10 |
-| Effective date | 2026-07-10 |
+| Version | 3.2.0 |
+| Release date | 2026-07-19 |
+| Effective date | 2026-07-19 |
 | Document classification | publicly usable training and review baseline |
 | Responsible unit | Project or training owner with security review |
 | Approved by | Project or training owner after security review |
-| Next review date | 2027-07-10 (annually, and ad hoc after material changes) |
+| Next review date | 2027-07-19 (annually, and ad hoc after material changes) |
 | Document number / file reference | RL-SE-001 |
 | Usage context | Generic guideline for secure development and training projects |
 
@@ -1034,7 +1035,7 @@ Concrete reference profiles, minimum evidence, and training requirements for sec
 - Secrets are not copied into prompts, project files, logs, or screenshots. Local secret files remain outside versioned project artefacts and are injected via a secret store or protected environment variables.
 - AI tools and their configurations are reproducibly pinned (versions, image digests, model identifiers). Self-updating mechanisms of the tools are disabled.
 - Approved AI tools, providers, models, and configurations are tracked in the project or adopting organization AI tool inventory (see section "AI-Assisted Code Generation").
-- For feature implementations with agentic AI, GitHub Spec Kit is used for spec-driven development (SDD). The flow is run in sequence through `/speckit.constitution`, `/speckit.specify`, `/speckit.clarify`, `/speckit.plan`, `/speckit.checklist`, `/speckit.tasks`, `/speckit.analyze`, and `/speckit.implement`. The seven governance presets `security-governance`, `architecture-governance`, `isaqb-architecture-governance`, `a11y-governance`, `cross-platform-governance`, `agent-parity-governance`, and `autonomous-run-governance` are installed and documented with evidence unless a justified project exception is documented. Installing `autonomous-run-governance` does not start an autonomous run or grant remote, merge, bypass, secret, or provider authority; complete autonomous runs still require explicit delegation.
+- For feature implementations with agentic AI, GitHub Spec Kit is used for spec-driven development (SDD). The flow is run in sequence through `/speckit.constitution`, `/speckit.specify`, `/speckit.clarify`, `/speckit.plan`, `/speckit.checklist`, `/speckit.tasks`, `/speckit.analyze`, and `/speckit.implement`. The eight governance presets `security-governance`, `architecture-governance`, `isaqb-architecture-governance`, `a11y-governance`, `cross-platform-governance`, `agent-parity-governance`, `autonomous-run-governance`, and `parallel-autonomous-run-governance` are installed and documented with evidence unless a justified project exception is documented. Installing either autonomous preset starts neither a single autonomous run nor a parallel campaign and grants no remote, merge, bypass, secret, or provider authority. Complete autonomous and parallel autonomous runs still require explicit delegation.
 - The presets are updated in a controlled way at least quarterly and when triggered by a relevant change. A triggered check is required when Spec Kit preset catalogs, preset contents, priorities, or project-local overrides change. The check covers the preset list, preset information, effective template resolution, and mapping of preset contents to the applicable checklists. Required changes are integrated into this guideline and into the checklists or documented as a justified exception.
 - Preset content coverage is treated as its own audit question. The coverage includes, in particular, regulatory screening (NIS2, CRA, EU AI Act, DORA), BSI C3A, BSI C5, concrete WCAG 2.2 AA review, CLI accessibility, cross-platform script parity, language-specific secure-coding profiles, and agent-guidance parity. Preset review points that do not apply are documented explicitly with a rationale.
 - The related-document alignment file is used as the default bridge between guideline sections, checklist chapters, related documents, governance presets, and evidence paths. A Spec Kit run may reference that file instead of repeating the whole mapping, but it must still record the concrete project decision and evidence.
@@ -1377,6 +1378,7 @@ The version history documents material changes to this guideline according to IS
 | 2.10.2 | 2026-06-26 | Security-Verantwortliche*r | Added related guideline for secure development sandboxes; positioned sandbox reference profile for MSL-based level-2 projects, AI agents, Spec Kit, and training; synchronized CL_12 and compendium |
 | 3.0.0 | 2026-07-10 | Project or training owner with security review | Consolidated an organization-neutral training baseline; introduced 157 stable CL IDs, the two-axis status model, manifest-controlled documents, generated compendium, standards register, learning path, and expanded related documents. |
 | 3.1.0 | 2026-07-17 | Project or training owner with security review | Expanded the binding standard Spec Kit profile from six to seven governance presets; installed `autonomous-run-governance` v0.2.2 by default while preserving explicit delegation and permission boundaries; synchronized CL_09, CL_12, and preset alignment. |
+| 3.2.0 | 2026-07-19 | Project or training owner with security review | Expanded the binding Spec Kit standard profile to eight governance presets; added `parallel-autonomous-run-governance` v0.2.0 and clearly separated installation from campaign start and permissions; synchronized CL_09, CL_12, and preset alignment. |
 
 **Approval of the current version:**
 
