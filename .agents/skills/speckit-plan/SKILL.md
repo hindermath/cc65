@@ -1,166 +1,139 @@
 ---
-name: "speckit-plan"
-description: "Execute the implementation planning workflow using the plan template to generate design artifacts."
-compatibility: "Requires spec-kit project structure with .specify/ directory"
+name: speckit-plan
+description: Generate technical implementation plans from feature specifications.
+compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
-  author: "github-spec-kit"
-  source: "templates/commands/plan.md"
+  author: github-spec-kit
+  source: preset:security-governance
 ---
 
+# Speckit Plan Skill
 
-## User Input
+Before continuing, apply the Security Governance preset:
 
-```text
-$ARGUMENTS
-```
+- plan explicit MSL applicability or non-MSL justification work when relevant
+- plan explicit secure-development verification work
+- plan dependency and supply-chain evidence updates where relevant
+- surface security review checkpoints instead of leaving them implicit
 
-You **MUST** consider the user input before proceeding (if not empty).
+Before continuing, apply the Architecture Governance preset:
 
-## Pre-Execution Checks
+- plan explicit architecture evidence work
+- plan threat-model and ADR updates when boundaries, integrations, or flows
+  change
+- surface Zero Trust and SAMM work explicitly when relevant
+- surface BSI C3A cloud autonomy work explicitly for cloud services and
+  provider-dependent deployments
 
-**Check for extension hooks (before planning)**:
-- Check if `.specify/extensions.yml` exists in the project root.
-- If it exists, read it and look for entries under the `hooks.before_plan` key
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
-  - **Optional hook** (`optional: true`):
-    ```
-    ## Extension Hooks
+Before continuing, apply the iSAQB Architecture Governance preset:
 
-    **Optional Pre-Hook**: {extension}
-    Command: `/{command}`
-    Description: {description}
+- plan explicit architecture work products where the feature changes
+  structure, interfaces, quality attributes, runtime behavior, or
+  deployment
+- plan updates to architecture views under `docs/architecture/`
+- plan ADRs for architecturally significant decisions
+- plan risk and technical-debt review for trade-offs or unresolved
+  constraints
+- if security-relevant architecture is affected, also plan the
+  secure-architecture evidence from `architecture-governance`
 
-    Prompt: {prompt}
-    To execute: `/{command}`
-    ```
-  - **Mandatory hook** (`optional: false`):
-    ```
-    ## Extension Hooks
+Before continuing, apply the A11Y Governance preset:
 
-    **Automatic Pre-Hook**: {extension}
-    Executing: `/{command}`
-    EXECUTE_COMMAND: {command}
+- plan accessibility review work explicitly
+- plan bilingual content work explicitly
+- include CLI accessibility checks where user-facing terminal output is changed
 
-    Wait for the result of the hook command before proceeding to the Outline.
-    ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
-- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+Before continuing, apply the Cross-Platform Governance preset:
 
-## Outline
+- plan paired Bash + PowerShell script work as a single unit
+- plan the man-page, the bilingual PowerShell help block, and the
+  `Verb-Noun` Cmdlet alongside the script
+- plan manual verification on at least one target OS per variant
+- plan implementation discipline checks (Bash quoting, `set -euo
+  pipefail`, `Set-StrictMode -Version Latest`, `-NoProfile`) and the
+  parity-checklist artefact
 
-1. **Setup**: Run `.specify/scripts/bash/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+Before continuing, apply the Agent Parity Governance preset:
 
-2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+- plan an atomic update across all maintained agent surfaces
+- plan synchronised updates to project templates and the local
+  `.specify/memory/constitution.md`
+- plan a parity-verification artefact for the change
 
-3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
-   - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
-   - Fill Constitution Check section from constitution
-   - Evaluate gates (ERROR if violations unjustified)
-   - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
-   - Phase 1: Generate data-model.md, contracts/, quickstart.md
-   - Re-evaluate Constitution Check post-design
+# Command Template: `/speckit.plan`
 
-## Mandatory Post-Execution Hooks
+Use this command to produce an implementation plan from an approved specification.
 
-**You MUST complete this section before reporting completion to the user.**
+## Required Actions
 
-Check if `.specify/extensions.yml` exists in the project root.
-- If it does not exist, or no hooks are registered under `hooks.after_plan`, skip to the Completion Report.
-- If it exists, read it and look for entries under the `hooks.after_plan` key.
-- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue to the Completion Report.
-- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
-- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
-  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
-  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
-- For each executable hook, output the following based on its `optional` flag:
-  - **Mandatory hook** (`optional: false`) — **You MUST emit `EXECUTE_COMMAND:` for each mandatory hook**:
-    ```
-    ## Extension Hooks
+1. Populate technical context with real stack details.
+2. Execute the Constitution Check gates explicitly:
+   - branching and PR flow
+   - cc65 C/C89, 6502 assembler, and target-platform alignment
+   - GNU `make` build/test path selection with relevant Makefile-chain
+     evidence
+   - generated artefact ownership and cleanup expectations derived from the
+     nearest project-local `.gitignore` where available
+   - permanent `.dev-tools/` fork-surface impact when hook or secret-scan
+     behaviour changes
+   - architecture/module boundaries across host tools, runtime libraries,
+     target descriptors, tests, samples, and docs
+   - C89/limited-C99 style and secure-C/CERT-C review
+   - bilingual CEFR B2 documentation scope
+   - non-MSL justification and compensating controls for cc65 C89 / 6502
+     assembly where relevant
+   - regression, targettest, sample-build, and documentation validation scope
+   - dependency and supply-chain evidence for host tools and release artefacts
+   - serialization/data conventions
+3. Document concrete project structure for this feature.
+4. Record justified exceptions in Complexity Tracking.
 
-    **Automatic Hook**: {extension}
-    Executing: `/{command}`
-    EXECUTE_COMMAND: {command}
-    ```
-    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
-  - **Optional hook** (`optional: true`):
-    ```
-    ## Extension Hooks
+## Validation Checklist
 
-    **Optional Hook**: {extension}
-    Command: `/{command}`
-    Description: {description}
+- No gate is left unresolved without rationale.
+- Build, test, generated artefact, dependency, and documentation impacts are
+  planned before implementation.
+- Generated Spec-Kit skill/command/agent surfaces are identified when command
+  templates, presets, or shared guidance change.
 
-    Prompt: {prompt}
-    To execute: `/{command}`
-    ```
 
-## Completion Report
+Audit-ready evidence requirement:
 
-Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated artifacts.
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
-## Phases
 
-### Phase 0: Outline & Research
+Audit-ready evidence requirement:
 
-1. **Extract unknowns from Technical Context** above:
-   - For each NEEDS CLARIFICATION → research task
-   - For each dependency → best practices task
-   - For each integration → patterns task
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
-2. **Generate and dispatch research agents**:
 
-   ```text
-   For each unknown in Technical Context:
-     Task: "Research {unknown} for {feature context}"
-   For each technology choice:
-     Task: "Find best practices for {tech} in {domain}"
-   ```
+Audit-ready evidence requirement:
 
-3. **Consolidate findings** in `research.md` using format:
-   - Decision: [what was chosen]
-   - Rationale: [why chosen]
-   - Alternatives considered: [what else evaluated]
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
-**Output**: research.md with all NEEDS CLARIFICATION resolved
 
-### Phase 1: Design & Contracts
+Audit-ready evidence requirement:
 
-**Prerequisites:** `research.md` complete
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
-1. **Extract entities from feature spec** → `data-model.md`:
-   - Entity name, fields, relationships
-   - Validation rules from requirements
-   - State transitions if applicable
 
-2. **Define interface contracts** (if project has external interfaces) → `/contracts/`:
-   - Identify what interfaces the project exposes to users or other systems
-   - Document the contract format appropriate for the project type
-   - Examples: public APIs for libraries, command schemas for CLI tools, endpoints for web services, grammars for parsers, UI contracts for applications
-   - Skip if project is purely internal (build scripts, one-off tools, etc.)
+Audit-ready evidence requirement:
 
-3. **Create quickstart validation guide** → `quickstart.md`:
-   - Document runnable validation scenarios that prove the feature works end-to-end
-   - Include prerequisites, setup commands, test/run commands, and expected outcomes
-   - Use links or references to contracts and data model details instead of duplicating them
-   - Do not include full implementation code, model/service/controller bodies, migrations, or complete test suites
-   - Keep this artifact as a validation/run guide; implementation details belong in `tasks.md` and the implementation phase
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
-**Output**: data-model.md, /contracts/*, quickstart.md
 
-## Key rules
+Audit-ready evidence requirement:
 
-- Use absolute paths for filesystem operations; use project-relative paths for references in documentation
-- ERROR on gate failures or unresolved clarifications
-
-## Done When
-
-- [ ] Plan workflow executed and design artifacts generated
-- [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with branch, plan path, and generated artifacts
+- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.

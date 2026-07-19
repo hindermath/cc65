@@ -1,14 +1,72 @@
 ---
-description: Create or update the feature specification from a natural language feature description.
+description: Create or update the feature specification from a natural language feature
+  description.
 handoffs:
-  - label: Build Technical Plan
-    agent: speckit.plan
-    prompt: Create a plan for the spec. I am building with...
-  - label: Clarify Spec Requirements
-    agent: speckit.clarify
-    prompt: Clarify specification requirements
-    send: true
+- label: Build Technical Plan
+  agent: speckit.plan
+  prompt: Create a plan for the spec. I am building with...
+- label: Clarify Spec Requirements
+  agent: speckit.clarify
+  prompt: Clarify specification requirements
+  send: true
 ---
+
+
+<!-- Source: security-governance -->
+Before continuing, apply the Security Governance preset:
+
+- determine whether the primary implementation language is memory-safe
+- document a short justification if the language is not memory-safe
+- determine whether `NIST SSDF`, `CWE Top 25`, `OWASP ASVS`, `SBOM`, `VEX`,
+  `AI-SBOM`, and `SLSA` are relevant
+- document `N/A` decisions with rationale
+- identify which security evidence artefacts should be created or updated under
+  `docs/security/`
+
+Before continuing, apply the Architecture Governance preset:
+
+- identify whether runtime or hardware constraints affect memory-safe language
+  choice
+- identify trust boundaries affected by the requested work
+- determine whether threat modeling, ADR updates, or Zero Trust review apply
+- determine whether BSI C3A cloud autonomy applicability applies for cloud
+  services or provider-dependent deployments
+- document `N/A` decisions with rationale
+
+Before continuing, apply the iSAQB Architecture Governance preset:
+
+- identify whether the feature affects architecture goals, context,
+  quality attributes, interfaces, runtime behavior, deployment, or
+  technical debt
+- record the architecture evidence expected under `docs/architecture/`
+- identify whether general ADRs or architecture-risk records are needed
+- if security-relevant architecture is affected, also apply the
+  `architecture-governance` secure-architecture preset
+
+Before continuing, apply the A11Y Governance preset:
+
+- determine which user-facing artefacts are affected
+- apply `WCAG 2.2 AA` where relevant
+- determine whether bilingual delivery is required
+- determine whether `docs/accessibility/` evidence should be updated
+- document `N/A` decisions with rationale
+
+Before continuing, apply the Cross-Platform Governance preset:
+
+- identify whether this feature adds, changes, or removes a
+  script-shaped tool
+- record that both Bash (`*.sh`) and PowerShell (`*.ps1`) variants are
+  in scope, plus a Unix man-page and a bilingual PowerShell help block
+- record the planned `Verb-Noun` Cmdlet name (approved verbs only)
+- record dry-run / `-WhatIf` parity expectations
+
+Before continuing, apply the Agent Parity Governance preset:
+
+- identify whether shared agent guidance, project templates, or
+  `.specify/memory/constitution.md` is affected
+- list every maintained agent surface that must be updated together
+- record any intentional deviation explicitly
+
 
 ## User Input
 
@@ -343,3 +401,45 @@ Success criteria must be:
 - [ ] Specification written to `SPEC_FILE` and validated against quality checklist
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
 - [ ] Completion reported to user with feature directory, spec file path, and checklist results
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
