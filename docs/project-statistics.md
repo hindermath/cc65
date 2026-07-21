@@ -53,29 +53,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 678637 lines |
-| Textdateien / Text files | 4684 |
+| Textbasis / Text base | 680878 lines |
+| Textdateien / Text files | 4712 |
 | Beobachtbarer Zeitraum / Observable period | 2025-07-27..2026-07-21 |
 | Aktivtage / Active days | 110 |
-| Relevante Commits / Relevant commits | 319 |
-| Zeilen je Aktivtag / Lines per active day | 6169.4 |
+| Relevante Commits / Relevant commits | 320 |
+| Zeilen je Aktivtag / Lines per active day | 6189.8 |
 | Peak-Tag im Fenster / Peak day in window | 2026-07-02 / 29374 |
 | Peak-Woche im Fenster / Peak week in window | 2026-06-28 / 33755 |
 | Laengste Serie / Longest streak | 5 days |
-| Speedup vs. 80 lines/day | 77.1x |
-| Speedup vs. 100 lines/day | 61.7x |
-| Methodik / Methodology | v2; source `1897b267bbc9` |
+| Speedup vs. 80 lines/day | 77.4x |
+| Speedup vs. 100 lines/day | 61.9x |
+| Methodik / Methodology | v2; source `9875ea8f9544` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
-Produktiv / Production          [#######.............]  32.7% | 221865
-Tests                           [#####...............]  23.4% | 158703
-Dokumentation / Documentation   [####................]  17.7% | 120393
-Skripte / Scripts               [#...................]   2.3% | 15590
+Produktiv / Production          [#######.............]  32.6% | 221865
+Tests                           [#####...............]  23.3% | 158703
+Dokumentation / Documentation   [####................]  18.0% | 122610
+Skripte / Scripts               [#...................]   2.3% | 15614
 Konfiguration / Configuration   [#...................]   0.1% | 784
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [#####...............]  23.8% | 161302
+Sonstiger Text / Other text     [#####...............]  23.7% | 161302
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -128,7 +128,7 @@ Wochen / Weeks 27..52 | 2026-01-25..2026-07-25
    cap 50000 | . . . . . . . . . . . . . . . . . . . . . . . . . .
        41667 | . . . . . . . . . . . . . . . . . . . . . . . . . .
        33333 | . . . . . . . . . . . . . . . . . . . . . . # . . .
-       25000 | . . . . . . . . . . . . . . . . . . . . . . # . . .
+       25000 | . . . . . . . . . . . . . . . . . . . . . . # . . #
        16667 | . . . . . . . . . . . . . . . . . . . . . . # . . #
         8333 | . . . . . . . . . # . # # . . . . # . . . . # # # #
            0 +-----------------------------------------------------
@@ -171,7 +171,7 @@ Die kumulative Kurve summiert nur das Brutto-Aenderungsvolumen im Fenster. Sie d
 ```text
 Last 12 calendar months
   cap 100000 | . . . . . . . . . . . .
-       83333 | . . . . . . . . . . . .
+       83333 | . . . . . . . . . . . #
        66667 | . . . . . . . . . . . #
        50000 | . . . . . . . . . . . #
        33333 | . . . . . . . . . . . #
@@ -187,8 +187,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 77.1x
-100 lines/day      [############........] 61.7x
+80 lines/day       [###############.....] 77.4x
+100 lines/day      [############........] 61.9x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -201,7 +201,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 6169.4
+Visible repository [############........] 6189.8
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -227,6 +227,6 @@ DE: Das Fenster beginnt am 2025-07-27 und endet am 2026-07-21. Es enthaelt 110 a
 | 2026-04 | 25347 |
 | 2026-05 | 10351 |
 | 2026-06 | 4664 |
-| 2026-07 | 81763 |
+| 2026-07 | 84044 |
 
 <!-- project-statistics-v2:end -->
