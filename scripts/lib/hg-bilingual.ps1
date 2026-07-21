@@ -11,8 +11,9 @@ function Invoke-HgCheckBilingual {
 
     $content = Get-Content -Path $FilePath -ErrorAction SilentlyContinue
 
-    $hasDE = ($content | Select-String -Pattern "^#{1,3} .*($HG_DE_PATTERNS)" -CaseSensitive:$false).Count
-    $hasEN = ($content | Select-String -Pattern "^#{1,3} .*($HG_EN_PATTERNS)" -CaseSensitive:$false).Count
+    # Array normalization keeps zero and one match strict-mode safe.
+    $hasDE = @($content | Select-String -Pattern "^#{1,3} .*($HG_DE_PATTERNS)" -CaseSensitive:$false).Count
+    $hasEN = @($content | Select-String -Pattern "^#{1,3} .*($HG_EN_PATTERNS)" -CaseSensitive:$false).Count
 
     if ($hasDE -gt 0 -and $hasEN -gt 0) {
         [PSCustomObject]@{ Status = 'PASS'; File = $FilePath; Message = 'bilingual-ok' }
