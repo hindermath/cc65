@@ -26,7 +26,8 @@ function Invoke-HgCheckA11y {
     }
 
     # 2. Empty alt texts
-    $emptyAlt = ($lines | Select-String -Pattern '!\[\]\(' -SimpleMatch).Count
+    # Array normalization keeps zero and one match strict-mode safe.
+    $emptyAlt = @($lines | Select-String -Pattern '!\[\]\(' -SimpleMatch).Count
     if ($emptyAlt -gt 0) {
         [PSCustomObject]@{ Status = 'WARN'; File = $FilePath; Message = 'empty-alt-text' }
     }
@@ -42,7 +43,7 @@ function Invoke-HgCheckA11y {
     }
 
     # 4. Color-only styling
-    $colorOnly = ($lines | Select-String -Pattern 'style="[^"]*color:' -CaseSensitive:$false).Count
+    $colorOnly = @($lines | Select-String -Pattern 'style="[^"]*color:' -CaseSensitive:$false).Count
     if ($colorOnly -gt 0) {
         [PSCustomObject]@{ Status = 'WARN'; File = $FilePath; Message = 'colour-only-styling' }
     }
