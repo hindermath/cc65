@@ -15,6 +15,7 @@
 | Datum / Date | Phase / Branch | Aktivtage ges. | Zeilen ges. | Commits ges. | Hauptarbeitspakete / Main Work Packages |
 |---|---|---:|---:|---:|---|
 | 2026-04-12 | 0 — Bootstrap | 1 | — | 1 | Initialer Projekt-Bootstrap via bootstrap-project |
+| 2026-07-23 | Intake Authoring und Review | — | — | — | Drei aktive Lastenhefte mit expliziter cc65-C89-/6502-Nicht-MSL-Grenze normalisiert und als `Ready` geprüft; kein Produktcode oder Build geändert |
 
 ---
 
