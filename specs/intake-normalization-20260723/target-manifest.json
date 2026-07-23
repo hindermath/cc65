@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "repository": "hindermath/cc65",
+  "baseBranch": "master",
+  "selectionRule": "Active executable intakes only",
+  "targets": [
+    {
+      "path": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "profile": "level2-lastenheft"
+    },
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "profile": "level2-lastenheft"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Hardening.md",
+      "profile": "level2-lastenheft"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "reason": "Ordering document"
+    }
+  ],
+  "nonMslBoundary": "cc65 C89 and 6502 assembly remain intentionally non-MSL; preserve the documented justification and secure-coding proof."
+}

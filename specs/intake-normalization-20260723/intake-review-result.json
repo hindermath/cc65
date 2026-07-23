@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "reviewId": "23d41f32-2c78-4272-b683-994b69763730",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "cc65-active-lastenhefte-v1",
+  "reviewedAt": "2026-07-23T14:36:30Z",
+  "repository": {
+    "root": ".",
+    "head": "7586b8921c4118035bc5b90794ad4ee7a4da322a"
+  },
+  "targets": [
+    {
+      "path": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9cbbdafeb213c6061d9dbdee437ebdb3d251734d91cef268eb1a3c1a0e343d6e",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "bce06d870382afa36aac77f05837c1df873bca1083f136d0ddccbd7f7f7bc59b",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "f6c0af23177c10753fe2b7d454c30b5d0ea3eca9b56533e4b39373de3be3ed7a",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Hardening.md"
+    ],
+    "series": [
+      "All 3 active paths and their exact order",
+      "Repository ordering, predecessor gates, overlap, terminology, authority, and no-auto-start boundaries",
+      "Excluded archive and overview classifications from target-manifest.json"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "N/A"
+}

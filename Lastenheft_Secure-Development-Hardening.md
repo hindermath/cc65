@@ -1,3 +1,4 @@
+<!-- intake-authoring:begin -->
 # Lastenheft: Secure-Development-Hardening fuer cc65
 
 **Dokumenttyp:** Spec-Kit Intake / Lastenheft
@@ -130,7 +131,7 @@ Cloud-Betrieb sind fuer NIS2, CRA, EU AI Act, DORA, C3A und C5 typischerweise
 ## 9. Kopierbarer `/speckit-specify`-Prompt
 
 ```text
-/speckit-specify Nutze Lastenheft_Secure-Development-Hardening.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer einen Sicherheits-Haertungs-Lauf im cc65-Fork.
+Ersetzter Alt-Prompt: speckit-specify Nutze Lastenheft_Secure-Development-Hardening.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer einen Sicherheits-Haertungs-Lauf im cc65-Fork.
 
 Ziel: Aus der Secure-Development-Governance, den sechs Spec-Kit-Presets und der cc65-spezifischen Nicht-MSL-Situation soll ein belastbares Zielbild fuer C89/6502-Assembly-Sicherheit, Makefile-Kettenpruefung, Artefakt-Hygiene und Supply-Chain-Evidenz entstehen.
 
@@ -151,3 +152,28 @@ Nicht-Ziele:
 
 Erzeuge eine Spezifikation mit Scope, Nicht-Zielen, Nicht-MSL-Begruendung, Schutzmodell, Evidenzmatrix, Anforderungen, Akzeptanzkriterien, Risiken und Teststrategie.
 ```
+<!-- intake-authoring:prompts -->
+## Kopierbare Spec-Kit-Prompts / Copy-Ready Spec Kit Prompts
+
+Die folgenden Alternativen starten keinen Lauf automatisch. Der autonome
+Prompt ist auf `LocalImplementation` begrenzt und erteilt keine Remote-,
+PR-, Merge-, Bypass-, Secret- oder Provider-Berechtigung.
+
+*The alternatives below do not start a run automatically. The autonomous
+prompt is limited to `LocalImplementation` and grants no remote,
+pull-request, merge, bypass, secret, or provider authority.*
+
+### Specify
+
+<!-- spec-kit-command-id: speckit.specify -->
+```text
+$speckit-specify Use Lastenheft_Secure-Development-Hardening.md as the binding intake. Preserve its scope, non-goals, ordering, governance, evidence, and acceptance criteria. Create or update only the matching feature specification. Do not implement, commit, push, create a pull request, merge, or start another feature.
+```
+
+### Autonomous
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Execute one complete autonomous Spec Kit run using Lastenheft_Secure-Development-Hardening.md as the binding intake. Delivery mode: LocalImplementation. Preserve all scope, ordering, security, accessibility, evidence, and acceptance boundaries. Do not push, create or merge a pull request, use bypass authority, expose secrets, or start a follow-up feature.
+```
+<!-- intake-authoring:end -->
