@@ -1,13 +1,13 @@
 {
-  "schemaVersion": "1.1",
-  "reviewId": "0b84cce1-892f-444e-b731-29296aef4dad",
+  "schemaVersion": "1.0",
+  "reviewId": "23d41f32-2c78-4272-b683-994b69763730",
   "mode": "Series",
   "status": "Ready",
   "policy": "cc65-active-lastenhefte-v1",
-  "reviewedAt": "2026-07-23T17:43:51Z",
+  "reviewedAt": "2026-07-23T14:36:30Z",
   "repository": {
     "root": ".",
-    "head": "b0316b802965857da1a5ccb277ee5936a9fa8d06"
+    "head": "7586b8921c4118035bc5b90794ad4ee7a4da322a"
   },
   "targets": [
     {
@@ -52,9 +52,5 @@
     "medium": 0,
     "low": 0
   },
-  "supersedes": "23d41f32-2c78-4272-b683-994b69763730",
-  "requestEvidence": {
-    "path": "specs/intake-normalization-20260723/intake-review-request.json",
-    "normalizedSha256": "3c16c5ab3821158a3e6210d907dfc4ed8ab7dc42b1f5a56886b7c4a7abc59023"
-  }
+  "supersedes": "N/A"
 }
