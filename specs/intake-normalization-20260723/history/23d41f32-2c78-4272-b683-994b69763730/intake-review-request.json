@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.1",
-  "reviewId": "0b84cce1-892f-444e-b731-29296aef4dad",
+  "schemaVersion": "1.0",
+  "reviewId": "23d41f32-2c78-4272-b683-994b69763730",
   "mode": "Series",
   "policy": "cc65-active-lastenhefte-v1",
   "targets": [
@@ -23,21 +23,7 @@
       "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "Lastenheft_Secure-Development-Hardening.md"
     ],
-    "roots": [
-      "Lastenheft_RL-SE-Checklist-Selbstpruefung.md"
-    ],
-    "dependencies": [
-      {
-        "from": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
-        "to": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
-        "kind": "Precedes"
-      },
-      {
-        "from": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
-        "to": "Lastenheft_Secure-Development-Hardening.md",
-        "kind": "Precedes"
-      }
-    ]
+    "dependencies": []
   },
   "campaign": {
     "manifestPath": "N/A",
