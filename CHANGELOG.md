@@ -1,5 +1,69 @@
 # Changelog
 
+## [0.4.0](https://github.com/hindermath/cc65/compare/v0.3.0...v0.4.0) (2026-07-24)
+
+
+### Features / Neue Funktionen
+
+* add ASCII statistics profile 2 toolchain ([755d000](https://github.com/hindermath/cc65/commit/755d00081e7e6e8933a3309463078d3d641da7ac))
+
+
+### Bug Fixes / Fehlerbehebungen
+
+* address statistics review and guidance drift ([bed62b9](https://github.com/hindermath/cc65/commit/bed62b97b7cf2a044afe1064f25ddf700dd7885f))
+* align statistics entry points across platforms ([6ccd42f](https://github.com/hindermath/cc65/commit/6ccd42f9ac41960df848e798020a514922392dc6))
+* align statistics profile window and portability ([4517977](https://github.com/hindermath/cc65/commit/4517977dd17316ed426478d6792353c2fd8366da))
+* apply v0.2.1 fleet review follow-up ([0081b55](https://github.com/hindermath/cc65/commit/0081b55c3ebe9e125c900e192c5af325dffae206))
+* complete homogeneity statistics parity ([9c0e291](https://github.com/hindermath/cc65/commit/9c0e291342c7c7cb9567fa69dc6f64bb622d41be))
+* complete literal workspace handling ([63d3d2b](https://github.com/hindermath/cc65/commit/63d3d2bab2bfa27aa123ee76bbb9ae3fd6dcf90e))
+* harden statistics paths and ASCII output ([72624e8](https://github.com/hindermath/cc65/commit/72624e82ba78bf06528ad6154608dae54942b00d))
+* make statistics file handling literal and portable ([b953a35](https://github.com/hindermath/cc65/commit/b953a35e96774990a9692bdaf7a64a07d5516473))
+* normalize empty statistics entry count ([eab1b3f](https://github.com/hindermath/cc65/commit/eab1b3f647dbd17ed37141095a643f040a7dc6b5))
+
+
+### Documentation / Dokumentation
+
+* migrate statistics ledger to ASCII profile 2 ([45a268b](https://github.com/hindermath/cc65/commit/45a268bca3c1b3c25eb434a94b006335fe99ab7e))
+* normalize active Spec Kit intakes ([a107a4b](https://github.com/hindermath/cc65/commit/a107a4b25e2921d775f7f0b9539d7c148aae3137))
+* refresh project statistics ([c9e04a5](https://github.com/hindermath/cc65/commit/c9e04a596badded45e1512866a70b3d628a6e473))
+* refresh project statistics ([b228d1a](https://github.com/hindermath/cc65/commit/b228d1a2be945a76e65df4d5d43c6cbbe361aed0))
+* refresh project statistics ([8cbec9f](https://github.com/hindermath/cc65/commit/8cbec9f159e008b9d9454e2f2d0b954f51bfbf31))
+* refresh project statistics ([502acd3](https://github.com/hindermath/cc65/commit/502acd3a16fa64990d2f0ab925d863f115f0925e))
+* refresh project statistics ([1df54fe](https://github.com/hindermath/cc65/commit/1df54fe54baaa6eb02e32d515fec27415368a9cc))
+* refresh project statistics for intake authoring rollout ([fd97393](https://github.com/hindermath/cc65/commit/fd97393727432d630e3d1d797ed9b7e59b366ce7))
+* refresh statistics after count normalization ([e9a0139](https://github.com/hindermath/cc65/commit/e9a0139b0b451ae71956f121ca94c671fb95af9b))
+* refresh statistics after entry-point alignment ([37b317a](https://github.com/hindermath/cc65/commit/37b317a255bdfdf4561b1cf269d181378f7c567f))
+* refresh statistics after guidance sync ([341068c](https://github.com/hindermath/cc65/commit/341068ce22e1ebe0b03e786e7a20f1036c86777f))
+* refresh statistics after parity fixes ([96230ad](https://github.com/hindermath/cc65/commit/96230adb047288a9d36932ef76ddd0b02a0176b1))
+* refresh statistics after path hardening ([f832307](https://github.com/hindermath/cc65/commit/f832307a96d6ef30958401c1cca4468871fa8ae3))
+* refresh statistics after path hardening ([de73065](https://github.com/hindermath/cc65/commit/de73065ac515d772687b2ffe16efcfadd40d2712))
+* refresh statistics after review fixes ([8ef1e03](https://github.com/hindermath/cc65/commit/8ef1e036ef9166ca5854c2ee1dc257cc9dd6c748))
+* refresh statistics after review follow-up ([f7cde5a](https://github.com/hindermath/cc65/commit/f7cde5a6a4d770728d95581208c0a2f19bdcdff9))
+* refresh statistics after window alignment ([8952c38](https://github.com/hindermath/cc65/commit/8952c38d64022b4dba0e028f98e676f3cdae5f73))
+* render intake review rollout statistics ([e942ce4](https://github.com/hindermath/cc65/commit/e942ce434690b12114e2ae08b69a95212e657e2f))
+* render project statistics ([f2a82ce](https://github.com/hindermath/cc65/commit/f2a82ce94857377fcf578f1252444d98968488b0))
+* roll out autonomous preset documentation releases ([b7bd136](https://github.com/hindermath/cc65/commit/b7bd136ff51306796b3d28ecb793ca2520375723))
+* synchronize active Level-2 environment registry ([d0082eb](https://github.com/hindermath/cc65/commit/d0082eb070b99de4e9482e34e7c7909acda1d4a0))
+* synchronize all five agent guidance surfaces ([41ad3fe](https://github.com/hindermath/cc65/commit/41ad3fecf786dd3cc7858599cabae340ee2ac137))
+
+
+### Maintenance / Wartung
+
+* adopt standard eight governance presets ([dd04cc4](https://github.com/hindermath/cc65/commit/dd04cc4d0df3bb9c04919afad5f259b7aa9faf18))
+* adopt standard seven governance presets ([6567eeb](https://github.com/hindermath/cc65/commit/6567eebe49173cc0f8a8392004d1fdd71063e9eb))
+* harden agentic toolchain maintenance ([67ed2b0](https://github.com/hindermath/cc65/commit/67ed2b0f25edbc0eab1ee6949ea63b5a8a523c7f))
+* harden agentic toolchain maintenance ([434bd3c](https://github.com/hindermath/cc65/commit/434bd3ceb8d11e8405a63b4e042d0b5a0cb56c28))
+* harden intake review series evidence ([279b074](https://github.com/hindermath/cc65/commit/279b07468d77d130412d758ec27ebf6832040aff))
+* install intake authoring governance preset ([9875ea8](https://github.com/hindermath/cc65/commit/9875ea8f9544b97a24846bba8b08b3ba00a31d3f))
+* install optional intake review governance ([1897b26](https://github.com/hindermath/cc65/commit/1897b267bbc900e9d7e7f0577124abeee4c48938))
+* migrate to Antigravity CLI ([97915fb](https://github.com/hindermath/cc65/commit/97915fb51ec86365353c3643e774198834e39a26))
+* roll out autonomous preset documentation releases ([14ed6a2](https://github.com/hindermath/cc65/commit/14ed6a210e6c37a20294239584e5bd6cbf36aa9a))
+* sync agentic maintenance package ([c622e7e](https://github.com/hindermath/cc65/commit/c622e7efc1190b6fbc8abfb3ae3f61bd8e7ac879))
+* **toolchain:** propagate PSScriptAnalyzer baseline ([ebd928e](https://github.com/hindermath/cc65/commit/ebd928e4058da09b2c1f3f49fb63f8eabc7184ff))
+* **toolchain:** sync agentic maintenance baseline ([aa25f78](https://github.com/hindermath/cc65/commit/aa25f7817931720210c28b4ad93870765dca67ed))
+* update intake authoring governance to v0.1.1 ([8d499da](https://github.com/hindermath/cc65/commit/8d499da67e0dfbcf7000c5a879ac45314c324e47))
+* update intake authoring preset to v0.2.0 ([379aed9](https://github.com/hindermath/cc65/commit/379aed9d460b1fc1bdb5ecfc098c41e022f3c259))
+
 ## [0.3.0](https://github.com/hindermath/cc65/compare/v0.2.0...v0.3.0) (2026-07-11)
 
 
