@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeGovernanceMigrationJournal",
+  "operationId": "8a6fefa6-80e5-47cd-88ff-d026a3d0ddec",
+  "state": "Completed",
+  "authorityEvidence": "Feature 014 MergeAndSync pilot authority",
+  "beforeSha256": "N/A",
+  "afterSha256": "c3a16649e70cdbfda586e56a95914fa3e54d1ce6648b3365e7a624874312f449",
+  "moves": [],
+  "updatedReferences": [
+    "Added portable roles and Series while preserving C89 and upstream-fork boundaries"
+  ],
+  "validation": [
+    "All existing intake bytes preserved",
+    "Bash and PowerShell schema-2.0 validators passed"
+  ],
+  "rollback": "Remove the new requirements-governance files; existing intakes remain unchanged.",
+  "repairBoundary": "N/A"
+}

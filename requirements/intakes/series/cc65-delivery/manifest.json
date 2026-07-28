@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "8a6fefa6-80e5-47cd-88ff-d026a3d0ddec",
+  "title": "cc65 requirements series",
+  "policy": "requirements-intake-governance-v2",
+  "status": "Active",
+  "orderedTargets": [
+    {
+      "path": "Lastenheft_Secure-Development-Hardening.md",
+      "role": "Primary",
+      "normalizedSha256": "f6c0af23177c10753fe2b7d454c30b5d0ea3eca9b56533e4b39373de3be3ed7a",
+      "status": "Eligible"
+    },
+    {
+      "path": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "9cbbdafeb213c6061d9dbdee437ebdb3d251734d91cef268eb1a3c1a0e343d6e",
+      "status": "Blocked"
+    },
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "bce06d870382afa36aac77f05837c1df873bca1083f136d0ddccbd7f7f7bc59b",
+      "status": "Blocked"
+    }
+  ],
+  "roots": [
+    "Lastenheft_Secure-Development-Hardening.md"
+  ],
+  "dependencies": [
+    {
+      "from": "Lastenheft_Secure-Development-Hardening.md",
+      "to": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+      "to": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "kind": "FinalAuditInput",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "requirements/intake-governance-config.json"
+  ]
+}
