@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "4ca08c4f-61c2-4a97-b765-5fdcddc80609",
+  "seriesId": "8a6fefa6-80e5-47cd-88ff-d026a3d0ddec",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.3"
+  },
+  "createdAt": "2026-08-30T09:23:03Z",
+  "operation": {
+    "operationId": "ee46803c-4a59-4db5-abd1-78f33b49a438",
+    "type": "LegacyAdoption",
+    "authorityEvidence": "Ausdrueckliche Nutzerfreigabe im aktuellen Codex-Dialog am 2026-08-30; notwendige Adoption des historisch receipt-losen Manifests / Explicit current user approval including required adoption of the historically receipt-less manifest"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/manifest.json",
+    "normalizedSha256": "1be8fd53b523fa468e46c92adecd9dd89b88e45342ce9fec8ee94ec124e70fdd"
+  },
+  "supersedes": {
+    "receiptPath": "N/A",
+    "receiptNormalizedSha256": "N/A",
+    "manifestArchivePath": "N/A",
+    "manifestArchiveSha256": "N/A"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-update cc65-delivery"
+}

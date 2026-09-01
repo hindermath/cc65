@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "675565f5-9c9d-47b4-af5e-9b278204056d",
+  "seriesId": "8a6fefa6-80e5-47cd-88ff-d026a3d0ddec",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.3"
+  },
+  "createdAt": "2026-08-30T09:23:03Z",
+  "operation": {
+    "operationId": "f4325d39-36bd-4a80-9f6e-dae8b627404e",
+    "type": "Update",
+    "authorityEvidence": "Ausdrueckliche Nutzerfreigabe fuer $speckit-intake-series-update cc65-delivery im aktuellen Codex-Dialog am 2026-08-30 / Explicit current user approval"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "requirements/intakes/series/cc65-delivery/manifest.json",
+    "normalizedSha256": "80400c2f8d11c60a0421db581bda2daaa2837ad16aee03469b6ebb31463d4593"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/receipt.json",
+    "receiptNormalizedSha256": "8029d09e0c40890519da72bccad3a07233cbb50a77f53c46dfec3216de2fc843",
+    "manifestArchivePath": "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/manifest.json",
+    "manifestArchiveSha256": "1be8fd53b523fa468e46c92adecd9dd89b88e45342ce9fec8ee94ec124e70fdd"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}
