@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "f4325d39-36bd-4a80-9f6e-dae8b627404e",
+  "seriesId": "8a6fefa6-80e5-47cd-88ff-d026a3d0ddec",
+  "type": "Update",
+  "status": "Completed",
+  "authorityEvidence": "Ausdrueckliche Nutzerfreigabe fuer $speckit-intake-series-update cc65-delivery im aktuellen Codex-Dialog am 2026-08-30 / Explicit current user approval",
+  "proposalNormalizedSha256": "80400c2f8d11c60a0421db581bda2daaa2837ad16aee03469b6ebb31463d4593",
+  "preparedPaths": [
+    "requirements/intakes/series/cc65-delivery/manifest.json",
+    "requirements/intakes/series/cc65-delivery/receipt.json",
+    "requirements/intake-series-operations/f4325d39-36bd-4a80-9f6e-dae8b627404e.json",
+    "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/manifest.json",
+    "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/receipt.json",
+    "Lastenheft_Abarbeitungsreihenfolge.md"
+  ],
+  "validation": {
+    "bash": "Passed",
+    "powerShell": "Passed"
+  },
+  "publication": {
+    "status": "Published",
+    "publishedPaths": [
+      "requirements/intakes/series/cc65-delivery/manifest.json",
+      "requirements/intakes/series/cc65-delivery/receipt.json",
+      "requirements/intake-series-operations/f4325d39-36bd-4a80-9f6e-dae8b627404e.json",
+      "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/manifest.json",
+      "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/receipt.json",
+      "Lastenheft_Abarbeitungsreihenfolge.md"
+    ]
+  },
+  "legacyAdoption": {
+    "reason": "Das am 2026-07-28 angelegte Serienmanifest besass historisch kein Serien-Receipt / The series manifest created on 2026-07-28 historically had no series receipt",
+    "receiptPath": "specs/intake-series-archive/cc65-delivery/f4325d39-36bd-4a80-9f6e-dae8b627404e/receipt.json",
+    "receiptNormalizedSha256": "8029d09e0c40890519da72bccad3a07233cbb50a77f53c46dfec3216de2fc843"
+  },
+  "changes": {
+    "targets": "3 -> 3",
+    "order": "Secure Development -> RL-SE -> GSDB (unchanged in manifest; readable order aligned)",
+    "roots": "1 -> 1",
+    "dependencies": "2 -> 2",
+    "lifecycle": "1 Eligible and 2 Blocked -> unchanged",
+    "evidencePaths": "2 -> 4",
+    "intakeContentChanges": 0,
+    "orderDocumentBeforeSha256": "e6eadf2d42e6669bc4a334cbce8bee7c0bbe4c688a0c8e92ee0cbfebe8f7bb9c",
+    "orderDocumentAfterSha256": "069b36ca8bf8d7d9ee15b3c73d58b3b7b356d6a512f483686e876f699cefa354"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

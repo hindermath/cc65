@@ -44,8 +44,6 @@
   ],
   "evidencePaths": [
     "Lastenheft_Abarbeitungsreihenfolge.md",
-    "requirements/intake-governance-config.json",
-    "requirements/intakes/series/cc65-delivery/receipt.json",
-    "requirements/intake-series-operations/f4325d39-36bd-4a80-9f6e-dae8b627404e.json"
+    "requirements/intake-governance-config.json"
   ]
 }
