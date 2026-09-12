@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report
-Version change: 1.15.1 -> 1.15.2
+Version change: 1.15.2 -> 1.15.3
 Modified principles:
-- Spec Kit preset governance: pin autonomous-run-governance v0.4.3 and require exact staged-candidate validation.
+- Spec Kit preset governance: pin autonomous-run-governance v0.4.4 and require exact staged-candidate validation.
 - X. Level-2 Project Environment Addenda (clarify generated artefact policy and permanent fork-local `.dev-tools/` surface)
 Added sections:
 - None
@@ -25,7 +25,7 @@ Follow-up TODOs:
 - None
 -->
 
-# Constitution v1.15.2
+# Constitution v1.15.3
 
 # home-baseline Constitution
 
@@ -833,7 +833,7 @@ workspace family consists of:
 | `a11y-governance` | `v0.4.1` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
 | `cross-platform-governance` | `v0.2.1` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
 | `agent-parity-governance` | `v0.4.0` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
-| `autonomous-run-governance` | `v0.4.3` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
+| `autonomous-run-governance` | `v0.4.4` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
 | `parallel-autonomous-run-governance` | `v0.2.1` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
 
 `autonomous-run-governance` is installed as part of the mandatory eight-preset
@@ -912,7 +912,7 @@ Community/catalog coordination is tracked in `github/spec-kit#2362`.
 `.github/copilot-instructions.md` for per-agent operational guidance. This
 constitution is the authoritative policy layer above all agent-specific files.
 
-**Version**: 1.15.2 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-09-12
+**Version**: 1.15.3 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-09-12
 
 ## Level-2 Project Environment Addendum / Level-2-Projektumgebung
 
