@@ -20,6 +20,7 @@
 ---
 
 | 2026-09-13 | Intake-Lifecycle-Preset-Rollout / Intake lifecycle preset rollout | N/A | N/A | N/A | Vorhandene Authoring-/Review-/Sequencing-Presets auf 0.3.2/0.2.2/0.2.4 aktualisiert; optionale Profile und Dokumentation nachgefuehrt. Pruefnachweise in docs/maintenance/intake-lifecycle-fleet-rollout.json. / Update existing presets and profile references; preserve other presets and project extensions. |
+| 2026-09-13 | Mermaid und Abschlussberichte | N/A | N/A | N/A | Neue textbasierte Diagrammregel, Berichtsvorlage, Agent-Paritaet und versionierte Governance; kein Produktcode. / Text-first diagram and completion-report governance; no product code. |
 
 ## Gesamtstand des Repositories / Repository Snapshot
 
@@ -56,26 +57,26 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 713869 lines |
-| Textdateien / Text files | 5014 |
+| Textbasis / Text base | 714755 lines |
+| Textdateien / Text files | 5018 |
 | Beobachtbarer Zeitraum / Observable period | 2025-09-21..2026-09-13 |
 | Aktivtage / Active days | 123 |
-| Relevante Commits / Relevant commits | 351 |
-| Zeilen je Aktivtag / Lines per active day | 5803.8 |
+| Relevante Commits / Relevant commits | 354 |
+| Zeilen je Aktivtag / Lines per active day | 5811.0 |
 | Peak-Tag im Fenster / Peak day in window | 2026-07-02 / 29374 |
 | Peak-Woche im Fenster / Peak week in window | 2026-06-28 / 33755 |
 | Laengste Serie / Longest streak | 11 days |
-| Speedup vs. 80 lines/day | 72.5x |
-| Speedup vs. 100 lines/day | 58.0x |
-| Methodik / Methodology | v2; source `bc4e39b7023d` |
+| Speedup vs. 80 lines/day | 72.6x |
+| Speedup vs. 100 lines/day | 58.1x |
+| Methodik / Methodology | v2; source `ad947dc36d6b` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [######..............]  31.1% | 221934
-Tests                           [#####...............]  22.8% | 162534
-Dokumentation / Documentation   [####................]  19.5% | 138854
-Skripte / Scripts               [#...................]   3.9% | 27612
+Tests                           [#####...............]  22.7% | 162534
+Dokumentation / Documentation   [####................]  19.5% | 139594
+Skripte / Scripts               [#...................]   3.9% | 27758
 Konfiguration / Configuration   [#...................]   0.2% | 1593
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#####...............]  22.6% | 161342
@@ -190,8 +191,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 72.5x
-100 lines/day      [############........] 58.0x
+80 lines/day       [###############.....] 72.6x
+100 lines/day      [############........] 58.1x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -204,7 +205,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 5803.8
+Visible repository [############........] 5811.0
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -230,6 +231,6 @@ DE: Das Fenster beginnt am 2025-09-21 und endet am 2026-09-13. Es enthaelt 123 a
 | 2026-06 | 4726 |
 | 2026-07 | 106576 |
 | 2026-08 | 12309 |
-| 2026-09 | 6550 |
+| 2026-09 | 7526 |
 
 <!-- project-statistics-v2:end -->
