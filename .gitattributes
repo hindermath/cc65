@@ -1,1 +1,5 @@
 * text=auto
+
+# Byte-bound rollout inputs must survive native Windows checkouts unchanged.
+scripts/config/spec-kit-project-statistics-governance-presets.json text eol=lf
+.specify/presets/secure-development-assurance-governance/** text eol=lf

@@ -10,6 +10,6 @@
     "thorstenLinesPerDay": 100
   },
   "phases": [],
-  "excludedPaths": [],
+  "excludedPaths": ["docs/project-statistics/*"],
   "categoryOverrides": []
 }
