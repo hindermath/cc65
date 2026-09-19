@@ -22,6 +22,8 @@
 | 2026-09-13 | Intake-Lifecycle-Preset-Rollout / Intake lifecycle preset rollout | N/A | N/A | N/A | Vorhandene Authoring-/Review-/Sequencing-Presets auf 0.3.2/0.2.2/0.2.4 aktualisiert; optionale Profile und Dokumentation nachgefuehrt. Pruefnachweise in docs/maintenance/intake-lifecycle-fleet-rollout.json. / Update existing presets and profile references; preserve other presets and project extensions. |
 | 2026-09-13 | Mermaid und Abschlussberichte | N/A | N/A | N/A | Neue textbasierte Diagrammregel, Berichtsvorlage, Agent-Paritaet und versionierte Governance; kein Produktcode. / Text-first diagram and completion-report governance; no product code. |
 
+| 2026-09-19 | Statistik-/Assurance-Rollout / Statistics and assurance rollout | N/A | N/A | N/A | Assurance v0.1.3 und Statistik v0.1.0; getrennte reproduzierbare Projekttransparenz, Legacy 80/100 unveraendert. Technische Nachweise und fachliche Abnahme getrennt. / Separate reproducible transparency, unchanged legacy references; no product changes. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 Stand / As of: 2026-04-12 — *Erste Einträge nach dem initialen Arbeitspaket eintragen.*
