@@ -30,6 +30,16 @@ Both immutable tag archives are bound above. Existing integration files were
 unchanged during installation. Cache files stay ignored. Assurance remains a
 pre-release; installation is not an assurance field-test decision.
 
+Windows-Erstpruefung: `Matrix source drift` durch native CRLF-Konvertierung
+bei `text=auto`. Gezielte `eol=lf`-Attribute erhalten die bytegebundene neue
+Matrix und Assurance-Payload; vorhandene Produktdateien bleiben unveraendert.
+Die Statistik-Payload besitzt bereits eigene LF-Attribute. Keine Abschwaechung
+des Validators; nach dieser Quellenkorrektur beide Messungen erneuern.
+
+Initial Windows CI detected checkout-induced matrix byte drift. Narrow LF
+attributes preserve the immutable new inputs without changing product files
+or relaxing hash checks. Both statistics contexts are refreshed afterwards.
+
 ## Statistikvertrag / Statistics contract
 
 [Bedienung](../project-statistics/README.md), [Snapshot](../project-statistics/snapshot.json)
