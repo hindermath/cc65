@@ -192,7 +192,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A26C, 0x60, 0, PutAll },
         { "AND",  0x080A26C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
@@ -265,7 +265,7 @@ static const struct {
         { "AND",  0x080A26C, 0x20, 0, PutAll },
         { "ANE",  0x0800000, 0x8B, 0, PutAll },         /* X */
         { "ARR",  0x0800000, 0x6B, 0, PutAll },         /* X */
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "AXS",  0x0800000, 0xCB, 0, PutAll },         /* X */
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
@@ -357,7 +357,7 @@ static const struct {
         { "AND",  0x080A26C, 0x20, 0, PutAll },
         { "ANE",  0x0800000, 0x8B, 0, PutAll },         /* X */
         { "ARR",  0x0800000, 0x6B, 0, PutAll },         /* X */
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "AXS",  0x0800000, 0xCB, 0, PutAll },         /* X */
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
@@ -437,11 +437,11 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -516,7 +516,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BBR0", 0x0000000, 0x0F, 0, PutBitBranch },
         { "BBR1", 0x0000000, 0x1F, 0, PutBitBranch },
         { "BBR2", 0x0000000, 0x2F, 0, PutBitBranch },
@@ -536,7 +536,7 @@ static const struct {
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -627,7 +627,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BBR0", 0x0000000, 0x0F, 0, PutBitBranch },
         { "BBR1", 0x0000000, 0x1F, 0, PutBitBranch },
         { "BBR2", 0x0000000, 0x2F, 0, PutBitBranch },
@@ -647,7 +647,7 @@ static const struct {
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -740,8 +740,8 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
-        { "ASR",  0x0000026, 0x43, 0, Put4510 },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
+        { "ASR",  0x0000027, 0x43, 0, Put4510 },
         { "ASW",  0x0000008, 0xcb, 6, PutAll },
         { "AUG",  0x0000001, 0x5C, 0, PutAll },
         { "BBR0", 0x0000000, 0x0F, 0, PutBitBranch },
@@ -763,7 +763,7 @@ static const struct {
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -886,8 +886,8 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
-        { "ASR",  0x0000026, 0x43, 0, Put4510 },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
+        { "ASR",  0x0000027, 0x43, 0, Put4510 },
         { "ASW",  0x0000008, 0xcb, 6, PutAll },
         { "BBR0", 0x0000000, 0x0F, 0, PutBitBranch },
         { "BBR1", 0x0000000, 0x1F, 0, PutBitBranch },
@@ -908,7 +908,7 @@ static const struct {
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -1035,10 +1035,10 @@ static const struct {
         { "ADCQ", 0x0000140C, 0x60, 13, Put45GS02_Q },
         { "AND",  0x4080A66C, 0x20, 0, Put45GS02 },
         { "ANDQ", 0x0000140C, 0x20, 13, Put45GS02_Q },
-        { "ASL",  0x0000006e, 0x02, 1, PutAll },
-        { "ASLQ", 0x800000ee, 0x00, 14, Put45GS02_Q },
-        { "ASR",  0x00000026, 0x43, 0, Put4510 },
-        { "ASRQ", 0x80000026, 0x40, 15, Put45GS02_Q },
+        { "ASL",  0x0000006F, 0x02, 1, PutAll },
+        { "ASLQ", 0x8000006D, 0x00, 14, Put45GS02_Q },
+        { "ASR",  0x00000027, 0x43, 0, Put4510 },
+        { "ASRQ", 0x80000025, 0x40, 15, Put45GS02_Q },
         { "ASW",  0x00000008, 0xcb, 6, PutAll },
         { "BBR0", 0x00000000, 0x0F, 0, PutBitBranch },
         { "BBR1", 0x00000000, 0x1F, 0, PutBitBranch },
@@ -1059,7 +1059,7 @@ static const struct {
         { "BCC",  0x00020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x00020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x00020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x00A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x0080006C, 0x00, 2, PutAll },
         { "BITQ", 0x0000000c, 0x20, 15, Put45GS02_Q },
         { "BMI",  0x00020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x00020000, 0xd0, 0, PutPCRel8 },
@@ -1081,7 +1081,7 @@ static const struct {
         { "CPZ",  0x0080000C, 0xd0, 1, Put4510 },
         { "DEA",  0x00000001, 0x00, 3, PutAll },   /* == DEC */
         { "DEC",  0x0000006F, 0x00, 3, PutAll },
-        { "DEQ",  0x800000ee, 0xc0, 14, Put45GS02_Q },
+        { "DEQ",  0x8000006D, 0xc0, 14, Put45GS02_Q },
         { "DEW",  0x00000004, 0xc3, 9, PutAll },
         { "DEX",  0x00000001, 0xca, 0, PutAll },
         { "DEY",  0x00000001, 0x88, 0, PutAll },
@@ -1091,7 +1091,7 @@ static const struct {
         { "EORQ", 0x0000140C, 0x40, 13, Put45GS02_Q },
         { "INA",  0x00000001, 0x00, 4, PutAll },   /* == INC */
         { "INC",  0x0000006f, 0x00, 4, PutAll },
-        { "INQ",  0x800000ee, 0xe0, 14, Put45GS02_Q },
+        { "INQ",  0x8000006D, 0xe0, 14, Put45GS02_Q },
         { "INW",  0x00000004, 0xe3, 9, PutAll },
         { "INX",  0x00000001, 0xe8, 0, PutAll },
         { "INY",  0x00000001, 0xc8, 0, PutAll },
@@ -1113,7 +1113,7 @@ static const struct {
         { "LDY",  0x0080006C, 0xa0, 1, PutAll },
         { "LDZ",  0x00800048, 0xa3, 1, Put4510 },
         { "LSR",  0x0000006F, 0x42, 1, PutAll },
-        { "LSRQ", 0x800000ee, 0x40, 14, Put45GS02_Q },
+        { "LSRQ", 0x8000006D, 0x40, 14, Put45GS02_Q },
         { "MAP",  0x00000001, 0x5C, 0, PutAll },
         { "NEG",  0x00000001, 0x42, 0, PutAll },
         { "NOP",  0x00000001, 0xea, 0, PutAll }, /* == EOM */
@@ -1140,9 +1140,9 @@ static const struct {
         { "RMB6", 0x00000004, 0x67, 1, PutAll },
         { "RMB7", 0x00000004, 0x77, 1, PutAll },
         { "ROL",  0x0000006F, 0x22, 1, PutAll },
-        { "ROLQ", 0x800000ee, 0x20, 14, Put45GS02_Q },
+        { "ROLQ", 0x8000006D, 0x20, 14, Put45GS02_Q },
         { "ROR",  0x0000006F, 0x62, 1, PutAll },
-        { "RORQ", 0x800000ee, 0x60, 14, Put45GS02_Q },
+        { "RORQ", 0x8000006D, 0x60, 14, Put45GS02_Q },
         { "ROW",  0x00000008, 0xeb, 6, PutAll },
         { "RTI",  0x00000001, 0x40, 0, PutAll },
         { "RTN",  0x00800000, 0x62, 1, PutAll },
@@ -1196,7 +1196,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x0b8f6fc, 0x60, 0, PutAll },
         { "AND",  0x0b8f6fc, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
@@ -1348,7 +1348,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x080A66C, 0x60, 0, PutAll },
         { "AND",  0x080A66C, 0x20, 0, PutAll },
-        { "ASL",  0x000006e, 0x02, 1, PutAll },
+        { "ASL",  0x000006F, 0x02, 1, PutAll },
         { "BBR0", 0x0000000, 0x0F, 0, PutBitBranch },
         { "BBR1", 0x0000000, 0x1F, 0, PutBitBranch },
         { "BBR2", 0x0000000, 0x2F, 0, PutBitBranch },
@@ -1368,7 +1368,7 @@ static const struct {
         { "BCC",  0x0020000, 0x90, 0, PutPCRel8 },
         { "BCS",  0x0020000, 0xb0, 0, PutPCRel8 },
         { "BEQ",  0x0020000, 0xf0, 0, PutPCRel8 },
-        { "BIT",  0x0A0006C, 0x00, 2, PutAll },
+        { "BIT",  0x080006C, 0x00, 2, PutAll },
         { "BMI",  0x0020000, 0x30, 0, PutPCRel8 },
         { "BNE",  0x0020000, 0xd0, 0, PutPCRel8 },
         { "BPL",  0x0020000, 0x10, 0, PutPCRel8 },
@@ -1498,7 +1498,7 @@ static const struct {
 /* BEGIN SORTED.SH */
         { "ADC",  0x0080A26C, 0x60, 0, PutAll },
         { "AND",  0x0080A26C, 0x20, 0, PutAll },
-        { "ASL",  0x0000006e, 0x02, 1, PutAll },
+        { "ASL",  0x0000006F, 0x02, 1, PutAll },
         { "BBC0", 0x10000002, 0x13, 10, PutBitBranch_m740 },
         { "BBC1", 0x10000002, 0x33, 10, PutBitBranch_m740 },
         { "BBC2", 0x10000002, 0x53, 10, PutBitBranch_m740 },
@@ -1645,7 +1645,7 @@ static unsigned char EATab[16][AM65I_COUNT] = {
     {   /* Table 2 (bit) */
         0x00, 0x00, 0x24, 0x2C, 0x0F, 0x34, 0x3C, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x89, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x89, 0x00, 0x89,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     },
     {   /* Table 3 (dec, dea) */
@@ -1954,15 +1954,23 @@ static void EmitCode (EffAddr* A)
 static void PutLDM_m740 (const InsDesc* Ins)
 {
     EffAddr A;
+    ExprNode* Imm;
+
     /* Evaluate the addressing mode */
     if (EvalEA (Ins, &A) == 0) {
         /* An error occurred */
         return;
     }
+
+    /* Read all operands before emitting anything, so that '*' in an
+    ** operand refers to the start of the instruction.
+    */
+    Consume (TOK_HASH, "`#' expected");
+    Imm = Expression ();
+
     Emit0 (Ins->BaseCode);
     EmitByte (A.Expr);
-    Consume (TOK_HASH, "`#' expected");
-    EmitByte (Expression ());
+    EmitByte (Imm);
 }
 
 
@@ -2066,12 +2074,23 @@ static void PutBlockMove (const InsDesc* Ins)
 static void PutBlockTransfer (const InsDesc* Ins)
 /* Handle the block transfer instructions (HuC6280) */
 {
+    ExprNode* Src;
+    ExprNode* Dst;
+    ExprNode* Len;
+
+    /* Read all operands before emitting anything, so that '*' in an
+    ** operand refers to the start of the instruction.
+    */
+    Src = Expression ();
+    ConsumeComma ();
+    Dst = Expression ();
+    ConsumeComma ();
+    Len = Expression ();
+
     Emit0 (Ins->BaseCode);
-    EmitWord (Expression ());
-    ConsumeComma ();
-    EmitWord (Expression ());
-    ConsumeComma ();
-    EmitWord (Expression ());
+    EmitWord (Src);
+    EmitWord (Dst);
+    EmitWord (Len);
 }
 
 
@@ -2079,10 +2098,20 @@ static void PutBlockTransfer (const InsDesc* Ins)
 static void PutBitBranch (const InsDesc* Ins)
 /* Handle 65C02 branch on bit condition */
 {
-    Emit0 (Ins->BaseCode);
-    EmitByte (Expression ());
+    ExprNode* Zp;
+    ExprNode* Target;
+
+    /* Read both operands before emitting anything, so that '*' in the
+    ** branch target refers to the start of the instruction. The branch
+    ** offset is relative to the end of the 3 byte instruction.
+    */
+    Zp = Expression ();
     ConsumeComma ();
-    EmitSigned (GenBranchExpr (1), 1);
+    Target = GenBranchExpr (3);
+
+    Emit0 (Ins->BaseCode);
+    EmitByte (Zp);
+    EmitSigned (Target, 1);
 }
 
 static void PutBitBranch_m740 (const InsDesc* Ins)
@@ -2108,17 +2137,20 @@ static void PutBitBranch_m740 (const InsDesc* Ins)
     A.Opcode = Ins->BaseCode;
 
     if (A.AddrMode == AM65I_ACCU) {
-        /* Accu */
-        Emit0 (A.Opcode);
+        /* Accu: 2 byte instruction, offset relative to its end */
+        ExprNode* Target;
         ConsumeComma ();
-        EmitSigned (GenBranchExpr (2), 1);
+        Target = GenBranchExpr (2);
+        Emit0 (A.Opcode);
+        EmitSigned (Target, 1);
     } else if (A.AddrMode == AM65I_ZP_REL) {
         /* FIXME: hacky, the comma was already consumed here */
         A.Opcode += 0x04;
-        /* Zeropage */
+        /* Zeropage: 3 byte instruction, offset relative to its end */
+        ExprNode* Target = GenBranchExpr (3);
         Emit0 (A.Opcode);
         EmitByte (A.Expr);
-        EmitSigned (GenBranchExpr (1), 1);
+        EmitSigned (Target, 1);
     }
 }
 
@@ -2511,6 +2543,7 @@ static void Put45GS02_Q (const InsDesc* Ins)
     EffAddr A;
 
     if (EvalEA (Ins, &A)) {
+        /* The special NEG-NEG prefix for Q opcodes */
         Emit0 (0x42);
         Emit0 (0x42);
         if ((A.AddrModeBit == AM65_DIR_IND_LONG) ||
@@ -2518,9 +2551,11 @@ static void Put45GS02_Q (const InsDesc* Ins)
             Emit0 (0xEA); /* NOP prefix */
         }
         if (A.Opcode == 0xea) {
+            /* Fix the INQ opcode because the base was 0xE0 */
             A.Opcode = 0x1a;
         }
         else if (A.Opcode == 0xca) {
+            /* Fix the DEQ opcode because the base was 0xC0 */
             A.Opcode = 0x3a;
         }
         EmitCode (&A);
