@@ -30,7 +30,7 @@ jobs:
         run: mkdir ~/.cache-sha
 
       - name: Cache SHA
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         id: check-sha
         with:
           path: ~/.cache-sha
