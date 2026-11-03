@@ -95,7 +95,7 @@ jobs:
           path: cc65-snapshot-win32.zip
           retention-days: 90
       - name: Upload a 64-bit Snapshot Zip
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cc65-snapshot-win64
           path: cc65-snapshot-win64.zip
@@ -125,7 +125,7 @@ jobs:
       - name: Package offline documents.
         run: 7z a cc65-snapshot-docs.zip ./html/*.*
       - name: Upload a Documents Snapshot Zip
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cc65-snapshot-docs
           path: cc65-snapshot-docs.zip
