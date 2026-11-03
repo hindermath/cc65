@@ -102,7 +102,7 @@ jobs:
           retention-days: 90
 
       - name: Get the online documents repo.
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: cc65/doc
           # this token will expire, if it does, generate a new one as decribed in https://github.com/cc65/cc65/issues/2065
