@@ -87,6 +87,22 @@ Technische Checks und manuelle Review-Grenzen bleiben verbindlich. Source-only.
 EN: Removes two Claude PR/issue workflows at the owner's request and revokes the app.
 Technical checks and manual review boundaries remain binding. Source-only.
 
+### 2026-11-09 - Dependabot PR #52 / Dependabot maintenance
+
+DE: Branch codex/dependabot-repair-20261109-cc65--52; sichtbares Wartungsfenster 09.11.2026, keine
+Stoppuhrmessung. chore(deps): bump astral-sh/setup-uv from 6.8.0 to 10.3.3. Dokumentationsentscheidung: NoUpdateRequired
+fuer die technische Aenderung; GeneratedUpdate fuer beide vorhandenen
+Statistikprofile. Bestehende Referenzwerte bleiben erhalten. Die beobachtete
+Liefermenge ist keine Messung von Lernleistung oder KI-Zeitersparnis.
+Aktuelle Head-/Plattform-Pruefungen sind vor dem Merge erforderlich.
+Owner: Repository-Maintainer; Source-only, kein Home-Sync.
+
+EN: Branch codex/dependabot-repair-20261109-cc65--52; observable maintenance window 9 November 2026,
+not stopwatch time. chore(deps): bump astral-sh/setup-uv from 6.8.0 to 10.3.3. Documentation impact: NoUpdateRequired for
+the technical change; GeneratedUpdate for the existing statistics profiles.
+Existing references remain unchanged. Delivery volume is not a measurement
+of learning outcomes or AI time savings. Current head/platform checks are
+required before merge. Owner: repository maintainer; source-only, no Home sync.
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
