@@ -141,7 +141,7 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 | Laengste Serie / Longest streak | 11 days |
 | Speedup vs. 80 lines/day | 68.8x |
 | Speedup vs. 100 lines/day | 55.0x |
-| Methodik / Methodology | v2; source `523f1ae95181` |
+| Methodik / Methodology | v2; source `8ca35658d0a4` |
 
 ### Artefaktmix / Artifact Mix
 
