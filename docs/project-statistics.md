@@ -171,14 +171,14 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 | Textdateien / Text files | 5737 |
 | Beobachtbarer Zeitraum / Observable period | 2025-11-16..2026-11-14 |
 | Aktivtage / Active days | 135 |
-| Relevante Commits / Relevant commits | 423 |
+| Relevante Commits / Relevant commits | 424 |
 | Zeilen je Aktivtag / Lines per active day | 5806.2 |
 | Peak-Tag im Fenster / Peak day in window | 2026-11-13 / 57741 |
-| Peak-Woche im Fenster / Peak week in window | 2026-11-08 / 58043 |
+| Peak-Woche im Fenster / Peak week in window | 2026-11-08 / 58047 |
 | Laengste Serie / Longest streak | 11 days |
 | Speedup vs. 80 lines/day | 72.6x |
 | Speedup vs. 100 lines/day | 58.1x |
-| Methodik / Methodology | v2; source `39483272e443` |
+| Methodik / Methodology | v2; source `be59e2aa0182` |
 
 ### Artefaktmix / Artifact Mix
 
@@ -324,9 +324,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-14. Es enthaelt 135 aktive und 229 inaktive vergangene Tage. Peak-Tag: 2026-11-13 / 57741. Peak-Woche: 2026-11-08 / 58043. Laengste Serie: 11 Tage (2026-07-16..2026-07-26).
+DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-14. Es enthaelt 135 aktive und 229 inaktive vergangene Tage. Peak-Tag: 2026-11-13 / 57741. Peak-Woche: 2026-11-08 / 58047. Laengste Serie: 11 Tage (2026-07-16..2026-07-26).
 
-*EN: The window starts on 2025-11-16 and ends on 2026-11-14. It contains 135 active and 229 inactive elapsed days. Peak day: 2026-11-13 / 57741. Peak week: 2026-11-08 / 58043. Longest streak: 11 days (2026-07-16..2026-07-26).*
+*EN: The window starts on 2025-11-16 and ends on 2026-11-14. It contains 135 active and 229 inactive elapsed days. Peak day: 2026-11-13 / 57741. Peak week: 2026-11-08 / 58047. Longest streak: 11 days (2026-07-16..2026-07-26).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -341,6 +341,6 @@ DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-14. Es enthaelt 135 a
 | 2026-08 | 12322 |
 | 2026-09 | 38941 |
 | 2026-10 | 10354 |
-| 2026-11 | 59139 |
+| 2026-11 | 59143 |
 
 <!-- project-statistics-v2:end -->
