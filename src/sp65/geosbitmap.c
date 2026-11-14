@@ -147,6 +147,8 @@ StrBuf* GenGeosBitmap (const Bitmap* B, const Collection* A attribute ((unused))
 */
 {
     unsigned        LineWidth;
+    unsigned        Height;
+    size_t          BufSize;
     unsigned char*  Buf;
     unsigned char*  BP;
     StrBuf*         D;
@@ -167,9 +169,16 @@ StrBuf* GenGeosBitmap (const Bitmap* B, const Collection* A attribute ((unused))
 
     /* Calculate the width of one line in bytes */
     LineWidth = (GetBitmapWidth (B) + 7U) / 8U;
+    Height = GetBitmapHeight (B);
+
+    /* Keep the allocation size in size_t and reject a wrapped product. */
+    if (Height != 0 && (size_t) LineWidth > (size_t) -1 / Height) {
+        Error ("Bitmap is too large");
+    }
+    BufSize = (size_t) LineWidth * Height;
 
     /* Allocate a buffer for the raw image */
-    Buf = xmalloc (LineWidth * GetBitmapHeight (B));
+    Buf = xmalloc (BufSize);
 
     /* Convert the bitmap into a raw image */
     BP = Buf;

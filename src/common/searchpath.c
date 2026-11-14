@@ -223,7 +223,7 @@ static int SearchPathBin(const char* bin, char* buf, size_t buflen)
         }
         if (*p == ':') {
             p++;
-        } else if (!p) {
+        } else {
             break;
         }
     }

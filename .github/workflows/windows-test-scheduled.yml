@@ -7,6 +7,8 @@ on:
     # every 1 days
   workflow_dispatch:
     # allow manual dispatch
+permissions:
+  contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

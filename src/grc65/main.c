@@ -377,7 +377,7 @@ static void DoMenu (void)
                 strcat (namebuff, " ");
                 strcat (namebuff, token);
             } while (token[strlen (token) - 1] != '"');
-            token = xmalloc (strlen (namebuff));
+            token = xmalloc (strlen (namebuff) + 1);
             strcpy (token, namebuff);
         }
         curItem->name = token;
