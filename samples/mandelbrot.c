@@ -51,7 +51,7 @@ void mandelbrot (signed short x1, signed short y1, signed short x2,
     register unsigned char count;
     register signed short r, r1, i;
     register signed short xs, ys, xx, yy;
-    register unsigned short x, y;
+    register unsigned x, y;
     register unsigned char maxcol = MAXCOL;
 
     /* Calc stepwidth */
