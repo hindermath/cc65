@@ -169,6 +169,8 @@ int main(int argc, char* argv[])
 {
     char          input[80];
     char*         p_name;
+    size_t        input_len;
+    int           input_char;
     unsigned      dir_addr;
     unsigned      header_addr;
     unsigned char index;
@@ -182,7 +184,24 @@ int main(int argc, char* argv[])
                "----------------------\n"
                "\n"
                "Pathname:");
-        p_name = gets(input);
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            err_exit("Could not read pathname", 0);
+        }
+        input_len = strcspn(input, "\r\n");
+        if (input[input_len] == '\0') {
+            input_char = getchar();
+            if (input_char == '\r') {
+                input_char = getchar();
+            }
+            if (input_char != '\n' && input_char != EOF) {
+                do {
+                    input_char = getchar();
+                } while (input_char != '\n' && input_char != EOF);
+                err_exit("Pathname is too long", 0);
+            }
+        }
+        input[input_len] = '\0';
+        p_name = input;
     }
 
     dir_addr = get_dir_entry(p_name);

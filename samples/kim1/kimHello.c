@@ -7,6 +7,7 @@
 // --------------------------------------------------------------------------
 
 #include <stdio.h>
+#include <string.h>
 #include <kim1.h>
 
 int main (void)
@@ -17,7 +18,10 @@ int main (void)
    printf ("\nHello World!\n\n");
    printf ("Type a line and press ENTER, please.\n\n");
 
-   gets( str );
+   if (fgets (str, sizeof (str), stdin) == NULL) {
+      return 1;
+   }
+   str[strcspn (str, "\r\n")] = '\0';
 
    printf ("\n\nThanks: %s\n\n", str);
    return 0;

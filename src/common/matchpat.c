@@ -184,7 +184,7 @@ static int RecursiveMatch (const unsigned char* Source, const unsigned char* Pat
                         CS_ADD (CS, C1);
                     } else {
                         int C2;
-                        unsigned char C;
+                        int C;
                         IncPattern ();
                         if ((C2 = RealChar (Pattern)) == -1) {
                             return 0;

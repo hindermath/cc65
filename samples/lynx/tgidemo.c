@@ -46,7 +46,7 @@ static void wait (unsigned char ticks)
 
 static void DoCircles (void)
 {
-    unsigned char I;
+    unsigned I;
     unsigned char Color = COLOR_BACK;
     const unsigned X = MaxX / 2;
     const unsigned Y = MaxY / 2;

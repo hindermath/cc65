@@ -36,7 +36,7 @@ static void mandelbrot (signed short x1, signed short y1, signed short x2,
     /*  */
     register signed short r, r1, i;
     register signed short xs, ys, xx, yy;
-    register signed short x, y;
+    register unsigned short x, y;
     register unsigned char count;
     register unsigned char maxcol = MAXCOL;
 
