@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.1](https://github.com/hindermath/cc65/compare/v0.4.0...v0.4.1) (2026-11-23)
+
+
+### Documentation / Dokumentation
+
+* refresh dependency update statistics evidence ([4fbaac9](https://github.com/hindermath/cc65/commit/4fbaac946ebd0bc6439d82262af22997897f6be8))
+* refresh statistics for dependency update ([473a9bf](https://github.com/hindermath/cc65/commit/473a9bf99b7e6bac98a75f8dd7d9b2c7f9f28788))
+
+
+### Maintenance / Wartung
+
+* **deps:** bump astral-sh/setup-uv ([ae76774](https://github.com/hindermath/cc65/commit/ae76774f4e71f5285dd7fbc26f5ddddcce56a921))
+* **deps:** bump astral-sh/setup-uv from 10.3.3 to 10.4.0 in the github-actions-minor-patch group ([1758805](https://github.com/hindermath/cc65/commit/1758805273d33bdc8e26ba9eb0036a1e088f8ff7))
+
 ## [0.4.0](https://github.com/hindermath/cc65/compare/v0.3.0...v0.4.0) (2026-11-20)
 
 
